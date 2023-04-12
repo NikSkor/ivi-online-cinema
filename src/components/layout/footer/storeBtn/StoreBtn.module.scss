@@ -1,0 +1,50 @@
+@import '/src/styles/vars.scss';
+
+.storeBtn {
+  height: 40px;
+
+  &:not(:first-child) {
+    margin-left: 12px;
+  }
+
+  &:hover {
+    background-color: $btn_hover;
+  }
+
+  display: flex;
+  align-items: center;
+
+  background-color: $btn_bg;
+  border-radius: 8px;
+  transition-duration: .4s;
+}
+
+.btn__icon {
+  margin-left: 12px;
+  margin-right: 8px;
+}
+
+.storeBtn__textBlock {
+  margin-right: 12px;
+}
+
+.preamble {
+  color: rgba($primary, .72);
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 500;
+  height: 12px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.caption {
+  color: $primary;
+  font-size: 15px;
+  line-height: 20px;
+  height: 20px;
+  font-weight: 500;
+  height: 20px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

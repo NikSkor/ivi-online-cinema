@@ -17,9 +17,16 @@
 
 .footer_content {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   padding: 48px 0;
   position: relative;
+
+  &.fourColumn {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  &.twoColumn {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
   &::before {
     content: '';
@@ -116,4 +123,23 @@
   border-radius: 8px;
 
   transition: all .15s linear;
+}
+
+.footer__stores {
+  display: flex;
+  position: relative;
+  z-index: 1;
+}
+
+.copyrights {
+  margin-top: 32px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: rgba($primary,.48);
+}
+
+.social {
+  display: flex;
+  justify-content: flex-end;
 }

@@ -1,0 +1,27 @@
+@import '/src/styles/vars.scss';
+
+.socialLink {
+  &:not(:first-child) {
+    margin-left: 12px;
+  }
+}
+
+.socialIcon__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  background-color: $btn_bg;
+  border-color: $btn_bg;
+
+  transition-duration: .4s;
+
+  &:hover {
+    background-color: $btn_hover;
+    border-color: $btn_hover;
+  }
+}
