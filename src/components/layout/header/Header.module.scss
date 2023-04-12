@@ -1,0 +1,144 @@
+@import '/src/styles/vars.scss';
+
+
+
+.header {
+  position: relative;
+
+  width: 1216px;
+  margin: 0 auto;
+  height: $headerHeight;
+
+
+  padding: 0px 15px;
+  margin-top: 3px;
+
+  &.dropdownOpen {
+    background-color: #1f1b2e;
+
+    border-top-right-radius: 20px; 
+    border-top-left-radius: 20px;
+
+    transition: all 0.2s ease-in;
+
+    z-index: 1;
+  }
+  .headerTop {
+    display: flex;
+    align-items: center;
+
+    .headerIcon {
+      display: flex;
+      align-items: center;
+
+      height: $headerHeight;
+    }
+
+    .logo {
+      margin-right: 32px;
+    }
+
+    .wideArea {
+      display: flex;
+      flex: 1 auto;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 20px;
+
+      margin-right: 12px;
+
+      .additionalButton {
+        button {
+          background-image: linear-gradient(270deg, #ea003d 0, #c447ff 100%);
+          border-radius: 8px;
+          padding: 8px 12px;
+          
+          color: #fff;
+          font-size: 13px;
+          font-weight: 700;
+        }
+      }
+
+      .searchButton {
+        background-color: inherit;
+        border: none;
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 15px;
+        font-weight: 700;
+
+        transition-property: color;
+        transition-duration: .4s;
+
+        height: 100%;
+        cursor: pointer;
+
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        padding: 10px 0;
+
+        .searchLink {
+          fill: rgba(255, 255, 255, 0.5);
+          transition-property: fill;
+          transition-duration: .4s;
+        }
+
+        &:hover {
+          color: rgba(255, 255, 255, 1);
+
+          .searchLink {
+            fill: rgba(255, 255, 255, 1);
+          }
+        }
+      }
+    }
+
+    .notificationButton {
+      margin-right: 12px;
+      padding: 0px 5px;
+
+      &:hover {
+        .notificationLink {
+          fill: rgba(255, 255, 255, 1)
+        }
+      }
+
+      .notificationLink {
+        cursor: pointer;
+        fill: rgba(255, 255, 255, 0.5);
+        transition-property: fill;
+        transition-duration: .4s;
+      }
+    }
+
+    .avatar {
+
+      &:hover {
+        .avatarButton {
+          border-color: rgba(255, 255, 255, 1);
+          transition-property: border-color;
+          transition-duration: .4s;
+
+          .avatarLink {
+            fill: rgba(255, 255, 255, 1);
+            transition-property: fill;
+            transition-duration: .4s;
+          }
+
+        }
+      }
+
+      .avatarButton {
+        padding: 12px;
+        border: 2px solid rgba(255, 255, 255, .5);
+        border-radius: 8px;
+        cursor: pointer;
+
+        .avatarLink {
+          fill: rgba(255, 255, 255, .5);
+        }
+      }
+    }
+  }
+}

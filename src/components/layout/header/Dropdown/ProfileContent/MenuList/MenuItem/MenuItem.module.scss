@@ -1,0 +1,28 @@
+@import '/src/styles/vars.scss';
+
+
+.menuItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background-color: rgb(57, 51, 82);
+    border-radius: 8px;
+    
+    padding: 15px;
+
+    transition: background-color 0.2s; 
+
+    cursor: pointer;
+
+    &:hover{
+        background-color: rgb(72, 66, 99);
+    }
+
+
+    p {
+        margin-top: 15px;
+        font-weight: 700;
+    }
+
+}
