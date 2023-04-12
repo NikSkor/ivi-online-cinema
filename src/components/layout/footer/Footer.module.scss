@@ -1,0 +1,119 @@
+@import '/src/styles/vars.scss';
+
+.footer {
+  display: block;
+  position: relative;
+}
+
+.footer__container {
+  max-width: 1216px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.footer__container_inner {
+  margin: 0 -12px;
+}
+
+.footer_content {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 48px 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    background-color: rgba($primary, .16);
+    height: 1px;
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    top: 0;
+  }
+}
+
+.footer__column {
+  padding: 0 12px;
+}
+
+.footer__certificateLinkWrapper {
+  margin-top: 5px;
+  background-image: $link_gradient;
+  background-clip: content-box;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.footer__certificateLink {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 500;
+  font-style: normal;
+  color: inherit;
+}
+
+.column__title {
+  display: block;
+  color: $primary;
+  font-weight: 700;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 20px;
+  font-style: normal;
+}
+
+.footer__btn {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  padding: 12px 12px;
+
+  border: solid 1px $btn_bg;
+  background-color: $btn_bg;
+  border-radius: 8px;
+
+  cursor: pointer;
+  text-decoration: none;
+  color: $primary;
+
+  transition-property: border-color,background-color;
+  transition-duration: .4s;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  &.square {
+    width: 40px;
+    padding: 0;
+  }
+
+  &:hover {
+    background-color: $btn_hover;
+    border-color: $btn_hover;
+  }
+}
+
+.btnIcon__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.supportPhone {
+  width: 196px;
+  margin-top: 12px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  text-align: center;
+
+  background-color: $btn_bg;
+  border-radius: 8px;
+
+  transition: all .15s linear;
+}

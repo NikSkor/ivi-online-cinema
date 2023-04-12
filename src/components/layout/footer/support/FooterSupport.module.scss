@@ -1,0 +1,41 @@
+@import '/src/styles/vars.scss';
+@import '/src/components/layout/footer/Footer.module.scss';
+
+.footer__description {
+  font-size: 14px;
+  line-height: 20px;
+  font-style: normal;
+  color: rgba($primary, .48);
+  font-weight: 400;
+}
+
+.support__links {
+  margin-top: 20px;
+}
+
+.footer__supportBtns {
+  margin-top: 12px;
+  display: flex;
+}
+
+.btn__text {
+  padding: 0 20px;
+}
+
+.questions {
+  display: block;
+  margin-top: 24px;
+
+  p {
+    color: rgba($primary, .48)
+  }
+}
+
+.question__link {
+  color: $primary;
+  transition-duration: .4s;
+
+  &:hover {
+    color: rgba($primary, .72);
+  }
+}
