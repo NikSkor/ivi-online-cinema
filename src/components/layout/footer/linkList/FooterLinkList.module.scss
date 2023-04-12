@@ -1,0 +1,16 @@
+@import '/src/styles/vars.scss';
+@import '/src/components/layout/footer/Footer.module.scss';
+
+.footer__linkItem {
+  color: $secondary;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 24px;
+}
+
+.footer__link {
+  &:hover {
+    color: $primary;
+    transition-duration: .4s;
+  }
+}
