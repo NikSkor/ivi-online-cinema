@@ -1,0 +1,13 @@
+.sliderItem {
+  min-width: 153px;
+  height: 100%;
+
+  transition: 0.6s;
+
+  &:nth-child(2n) {
+    background-color: red;
+  }
+  &:nth-child(2n+1) {
+    background-color: green;
+  }
+}

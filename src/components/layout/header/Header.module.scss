@@ -10,7 +10,6 @@
   height: $headerHeight;
 
 
-  padding: 0px 15px;
   margin-top: 3px;
 
   &.dropdownOpen {
@@ -18,6 +17,8 @@
 
     border-top-right-radius: 20px; 
     border-top-left-radius: 20px;
+
+    padding: 0px 15px;
 
     transition: all 0.2s ease-in;
 
