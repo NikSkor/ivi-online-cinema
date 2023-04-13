@@ -1,0 +1,152 @@
+.film
+    &__container
+        padding-top: 24px
+        margin-bottom: 30px
+    &__navbar
+        display: flex
+        align-items: center
+        justify-content: space-between
+        margin-bottom: 24px
+    &__navigation
+        display: flex
+        align-items: center
+        li
+            a
+                color: rgba(255,255,255,.72)
+                font-size: 15px
+                line-height: 20px
+                font-weight: 500
+                font-style: normal
+                cursor: pointer
+                transition: all .3s
+                &:hover
+                    color: white
+        li:not(:first-child)
+            &::before
+                display: inline-block
+                content: ''
+                width: 2px
+                height: 2px
+                background-color: rgba(255,255,255,.56)
+                margin-left: 7px
+                margin-right: 7px
+                margin-bottom: 3px
+    &__badge
+        background-color: #7e798f
+        -webkit-backdrop-filter: blur(0)
+        backdrop-filter: blur(0)
+        padding: 6px 10px
+        border-radius: 6px
+        font-size: 13px
+        line-height: 16px
+        font-weight: 500
+        font-style: normal
+        overflow: hidden
+        white-space: nowrap
+        text-overflow: ellipsis
+        text-align: center
+    &__info
+        display: flex
+    &__trailer
+        min-width: 720px
+        margin-right: 32px
+    &__video
+        width: 100%
+        height: 400px
+        background-color: #77777736
+        margin-bottom: 30px
+    &__title
+        font-style: normal
+        color: #fff
+        text-align: center
+        font-weight: 700
+        font-size: 42px
+        line-height: 44px
+        margin-bottom: 20px
+    &__text
+        font-size: 15px
+        line-height: 20px
+        font-weight: 400
+        font-style: normal
+        text-align: center
+        color: rgba(255,255,255,.72)
+        margin-bottom: 10px
+    &__categories
+        display: flex
+        align-items: center
+        justify-content: center
+        margin-bottom: 10px
+        li
+            color: rgba(255,255,255,.72)
+            font-size: 15px
+            line-height: 20px
+            font-weight: 500
+            font-style: normal
+            cursor: pointer
+            transition: all .3s
+            &:hover
+                color: white
+        li:not(:first-child)
+            &::before
+                display: inline-block
+                content: ''
+                width: 2px
+                height: 2px
+                background-color: rgba(255,255,255,.56)
+                margin-left: 7px
+                margin-right: 7px
+                margin-bottom: 3px
+    &__premies
+        width: 100%
+        height: 98px
+        margin-bottom: 20px
+        background-color: rgba(255,255,255,.08)
+        transition-duration: .4s
+        border-radius: 12px
+        cursor: pointer
+        display: flex
+        align-items: center
+        justify-content: center
+        &:hover
+            background-color: rgba(255, 255, 255, 0.2)
+
+.actor
+    display: flex
+    justify-content: space-around
+    margin-bottom: 20px
+    &__wrapper
+        transition-duration: .4s
+        cursor: pointer
+        text-align: center
+        color: rgba(255,255,255,.48)
+        font-weight: 400
+        font-style: normal
+        font-size: 12px
+        &:hover
+            color: white
+            .actor__item
+                background-color: rgba(255, 255, 255, 0.2)
+    &__item
+        transition-duration: .4s
+        background-color: rgba(255,255,255,.08)
+        width: 56px
+        height: 56px
+        border-radius: 12px
+        margin-bottom: 5px
+
+.videoBtnBox
+    display: flex
+    gap: 20px
+    &__item
+        background-color: rgba(255,255,255,.08)
+        padding: 10px 12px
+        border-radius: 8px
+        cursor: pointer
+        font-size: 15px
+        line-height: 20px
+        font-weight: 500
+        font-style: normal
+        color: rgba(255,255,255,.72)
+        transition-duration: .4s
+        &:hover
+            background-color: rgba(255, 255, 255, 0.2)
