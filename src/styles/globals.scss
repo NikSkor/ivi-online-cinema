@@ -14,7 +14,13 @@ body {
   background-color: $main_bg;
   font-size: 14px;
   font-family: 'Open Sans', sans-serif;
-  color: $primary
+  color: $primary;
+}
+
+.container {
+  width: 1236px;
+  padding: 0 10px;
+  margin: 0 auto;
 }
 
 a {
