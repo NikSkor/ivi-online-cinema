@@ -5,7 +5,7 @@ const Home: FC = () => {
   return (
     <Layout title="Онлайн-кинотеатр Иви">
       <main>
-        Home content
+        Контент главной страницы
       </main>
     </Layout>
   )
