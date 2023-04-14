@@ -1,0 +1,27 @@
+@import '/src/styles/vars.scss';
+
+.personFilmography {
+  margin-top: 40px;
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin-right: 8px;
+  color: $primary;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.filmsCounter {
+  color: $secondary;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 400;
+}

@@ -1,0 +1,74 @@
+@import '/src/styles/vars.scss';
+
+.filmographyItem {
+  display: block;
+
+  &:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.filmographyItem__body {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.posterWrapper {
+  border-radius: 6px;
+  max-width: 80px;
+}
+
+.poster__img {
+  border-radius: 6px;
+  width: 100%
+}
+
+.filmographyItem__main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-left: 16px;
+}
+
+.title {
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 600;
+  color: $primary;
+  margin-bottom: 4px;
+}
+
+.rating {
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+  color: $secondary;
+}
+
+.filmographyItem__action {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 140px;
+  height: 40px;
+  border-width: 1px;
+  border-radius: 8px;
+  padding: 9px 15px;
+  background-color: $btn_bg;
+
+  transition: .2s linear;
+
+  &:hover {
+    background-color: $btn_hover;
+  }
+}
+
+.btn__text {
+  color: $primary;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 700;
+}
