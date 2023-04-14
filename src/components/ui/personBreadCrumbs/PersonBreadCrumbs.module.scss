@@ -1,0 +1,39 @@
+@import '/src/styles/vars.scss';
+
+.breadCrumbs__container {
+  margin: 40px 0;
+}
+.person__breadCrumbs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.breadCrumbs__item {
+  &:not(:first-child)::before {
+    content: '/';
+    margin-left: 4px;
+    margin-right: 3px;
+    color: $secondary;
+    font-weight: 600;
+  }
+}
+
+.breadCrumbs__link {
+  line-height: 16px;
+  font-weight: 600;
+  font-size: 13px;
+  transition: .2s;
+  box-shadow: 0 2px 0 $breadCrumbs, inset 0 0 0 $breadCrumbs;
+
+  &:hover {
+    box-shadow: 0 0 0 $breadCrumbs, inset 0 -1.5em 0 $breadCrumbs;
+  }
+}
+
+.breadCrumbs__name {
+  color: $secondary;
+  line-height: 16px;
+  font-weight: 600;
+  font-size: 13px;
+}
