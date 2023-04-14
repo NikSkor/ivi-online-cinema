@@ -1,0 +1,72 @@
+@import '/src/styles/vars.scss';
+
+.anchorLink__container {
+  margin-top: 40px;
+}
+
+.anchorLink {
+  color: rgba($primary, .88);
+  cursor: pointer;
+  transition-duration: 400ms;
+  font-size: 18px;
+}
+
+.personBiography {
+  margin-top: 40px;
+}
+
+.title {
+  color: $primary;
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+.biography__container {
+  margin-top: 16px;
+}
+
+.biographyParagraph {
+  color: $description;
+  font-size: 14px;
+  line-height: 22px;
+  margin: 10px 0;
+}
+
+.content__toggle {
+  color: $secondary;
+  cursor: pointer;
+  transition: .1s linear;
+
+  &:hover {
+    color: $primary;
+  }
+}
+
+@media screen and (min-width: 272px) and (max-width: 599px) {
+  .personContent {
+    width: 100%;
+    margin: 0;
+    padding: 0 8px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .personContent {
+    padding: 0 12px;
+  }
+}
+
+@media screen and (min-width: 880px) {
+  .personContent {
+    width: 66.7%;
+    margin-left: 16.7%;
+  }
+}
+
+@media screen and (min-width: 1160px) {
+  .personContent {
+    width: 50%;
+    margin-left: 25%;
+  }
+}

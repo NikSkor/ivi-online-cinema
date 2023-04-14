@@ -1,0 +1,20 @@
+@import '/src/styles/vars.scss';
+
+.pageSection {
+  display: block;
+}
+
+.pageSection_container {
+  width: 1216px;
+  margin: 0 auto;
+}
+
+.pageSection_innerContainer {
+  margin: 0 12px;
+}
+
+.personContent {
+  width: 50%;
+  margin-left: 25%;
+  padding: 0 12px;
+}
