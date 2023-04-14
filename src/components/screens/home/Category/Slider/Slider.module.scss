@@ -12,6 +12,23 @@
     align-items: center;
     gap: 24px;
     overflow: hidden;
+
+    .seeMore {
+      align-self: flex-start;
+      min-width: 153px;
+      padding: 12px;
+      height: 244px;
+
+      background-color: rgb(34, 30, 49);
+      
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      border-radius: 8px;
+
+      transition-duration: 0.6s;
+    }
   }
 
   .sliderButton {
@@ -25,11 +42,11 @@
   
   .sliderButtonPrev {
     transform: rotate(180deg);
-    top: 0;
+    top: -10%;
     left: -55px;
   }
   .sliderButtonNext {
-    top: 0;
+    top: -10%;
     right: -55px;
   }
 

@@ -24,8 +24,11 @@ const Slider:FC<{ items: ReactNode[]}> = ({ items }) => {
     <div className={styles.slider}>
         <div className={styles.sliderTrack} ref={slider}>
           {
-            items.map(film => <SliderItem film={film} />)
+            items.map((film, index) => <SliderItem key={`film-${index}`} film={film} />)
           }
+          <div className={styles.seeMore}>
+            <p>Посмотреть все</p>
+          </div>
         </div>
         <div
           className={`${styles.sliderButton} ${styles.sliderButtonPrev}`}

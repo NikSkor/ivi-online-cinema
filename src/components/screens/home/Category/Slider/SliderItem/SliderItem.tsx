@@ -3,7 +3,10 @@ import styles from './SliderItem.module.scss'
 
 const SliderItem:FC<{film: ReactNode}> = ({ film }) => {
   return(
-    <div className={styles.sliderItem}>{film}</div>
+    <div className={styles.sliderItem}>
+      <div className={styles.image}>{film}</div>
+      <p>qweqeqwewqewqeффффыффqqq</p>
+    </div>
   )
 }
 
