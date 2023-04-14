@@ -2,7 +2,6 @@
 
 .dropdown {
     width: 100%;
-
     position: absolute;
     left: 0;
     top: $headerHeight;
@@ -17,7 +16,7 @@
     visibility: hidden;
     z-index: -1;
 
-    transition-property: opacity, height;
+    transition-property: opacity, min-height;
     transition-duration: .3s;
 
 

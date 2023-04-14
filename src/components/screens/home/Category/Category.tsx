@@ -3,11 +3,13 @@ import styles from './Category.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 import Slider from './Slider/Slider'
+import { CategoryData } from './CategoryData/CategoryData'
+import { filmographyData } from '@/components/ui/filmography/filmography.data'
 type CategoryProps = {
   title: String
 }
 const Category: FC<CategoryProps> = ({ title }) => {
-  const [items, setItems] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12])
+  const [items, setItems] = useState(filmographyData)
 
 
   return (

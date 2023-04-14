@@ -1,6 +1,6 @@
 .category {
   padding: 24px 0;
-  a {
+  & > a {
     font-size: 24px;
     line-height: 28px;
     font-weight: 700;

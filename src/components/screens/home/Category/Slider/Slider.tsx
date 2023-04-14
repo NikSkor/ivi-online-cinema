@@ -1,23 +1,40 @@
 import { FC, useRef, useState } from "react"
 import Image from "next/image"
 import styles from './Slider.module.scss'
-import { ReactNode } from "react"
 import SliderItem from "./SliderItem/SliderItem"
-const Slider:FC<{ items: ReactNode[]}> = ({ items }) => {
-  const [isLast, setIsLast] = useState<boolean>(false)
-  const [isFirst, setIsFirst] = useState<boolean>(true)
+import { IFilmographyItem } from "@/interfaces/person/IFilmographyItem"
+
+const Slider:FC<{ items: IFilmographyItem[]}> = ({ items }) => {
 
   const slider = useRef<any>(null)
   let sliderPosition = 0
 
+  const [isLast, setIsLast] = useState<boolean>(false)
+  const [isFirst, setIsFirst] = useState<boolean>(true)
+
+  const cardWidth = 177
+  const cardsPerPage = 6
+
   const prevButtonHandler = () => {
-    sliderPosition += 177 * 6
-    slider.current.childNodes.forEach((element: any) => element.style = `transform: translateX(${sliderPosition}px)`)
+    if (sliderPosition === 0) {
+      setIsFirst(true)
+    } else {
+      setIsLast(false)
+      sliderPosition += cardWidth * cardsPerPage
+      slider.current.childNodes.forEach((element: any) => element.style = `transform: translateX(${sliderPosition}px)`)
+    }
+    console.log(sliderPosition)
   }
 
   const nextButtonHandler = () => {
-    sliderPosition -= 177 * 6
-    slider.current.childNodes.forEach((element: any) => element.style = `transform: translateX(${sliderPosition}px)`)
+    if (sliderPosition == (cardWidth*items.length) * -1) {
+      setIsLast(true)
+    } else {
+      setIsFirst(false)
+      sliderPosition -= cardWidth * cardsPerPage
+      slider.current.childNodes.forEach((element: any) => element.style = `transform: translateX(${sliderPosition}px)`)
+      console.log(isFirst)
+    }
   }
 
   return(
@@ -30,7 +47,9 @@ const Slider:FC<{ items: ReactNode[]}> = ({ items }) => {
             <p>Посмотреть все</p>
           </div>
         </div>
-        <div
+        {
+          !isFirst && (
+            <div
           className={`${styles.sliderButton} ${styles.sliderButtonPrev}`}
           onClick={prevButtonHandler}>
           <Image
@@ -41,6 +60,8 @@ const Slider:FC<{ items: ReactNode[]}> = ({ items }) => {
             alt=""
           />
         </div>
+          )
+        }
         <div
           className={`${styles.sliderButton} ${styles.sliderButtonNext}`}
           onClick={nextButtonHandler}>

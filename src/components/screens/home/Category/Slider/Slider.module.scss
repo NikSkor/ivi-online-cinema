@@ -1,9 +1,9 @@
 .slider {
   width: 100%;
-  height: 292px;
+  height: 100%;
   background-color: inherit;
   position: relative;
-  margin: 26px 0;
+  margin: 0 12px;
 
   .sliderTrack {
     width: 100%;
@@ -12,6 +12,7 @@
     align-items: center;
     gap: 24px;
     overflow: hidden;
+    padding: 15px 5px;
 
     .seeMore {
       align-self: flex-start;
