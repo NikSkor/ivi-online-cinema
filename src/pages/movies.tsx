@@ -1,21 +1,15 @@
 import Layout from '@/components/layout/Layout'
 import React, { FC, useState } from 'react'
 import Link from 'next/link'
+import Movies from '@/components/screens/movies/Movies'
 
-const Movies: FC = () => {
+const MoviesPage: FC = () => {
     const [films, setFilms] = useState([{ id: 1, title: 'Titanik' }, { id: 2, title: 'Brigada' }])
     return (
-        <Layout title="Онлайн-кинотеатр Иви">
-            <main className='container'>
-                Контент Фильмы
-                <ul>
-                    {
-                        films.map(el => (<li key={el.id}><Link href={`/film/${el.id}`} >{el.title}</Link></li>))
-                    }
-                </ul>
-            </main>
-        </Layout>
+        <>
+          <Movies />
+        </>
     )
 }
 
-export default Movies
+export default MoviesPage

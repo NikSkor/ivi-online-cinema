@@ -1,11 +1,12 @@
 export function truncateText (text: string, maxLength: number) {
   if (text.length <= maxLength) return text
-
-  let truncateText = ''
+  let result = ''
 
   for (let word of text.split(' ')) {
-    if ((truncateText + ' ' + word).length >= maxLength) break
-    truncateText += ` ${word}`
+    if ((result + ' ' + word).length >= maxLength) break
+    result += ` ${word}`
   }
-  return truncateText + '...'
+
+  if (result === '') result = text.slice(0, maxLength)
+  return result + '...'
 }

@@ -1,0 +1,71 @@
+import { FC, useState } from 'react'
+import styles from './DropDawn.module.scss'
+import { IDropDawn } from '@/interfaces/movies/IPlankItem'
+import Slider from 'react-slick'
+
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+
+import SlickItem from '../slickItem/SlickItem'
+import Checkbox from '../checkbox/Checkbox';
+
+interface IIDropDawnList {
+  hasIcon: boolean
+  dropDawnList: IDropDawn[]
+}
+
+const DropDawn: FC<IIDropDawnList> = ({dropDawnList, hasIcon}) => {
+
+
+
+  const sliderSettings = {
+    infinite: true,
+    speed: 500,
+    slidesToShow: 5,
+    slidesToScroll: 3
+  }
+
+  return (
+    <div className={styles.filter__dropDawn}>
+      <div className={styles.dropDawn__content}>
+        {hasIcon &&
+          <div className={styles.dropDawn__carousel}>
+            <div className={styles.viewport}>
+              <div className={styles.slick_track}>
+                <Slider {...sliderSettings}>
+                  {
+                      dropDawnList.map((item) => (
+                        <SlickItem 
+                          key={item.value}
+                          icon={item.icon}
+                          name={item.name}
+                        />
+                      ))
+                    }
+                </Slider>
+              </div>
+            </div>
+          </div>
+        }
+
+          <div className={styles.list__container}>
+            <ul className={styles.dropDawn__list}>
+              {
+                dropDawnList.map((item) => (
+                  <Checkbox 
+                    value={item.value} 
+                    name={item.name} />
+                ))
+              }
+            </ul>
+          </div>  
+
+      </div>
+
+    </div>
+  )
+}
+
+export default DropDawn
