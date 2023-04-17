@@ -5,8 +5,14 @@
   .filmSection {
     font-size: 14px;
     color: rgba(255,255,255, .5);
-    p {
+    a,p {
+      display: block;
       margin-bottom: 10px;
+      transition-property: color;
+      transition: 0.3s;
+      &:hover {
+        color: white;
+      }
     }
   }
   .countries {
