@@ -11,6 +11,8 @@ import favorite from './icons/favorite.svg'
 import share from './icons/share.svg'
 import volume from './icons/volume.svg'
 import { Comments } from '@/components/ui/comments/Comments'
+import BackLink from '@/components/ui/backLink/BackLink'
+import { FilmItemSlider } from '@/components/ui/filmItemSlider/FilmItemSlider'
 
 const Film: NextPage = () => {
     const [showDescription, setShowDescription] = useState(false);
@@ -28,16 +30,7 @@ const Film: NextPage = () => {
                     <li><Link href={'/movies'}>Фильмы</Link></li>
                     <li><Link href={asPath}>Название</Link></li>
                 </ul> */}
-                <div className={styles.back} onClick={() => router.back()}>
-                    <Image
-                        priority
-                        height={25}
-                        width={25}
-                        src={backIcon}
-                        alt="back_lcon"
-                    />
-                    <p className={styles.back__text}>Назад</p>
-                </div>
+                <BackLink />
                 <div className={styles.film__badge}>бесплатно</div>
             </div>
             <section className={styles.film__info}>
@@ -135,71 +128,10 @@ const Film: NextPage = () => {
             <section className={styles.secondSection}>
                 <h2 className={styles.subtitle}>C фильмом &quot;Калашников&quot; смотрят</h2>
                 <div className={styles.slider__list}>
-                    <Link href='/film/1' className={styles.slider__item}>
-                        <div className={styles.slider__image}>
-                            <Image loader={() => image} src={image} alt='actor' width={153} height={235} />
-                            <div className={styles.menu}>
-                                <div className={styles.menu__image}>
-                                    <Image src={favorite} alt='addToFavorite' width={45} height={45} />
-                                </div>
-                                <div>
-                                    <div className={styles.menu__rating}>8.5
-                                        <div className={styles.menu__ratingBox}>
-                                            <div><div style={{ width: '40%' }}></div></div>
-                                            <div><div style={{ width: '70%' }}></div></div>
-                                            <div><div style={{ width: '30%' }}></div></div>
-                                            <div><div style={{ width: '60%' }}></div></div>
-                                        </div>
-                                    </div>
-                                    <div className={styles.menu__text}>
-                                        сюжет
-                                        <div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                    <h3 className={styles.menu__text}>2019, Россия, Биография</h3>
-                                    <h3 className={styles.menu__text}>115 минут</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles.slider__info}>
-                            <h3>Лев Яшин</h3>
-                            <h4>Бесплатно</h4>
-                        </div>
-                    </Link>
-                    <Link href='/film/1' className={styles.slider__item}>
-                        <div className={styles.slider__image}>
-                            <Image loader={() => image} src={image} alt='actor' width={153} height={235} />
-                            <div className={styles.menu}>
-                                <div className={styles.menu__image}>
-                                    <Image src={favorite} alt='addToFavorite' width={45} height={45} />
-                                </div>
-                                <div>
-                                    <div className={styles.menu__rating}>8.5
-                                        <div className={styles.menu__ratingBox}>
-                                            <div><div style={{ width: '40%' }}></div></div>
-                                            <div><div style={{ width: '70%' }}></div></div>
-                                            <div><div style={{ width: '30%' }}></div></div>
-                                            <div><div style={{ width: '60%' }}></div></div>
-                                        </div>
-                                    </div>
-                                    <div className={styles.menu__text}>
-                                        сюжет
-                                        <div>
-                                            <div></div>
-                                        </div>
-                                    </div>
-                                    <h3 className={styles.menu__text}>2019, Россия, Биография</h3>
-                                    <h3 className={styles.menu__text}>115 минут</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div className={styles.slider__info}>
-                            <h3>Лев Яшин</h3>
-                            <h4>Бесплатно</h4>
-                        </div>
-                    </Link>
-
+                    <FilmItemSlider />
+                    <FilmItemSlider />
+                    <FilmItemSlider />
+                    <FilmItemSlider />
                 </div>
             </section>
             <section className={styles.thirdSection}>
@@ -299,8 +231,6 @@ const Film: NextPage = () => {
                             </div>
                         </div>
                         <div>
-                            <div>
-
                                 <div className={styles.modalActors__image}>
                                     <Image loader={() => image} src={image} alt='actor' width={153} height={235} />
                                 </div>
@@ -320,12 +250,13 @@ const Film: NextPage = () => {
                                 </div>
                                 <h3 className={styles.menu__text}>2019, Россия, Биография</h3>
                                 <h3 className={styles.menu__text}>115 минут</h3>
-                            </div>
                         </div>
                     </div>
                 </div> : null
             }
-            <Comments />
+            <section className={styles.fourthSection}>
+                <Comments />
+            </section>
         </main>
     )
 }
