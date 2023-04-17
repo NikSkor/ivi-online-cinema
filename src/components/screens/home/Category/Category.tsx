@@ -15,8 +15,10 @@ const Category: FC<CategoryProps> = ({ title }) => {
   return (
     <div className={styles.category}>
       <Link href="/">
-        {title}
-        <Image src="/arrow-right-icon.svg" width={19} height={19} alt="arrow" />
+        <p>
+          {title}
+          <Image src="/arrow-right-icon.svg" width={19} height={19} alt="arrow" />
+          </p>
       </Link>
       <Slider items={items}/>
     </div>

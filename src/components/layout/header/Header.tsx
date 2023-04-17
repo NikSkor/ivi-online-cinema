@@ -10,29 +10,35 @@ const Header = () => {
 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
-  const isDropdownOpen = isNotificationsOpen || isProfileOpen
+  const [isFilmsOpen, setIsFilmsOpen] = useState(false)
+  const isDropdownOpen = isNotificationsOpen || isProfileOpen || isFilmsOpen
 
   const notificationHandler = () => {
     setIsNotificationsOpen(true)
     setIsProfileOpen(false)
+    setIsFilmsOpen(false)
   }
 
   const profileHandler = () => {
     setIsProfileOpen(true)
     setIsNotificationsOpen(false)
+    setIsFilmsOpen(false)
+  }
+
+  const headerMouseLeaveHandler = () => {
+    setIsProfileOpen(false);
+    setIsNotificationsOpen(false)
+    setIsFilmsOpen(false)
   }
   
   return (
-    <header className={`${styles.header} ${isDropdownOpen ? styles.dropdownOpen : ''}`} onMouseLeave={() => {
-      setIsProfileOpen(false);
-      setIsNotificationsOpen(false)
-    }}>
+    <header className={`${styles.header} ${isDropdownOpen ? styles.dropdownOpen : ''}`} onMouseLeave={headerMouseLeaveHandler}>
       <div className={styles.headerTop}>
         <Link href="/">
           <Image className={styles.logo} src="/iviLogo.svg" width={66} height={48} alt='logo' />
         </Link>
         <div className={styles.menuContainer}>
-          <Navigation />
+          <Navigation setIsProfileOpen={setIsProfileOpen} setIsNotificationsOpen={setIsNotificationsOpen} setIsFilmsOpen={setIsFilmsOpen}/>
         </div>
         <div className={styles.wideArea}>
           <div className={styles.additionalButton}>
@@ -59,8 +65,7 @@ const Header = () => {
       <Dropdown 
       isProfileOpen={isProfileOpen} 
       isNotificationsOpen={isNotificationsOpen}
-      setIsProfileOpen={setIsProfileOpen}
-      setIsNotificationsOpen={setIsNotificationsOpen}/>
+      isFilmsOpen={isFilmsOpen}/>
     </header>
   )
 }

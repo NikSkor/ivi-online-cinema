@@ -1,0 +1,29 @@
+.content {
+  display: flex;
+  gap: 100px;
+
+  .filmSection {
+    font-size: 14px;
+    color: rgba(255,255,255, .5);
+    p {
+      margin-bottom: 10px;
+    }
+  }
+  .countries {
+    margin-bottom: 30px;
+  }
+  .genres {
+    
+    .genreList {
+      display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 80px;
+    }
+  }
+
+  .title {
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+  }
+}

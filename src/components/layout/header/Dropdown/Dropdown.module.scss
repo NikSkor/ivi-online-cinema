@@ -5,9 +5,9 @@
     position: absolute;
     left: 0;
     top: $headerHeight;
-
+    
     display: flex;
-
+    
     background-color: #1f1b2e;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -15,10 +15,9 @@
     opacity: 0;
     visibility: hidden;
     z-index: -1;
-
+    
     transition-property: opacity, min-height;
     transition-duration: .3s;
-
 
     
     &::before {
@@ -34,16 +33,11 @@
         opacity: 1;
         visibility: visible;
         z-index: 1;
+        
     }
 
     .dropdownBody {
         min-width: 100%;
-        min-height: 100%;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
         padding: 32px;
     }
 }

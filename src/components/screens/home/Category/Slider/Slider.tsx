@@ -19,7 +19,7 @@ const Slider:FC<{ items: IFilmographyItem[]}> = ({ items }) => {
     if (sliderPosition === 0) {
       setIsFirst(true)
     } else {
-      setIsLast(false)
+      setIsFirst(false)
       sliderPosition += cardWidth * cardsPerPage
       slider.current.childNodes.forEach((element: any) => element.style = `transform: translateX(${sliderPosition}px)`)
     }
@@ -30,6 +30,7 @@ const Slider:FC<{ items: IFilmographyItem[]}> = ({ items }) => {
     if (sliderPosition == (cardWidth*items.length) * -1) {
       setIsLast(true)
     } else {
+      setIsLast(false)
       setIsFirst(false)
       sliderPosition -= cardWidth * cardsPerPage
       slider.current.childNodes.forEach((element: any) => element.style = `transform: translateX(${sliderPosition}px)`)
@@ -62,17 +63,21 @@ const Slider:FC<{ items: IFilmographyItem[]}> = ({ items }) => {
         </div>
           )
         }
-        <div
-          className={`${styles.sliderButton} ${styles.sliderButtonNext}`}
-          onClick={nextButtonHandler}>
-          <Image
-            className={styles.sliderArrow}
-            src="/arrow-right-icon.svg"
-            width={32}
-            height={32}
-            alt=""
-          />
-        </div>
+        {
+          !isLast && (
+            <div
+            className={`${styles.sliderButton} ${styles.sliderButtonNext}`}
+            onClick={nextButtonHandler}>
+            <Image
+              className={styles.sliderArrow}
+              src="/arrow-right-icon.svg"
+              width={32}
+              height={32}
+              alt=""
+            />
+          </div>
+          )
+        }
       </div>
   )
 }
