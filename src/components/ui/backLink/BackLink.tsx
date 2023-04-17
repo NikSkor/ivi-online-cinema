@@ -4,19 +4,16 @@ import styles from './BackLink.module.scss'
 import { useRouter } from 'next/router'
 import backIcon from '/public/back_icon.svg'
 
-/*
-
-*/
-
 const BackLink: FC = () => {
 
   const router = useRouter()
 
   return (
-    <section className={styles.backLink__section}>
-      <div className={styles.controlButton}
+    <section className='container'>
+      <div className={styles.backLink__section_inner}>
+        <div 
+          className={styles.controlButton__content}
           onClick={() => router.back()}>
-        <div className={styles.controlButton__content}>
           <Image
             className={styles.back__icon}
             priority

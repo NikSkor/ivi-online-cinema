@@ -1,0 +1,507 @@
+//1 section
+.title
+    font-style: normal
+    color: white
+    font-weight: 700
+    font-size: 42px
+    line-height: 44px
+    margin-bottom: 20px
+
+.subtitle
+    color: white
+    font-size: 24px
+    line-height: 28px
+    font-weight: 700
+    font-style: normal
+    margin-bottom: 20px
+
+.text
+    color: rgba(255,255,255,.72)
+    font-size: 15px
+
+.label
+    font-size: 12px
+    font-weight: bold
+    color: white
+    background: rgba(255, 255, 255, 0.2)
+    padding: 2px 6px
+    border-radius: 6px
+
+.film
+    &__container
+        padding-top: 24px
+        margin-bottom: 30px
+    &__navbar
+        display: flex
+        align-items: center
+        justify-content: space-between
+        margin-bottom: 20px
+    &__badge
+        background-color: #7e798f
+        padding: 6px 10px
+        border-radius: 6px
+        font-size: 13px
+        line-height: 16px
+        font-weight: 500
+        text-align: center
+    &__text
+        color: rgba(255,255,255,.72)
+        text-align: center
+        margin-bottom: 10px
+    &__info
+        display: inline-flex
+        gap: 30px
+        margin-bottom: 30px
+    &__trailer
+        min-width: 60%
+        top: 32px
+    &__list
+        display: flex
+        align-items: center
+        justify-content: center
+        margin-bottom: 10px
+        li
+            a
+                color: rgba(255,255,255,.72)
+                font-size: 15px
+                line-height: 20px
+                font-weight: 500
+                font-style: normal
+                cursor: pointer
+                transition: all .3s
+                &:hover
+                    color: white
+        li:not(:first-child)
+            &::before
+                display: inline-block
+                content: ''
+                width: 2px
+                height: 2px
+                background-color: rgba(255,255,255,.56)
+                margin-left: 7px
+                margin-right: 7px
+                margin-bottom: 3px
+    &__params
+        display: flex
+        align-items: center
+        justify-content: center
+        gap: 10px
+        margin-bottom: 10px
+        color: rgba(255,255,255,.72)
+    &__aboutQuality
+        padding: 15px 0
+        border-top: 1px solid rgba(255, 255, 255, 0.219)
+        border-bottom: 1px solid rgba(255, 255, 255, 0.219)
+        margin-bottom: 20px
+    &__quality
+        display: flex
+        gap: 10px
+        margin-bottom: 10px
+    &__qualityText
+        color: rgba(255,255,255,.48)
+        margin-bottom: 10px
+        span
+            color: rgba(255,255,255,.72)
+//блок с рейтингом
+.raiting
+    display: flex
+    align-items: center
+    gap: 10px
+    background-color: rgba(255,255,255,.08)
+    border-radius: 12px
+    padding: 10px
+    cursor: pointer
+    &__total
+        width: 64px
+        height: 64px
+        color: white
+        font-weight: bold
+        font-size: 24px
+        line-height: 28px
+        background-color: rgb(115, 163, 47)
+        display: flex
+        align-items: center
+        justify-content: center
+        border-radius: 12px
+    &__des
+        width: 80%
+        display: flex
+        justify-content: space-between
+        align-items: center
+    &__info
+        h2
+            color: white
+            font-size: 14px
+            font-weight: 600
+        h3
+            color: rgba(255,255,255,.72)
+            font-size: 14px
+            font-weight: 400
+        h4
+            color: rgba(255,255,255,.72)
+            font-size: 12px
+            font-weight: normal
+    &__estimate
+        font-size: 12px
+        font-weight: bold
+        padding: 2px 5px
+        border-radius: 5px
+        border: 1px solid rgba(255, 255, 255, 0.3)
+        cursor: pointer
+        transition-duration: .4s
+        &:hover
+            border-color: white
+//блок с языками
+.languages
+    color: rgba(255,255,255,.72)
+    margin-bottom: 10px
+    &__list
+        display: flex
+        gap: 10px
+        margin-bottom: 20px
+    &__item
+        color: white
+//блок премии
+.premies
+    width: 100%
+    height: 98px
+    margin-bottom: 20px
+    background-color: rgba(255,255,255,.08)
+    transition-duration: .4s
+    border-radius: 12px
+    cursor: pointer
+    display: flex
+    justify-content: flex-start
+    &__image
+        align-self: center
+        padding-left: 15px
+        margin-right: 15px
+    &__title
+        padding-top: 20px
+        align-self: flex-start
+        color: white
+        font-size: 16px
+        font-weight: bold
+    &__subtitle
+        color: rgba(255,255,255,.48)
+        font-size: 12px
+    &:hover
+        background-color: rgba(255, 255, 255, 0.2)
+//детали о фильме (показать/скрыть)
+.details
+    &__text
+        font-size: 15px
+        line-height: 20px
+        font-weight: 400
+        font-style: normal
+        text-align: center
+        color: rgba(255,255,255,.72)
+        margin-bottom: 20px
+        text-align: left
+    &__showdes
+        color: rgba(255,255,255,.48)
+        font-weight: 400
+        font-style: normal
+        font-size: 14px
+        margin-bottom: 20px
+        cursor: pointer
+        display: inline-block
+        &:hover
+            color: white
+//вернуться назад
+.back
+    display: flex
+    align-items: center
+    gap: 10px
+    cursor: pointer
+    &__text
+        color: white
+        font-size: 14px
+//имитация видео
+.video
+    position: relative
+    img
+        width: 100%
+        height: 400px
+        background-size: cover
+    &__play
+        position: absolute
+        background-color: #ea003d
+        transition-duration: .4s
+        width: 85px
+        height: 85px
+        border-radius: 50%
+        cursor: pointer
+        top: 50%
+        right: 50%
+        transform: translate(50%,-50%)
+        display: flex
+        justify-content: center
+        align-items: center
+        img
+            padding-left: 5px
+            height: 40px
+            width: 40px
+            color: white
+//блок с актерами
+.actor
+    display: flex
+    justify-content: flex-start
+    gap: 20px
+    margin-bottom: 20px
+    &__wrapper
+        transition-duration: .4s
+        cursor: pointer
+        text-align: center
+        color: rgba(255,255,255,.48)
+        font-weight: 400
+        font-style: normal
+        font-size: 12px
+        width: 56px
+        &:hover
+            color: white
+            .actor__item
+                background-color: rgba(255, 255, 255, 0.2)
+    &__item
+        transition-duration: .4s
+        background-color: rgba(255,255,255,.08)
+        width: 56px
+        height: 56px
+        border-radius: 12px
+        margin-bottom: 5px
+        display: flex
+        justify-content: center
+        align-items: center
+        img
+            height: 44px
+            width: 44px
+            object-fit: cover
+            border-radius: 12px
+    &__raiting
+        width: 44px
+        height: 44px
+        background-color: rgb(115, 163, 47)
+        border-radius: 10px
+        display: flex
+        justify-content: center
+        align-items: center
+        color: white
+        font-size: 15px
+        line-height: 20px
+        font-weight: 500
+        font-style: normal
+//кнопки под видео
+.videoBtnBox
+    margin-top: 30px
+    display: flex
+    gap: 20px
+    &__item
+        display: flex
+        align-items: center
+        gap: 5px
+        background-color: rgba(255,255,255,.08)
+        padding: 8px 10px
+        border-radius: 8px
+        cursor: pointer
+        font-size: 15px
+        line-height: 20px
+        font-weight: 500
+        font-style: normal
+        color: rgba(255,255,255,.72)
+        transition-duration: .4s
+        &:hover
+            background-color: rgba(255, 255, 255, 0.2)
+        img
+            height: 20px
+            width: 20px
+
+//////////////////////////////////////2 section С ЭТИМ ФИЛЬМОМ СМОТРЯТ
+
+.secondSection
+    margin-bottom: 30px
+
+//слайдер с этим фльмом смотрят
+.slider
+    &__list
+        display: flex
+        gap: 25px
+    &__item
+        cursor: pointer
+        &:hover
+            .menu
+                opacity: 1
+                background-color: #000120b4
+    &__image
+        position: relative
+        border-radius: 12px
+        overflow: hidden
+        margin-bottom: 10px
+        height: 235px
+        width: 153px
+        cursor: pointer
+    &__info
+        h3
+            color: rgba(255,255,255,.9)
+            font-size: 14px
+            font-weight: 400
+        h4
+            color: rgba(255,255,255,.72)
+            font-size: 12px
+            font-weight: normal
+
+//карточка слайдера при наведении
+.menu
+    position: absolute
+    opacity: 0
+    z-index: 5
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    transition-duration: .2s
+    padding: 10px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: 100%
+    height: 100%
+    color: white
+    &__image
+        img
+            height: 25px
+            width: 25px
+            float: right
+    &__text
+        color: rgba(255,255,255,.72)
+        font-size: 12px
+        margin-bottom: 5px
+        div
+            margin-top: 5px
+            width: 80%
+            height: 4px
+            background-color: rgba(255, 255, 255, 0.253)
+            border-radius: 2px
+            div
+                background-color: #fd0241
+                width: 60%
+    &__rating
+        display: flex
+        gap: 5px
+        align-items: center
+        color: white
+        font-size: 24px
+        font-weight: bold
+    &__ratingBox
+        padding-top: 4px
+        display: flex
+        gap: 2px
+        flex-direction: column
+        width: 20px
+        div
+            width: 100%
+            height: 2px
+            background-color: rgba(255, 255, 255, 0.253)
+            div
+                background-color: #fd0241
+
+//////////////////////////////////////3 section АКТЕРЫ
+.thirdSection
+    margin-bottom: 30px
+.actors
+    &__list
+        display: flex
+        gap: 25px
+    &__item
+        font-size: 13px
+        line-height: 16px
+        display: inline-block
+        &:hover
+            .actors__name
+                color: white
+    &__image
+        height: 88px
+        width: 88px
+        border-radius: 50%
+        overflow: hidden
+        margin-bottom: 10px
+    &__name
+        color: #d9d7e0
+        font-weight: 500
+    &__post
+        color: #a5a1b2
+    &__showMore
+        height: 88px
+        width: 88px
+        border-radius: 50%
+        background-color: rgba(255,255,255,.08)
+        display: flex
+        align-items: center
+        justify-content: center
+        color: rgba(255,255,255,.72)
+        cursor: pointer
+        &:hover
+            color: white
+
+.modalActors
+    background-color: #00000a
+    position: fixed
+    overflow: hidden !important
+    z-index: 50
+    height: 100vh
+    width: 100%
+    top: 0
+    left: 0
+    padding: 50px
+    &__image
+        width: 130px
+        border-radius: 6px
+        overflow: hidden
+        margin-bottom: 10px
+    &__dialog
+        padding-top: 50px
+        height: 100%
+        width: 60%
+        margin: 0 auto
+        overflow-y: auto
+        display: flex
+        gap: 30px
+        &::-webkit-scrollbar
+            display: none
+    &__info
+        width: 80%
+    &__tabs
+        width: 90%
+        padding-bottom: -4px
+        border-bottom: 1px solid rgba(255, 255, 255, 0.219)
+        margin-bottom: 30px
+    &__creators
+        cursor: pointer
+        height: 40px
+        display: inline-flex
+        align-items: center
+        justify-content: center
+        border-bottom: 3px solid #fd0241
+    &__section
+        margin-bottom: 30px
+    &__title
+        color: white
+        padding-bottom: 30px
+        font-size: 22px
+        font-weight: bold
+    &__list
+        display: flex
+        gap: 25px
+    &__itemImage
+        height: 120px
+        width: 120px
+        border-radius: 50%
+        overflow: hidden
+        margin-bottom: 10px
+        &__name
+            color: #d9d7e0
+            font-weight: 500
+        &__films
+            color: #a5a1b2
+//////////////////////////////////////.fourthSection
+
+.fourthSection

@@ -1,11 +1,7 @@
 @import '/src/styles/vars.scss';
 
-.breadCrumbs__container {
-  margin: 40px 0;
-}
-.person__breadCrumbs {
+.breadCrumbs {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 

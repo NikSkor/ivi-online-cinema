@@ -1,0 +1,82 @@
+.slider
+    &__list
+        display: flex
+        gap: 25px
+    &__item
+        cursor: pointer
+        &:hover
+            .menu
+                opacity: 1
+                background-color: #000120b4
+    &__image
+        position: relative
+        border-radius: 12px
+        overflow: hidden
+        margin-bottom: 10px
+        height: 235px
+        width: 153px
+        cursor: pointer
+    &__info
+        h3
+            color: rgba(255,255,255,.9)
+            font-size: 14px
+            font-weight: 400
+        h4
+            color: rgba(255,255,255,.72)
+            font-size: 12px
+            font-weight: normal
+
+//карточка слайдера при наведении
+.menu
+    position: absolute
+    opacity: 0
+    z-index: 5
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    transition-duration: .2s
+    padding: 10px
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    width: 100%
+    height: 100%
+    color: white
+    &__image
+        img
+            height: 25px
+            width: 25px
+            float: right
+    &__text
+        color: rgba(255,255,255,.72)
+        font-size: 12px
+        margin-bottom: 5px
+        div
+            margin-top: 5px
+            width: 80%
+            height: 4px
+            background-color: rgba(255, 255, 255, 0.253)
+            border-radius: 2px
+            div
+                background-color: #fd0241
+                width: 60%
+    &__rating
+        display: flex
+        gap: 5px
+        align-items: center
+        color: white
+        font-size: 24px
+        font-weight: bold
+    &__ratingBox
+        padding-top: 4px
+        display: flex
+        gap: 2px
+        flex-direction: column
+        width: 20px
+        div
+            width: 100%
+            height: 2px
+            background-color: rgba(255, 255, 255, 0.253)
+            div
+                background-color: #fd0241
