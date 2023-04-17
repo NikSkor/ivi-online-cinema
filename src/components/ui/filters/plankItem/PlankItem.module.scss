@@ -1,0 +1,30 @@
+@import '/src/styles/vars.scss';
+
+.plankItem {
+  position: relative;
+  margin-bottom: 12px;
+  padding: 0 6px;
+  cursor: pointer;
+}
+
+.plank {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  height: 56px;
+  padding: 8px 16px;
+
+  background-color: $plank_bg;
+  border-radius: 4px;
+}
+
+.plank__title {
+  color: $primary;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}

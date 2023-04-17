@@ -1,0 +1,59 @@
+@import '/src/styles/vars.scss';
+
+.headerBar {
+  padding-top: 32px;
+  padding-bottom: 16px;
+}
+
+.headerBar__controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 12px;
+}
+
+.headerBar__textInfo {
+  width: 100%;
+  padding: 0 12px;
+  margin-top: 24px;
+}
+
+.title {
+  font-size: 40px;
+  line-height: 44px;
+  font-weight: 700;
+  color: $primary;
+}
+
+.descriptionWrapper {
+  width: 78%;
+  font-size: 15px;
+  line-height: 22px;
+  font-weight: 400;
+  color: $secondary;
+}
+
+.descriptionParagraph {
+  font-size: inherit;
+  line-height: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+
+  &:not(:first-child) {
+    margin-top: 8px;
+  }
+}
+
+.descriptionToggle {
+  display: inline-block;
+  margin-top: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  color: rgba($primary, .88);;
+
+  &:hover {
+    color: $primary;
+  }
+
+}

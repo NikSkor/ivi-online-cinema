@@ -1,34 +1,27 @@
 @import '/src/styles/vars.scss';
 
-.backLink__section {
-  position: relative;
-  z-index: 1;
-  width: auto;
-  margin-left: 20px;
-  margin-right: 20px;
-}
-
-.controlButton {
-  position: absolute;
-  top: 16px;
-  padding: 16px;
-  cursor: pointer;
+.backLink__section_inner {
+  display: block;
 }
 
 .controlButton__content {
   display: flex;
   align-items: center;
-  transition: .2s;
+  width: 100px;
+  transition: .1s;
+  cursor: pointer;
 
   &:hover {
-    transform: scale(1.05);
+    .back__icon {
+      transform: scale(1.2);
+    }
   }
 }
 
 .back__icon {
-  position: relative;
   width: 22px;
   height: 22px;
+  transition: .2s;
 }
 
 .controlButton__caption {

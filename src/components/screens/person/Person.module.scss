@@ -1,5 +1,11 @@
 @import '/src/styles/vars.scss';
 
+.personPage {
+  max-width: 1216px;
+  margin: auto;
+  padding-top: 30px;
+  border-top: 1px solid rgba($secondary, 0.5);
+}
 .anchorLink__container {
   margin-top: 40px;
 }
@@ -41,6 +47,16 @@
   &:hover {
     color: $primary;
   }
+}
+
+.breadCrumbs__container {
+  margin: 40px 0;
+}
+
+.person__breadCrumbs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 272px) and (max-width: 599px) {
