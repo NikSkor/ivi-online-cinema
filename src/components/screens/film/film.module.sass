@@ -1,4 +1,32 @@
 //1 section
+.title
+    font-style: normal
+    color: white
+    font-weight: 700
+    font-size: 42px
+    line-height: 44px
+    margin-bottom: 20px
+
+.subtitle
+    color: white
+    font-size: 24px
+    line-height: 28px
+    font-weight: 700
+    font-style: normal
+    margin-bottom: 20px
+
+.text
+    color: rgba(255,255,255,.72)
+    font-size: 15px
+
+.label
+    font-size: 12px
+    font-weight: bold
+    color: white
+    background: rgba(255, 255, 255, 0.2)
+    padding: 2px 6px
+    border-radius: 6px
+
 .film
     &__container
         padding-top: 24px
@@ -8,9 +36,30 @@
         align-items: center
         justify-content: space-between
         margin-bottom: 20px
-    &__navigation
+    &__badge
+        background-color: #7e798f
+        padding: 6px 10px
+        border-radius: 6px
+        font-size: 13px
+        line-height: 16px
+        font-weight: 500
+        text-align: center
+    &__text
+        color: rgba(255,255,255,.72)
+        text-align: center
+        margin-bottom: 10px
+    &__info
+        display: inline-flex
+        gap: 30px
+        margin-bottom: 30px
+    &__trailer
+        min-width: 60%
+        top: 32px
+    &__list
         display: flex
         align-items: center
+        justify-content: center
+        margin-bottom: 10px
         li
             a
                 color: rgba(255,255,255,.72)
@@ -32,83 +81,28 @@
                 margin-left: 7px
                 margin-right: 7px
                 margin-bottom: 3px
-    &__badge
-        background-color: #7e798f
-        -webkit-backdrop-filter: blur(0)
-        backdrop-filter: blur(0)
-        padding: 6px 10px
-        border-radius: 6px
-        font-size: 13px
-        line-height: 16px
-        font-weight: 500
-        font-style: normal
-        overflow: hidden
-        white-space: nowrap
-        text-overflow: ellipsis
-        text-align: center
-    &__text
-        color: rgba(255,255,255,.72)
-        text-align: center
-        margin-bottom: 10px
-    &__info
-        display: inline-flex
-        gap: 30px
-        margin-bottom: 30px
-    &__trailer
-        min-width: 60%
-        position: -webkit-sticky
-        top: 32px
-        display: inline-block
-        vertical-align: top
-    &__title
-        font-style: normal
-        color: #fff
-        text-align: center
-        font-weight: 700
-        font-size: 42px
-        line-height: 44px
-        margin-bottom: 20px
-    &__categories
+    &__params
         display: flex
         align-items: center
         justify-content: center
+        gap: 10px
         margin-bottom: 10px
-        li
-            color: rgba(255,255,255,.72)
-            font-size: 15px
-            line-height: 20px
-            font-weight: 500
-            font-style: normal
-            cursor: pointer
-            transition: all .3s
-            &:hover
-                color: white
-        li:not(:first-child)
-            &::before
-                display: inline-block
-                content: ''
-                width: 2px
-                height: 2px
-                background-color: rgba(255,255,255,.56)
-                margin-left: 7px
-                margin-right: 7px
-                margin-bottom: 3px
-    &__quality
+        color: rgba(255,255,255,.72)
+    &__aboutQuality
         padding: 15px 0
         border-top: 1px solid rgba(255, 255, 255, 0.219)
         border-bottom: 1px solid rgba(255, 255, 255, 0.219)
         margin-bottom: 20px
-
-.quality
-    display: flex
-    gap: 10px
-    margin-bottom: 10px
-    &__text
+    &__quality
+        display: flex
+        gap: 10px
+        margin-bottom: 10px
+    &__qualityText
         color: rgba(255,255,255,.48)
         margin-bottom: 10px
         span
             color: rgba(255,255,255,.72)
-
+//блок с рейтингом
 .raiting
     display: flex
     align-items: center
@@ -157,7 +151,7 @@
         transition-duration: .4s
         &:hover
             border-color: white
-
+//блок с языками
 .languages
     color: rgba(255,255,255,.72)
     margin-bottom: 10px
@@ -167,6 +161,7 @@
         margin-bottom: 20px
     &__item
         color: white
+//блок премии
 .premies
     width: 100%
     height: 98px
@@ -192,7 +187,7 @@
         font-size: 12px
     &:hover
         background-color: rgba(255, 255, 255, 0.2)
-
+//детали о фильме (показать/скрыть)
 .details
     &__text
         font-size: 15px
@@ -213,22 +208,7 @@
         display: inline-block
         &:hover
             color: white
-
-.params
-    display: flex
-    align-items: center
-    justify-content: center
-    gap: 10px
-    margin-bottom: 10px
-    color: rgba(255,255,255,.72)
-    &__quality
-        font-size: 12px
-        font-weight: bold
-        color: white
-        background: rgba(255, 255, 255, 0.2)
-        padding: 2px 6px
-        border-radius: 6px
-
+//вернуться назад
 .back
     display: flex
     align-items: center
@@ -237,7 +217,7 @@
     &__text
         color: white
         font-size: 14px
-
+//имитация видео
 .video
     position: relative
     img
@@ -263,7 +243,7 @@
             height: 40px
             width: 40px
             color: white
-
+//блок с актерами
 .actor
     display: flex
     justify-content: flex-start
@@ -310,7 +290,7 @@
         line-height: 20px
         font-weight: 500
         font-style: normal
-
+//кнопки под видео
 .videoBtnBox
     margin-top: 30px
     display: flex
@@ -334,21 +314,21 @@
         img
             height: 20px
             width: 20px
-//2section
+
+//////////////////////////////////////2 section С ЭТИМ ФИЛЬМОМ СМОТРЯТ
 
 .secondSection
-    &__title
-        font-size: 24px
-        line-height: 28px
-        font-weight: 700
-        font-style: normal
-        margin-bottom: 20px
+    margin-bottom: 30px
+
+//слайдер с этим фльмом смотрят
+.slider
     &__list
         display: flex
+        gap: 25px
     &__item
         cursor: pointer
         &:hover
-            .secondSection__menu
+            .menu
                 opacity: 1
                 background-color: #000120b4
     &__image
@@ -368,18 +348,18 @@
             color: rgba(255,255,255,.72)
             font-size: 12px
             font-weight: normal
-    &__menu
-        position: absolute
-        opacity: 0
-        z-index: 5
-        width: 100%
-        height: 100%
-        top: 0
-        left: 0
-        transition-duration: .2s
-        padding: 10px
 
+//карточка слайдера при наведении
 .menu
+    position: absolute
+    opacity: 0
+    z-index: 5
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    transition-duration: .2s
+    padding: 10px
     display: flex
     flex-direction: column
     justify-content: space-between
@@ -423,3 +403,102 @@
             background-color: rgba(255, 255, 255, 0.253)
             div
                 background-color: #fd0241
+
+//////////////////////////////////////3 section АКТЕРЫ
+.thirdSection
+    margin-bottom: 30px
+.actors
+    &__list
+        display: flex
+        gap: 25px
+    &__item
+        font-size: 13px
+        line-height: 16px
+        display: inline-block
+        &:hover
+            .actors__name
+                color: white
+    &__image
+        height: 88px
+        width: 88px
+        border-radius: 50%
+        overflow: hidden
+        margin-bottom: 10px
+    &__name
+        color: #d9d7e0
+        font-weight: 500
+    &__post
+        color: #a5a1b2
+    &__showMore
+        height: 88px
+        width: 88px
+        border-radius: 50%
+        background-color: rgba(255,255,255,.08)
+        display: flex
+        align-items: center
+        justify-content: center
+        color: rgba(255,255,255,.72)
+        cursor: pointer
+        &:hover
+            color: white
+
+.modalActors
+    background-color: #00000a
+    position: fixed
+    overflow: hidden !important
+    z-index: 50
+    height: 100vh
+    width: 100%
+    top: 0
+    left: 0
+    padding: 50px
+    &__image
+        width: 130px
+        border-radius: 6px
+        overflow: hidden
+        margin-bottom: 10px
+    &__dialog
+        padding-top: 50px
+        height: 100%
+        width: 60%
+        margin: 0 auto
+        overflow-y: auto
+        display: flex
+        gap: 30px
+        &::-webkit-scrollbar
+            display: none
+    &__info
+        width: 80%
+    &__tabs
+        width: 90%
+        padding-bottom: -4px
+        border-bottom: 1px solid rgba(255, 255, 255, 0.219)
+        margin-bottom: 30px
+    &__creators
+        cursor: pointer
+        height: 40px
+        display: inline-flex
+        align-items: center
+        justify-content: center
+        border-bottom: 3px solid #fd0241
+    &__section
+        margin-bottom: 30px
+    &__title
+        color: white
+        padding-bottom: 30px
+        font-size: 22px
+        font-weight: bold
+    &__list
+        display: flex
+        gap: 25px
+    &__itemImage
+        height: 120px
+        width: 120px
+        border-radius: 50%
+        overflow: hidden
+        margin-bottom: 10px
+        &__name
+            color: #d9d7e0
+            font-weight: 500
+        &__films
+            color: #a5a1b2
