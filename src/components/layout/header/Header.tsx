@@ -34,7 +34,7 @@ const Header = () => {
   }
   
   return (
-    <header className={``container ${styles.header} ${isDropdownOpen ? styles.dropdownOpen : ''}`} onMouseLeave={headerMouseLeaveHandler}>
+    <header className={`container ${styles.header} ${isDropdownOpen ? styles.dropdownOpen : ''}`} onMouseLeave={headerMouseLeaveHandler}>
       <div className={styles.headerTop}>
         <Link href="/">
           <Image className={styles.logo} src="/iviLogo.svg" width={66} height={48} alt='logo' />
