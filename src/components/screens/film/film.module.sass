@@ -1,12 +1,13 @@
-//1 section
+/////////////////////// TITLE
 .title
     font-style: normal
+    text-align: center
     color: white
     font-weight: 700
     font-size: 42px
     line-height: 44px
     margin-bottom: 20px
-
+/////////////////////// SUBTITLES
 .subtitle
     color: white
     font-size: 24px
@@ -14,11 +15,20 @@
     font-weight: 700
     font-style: normal
     margin-bottom: 20px
-
+    &__link
+        padding-bottom: 2px
+        display: inline-block
+        cursor: pointer
+        border-bottom: 1px solid rgba(255, 255, 255, 0.219)
+        transition: all .3s
+        &:hover
+            border-color: white
+/////////////////////// TEXT
 .text
     color: rgba(255,255,255,.72)
     font-size: 15px
-
+    margin-bottom: 30px
+/////////////////////// LABLE 1080 720 5.1
 .label
     font-size: 12px
     font-weight: bold
@@ -26,6 +36,8 @@
     background: rgba(255, 255, 255, 0.2)
     padding: 2px 6px
     border-radius: 6px
+
+/////////////////////// SECTION ABOUT FILM
 
 .film
     &__container
@@ -208,41 +220,6 @@
         display: inline-block
         &:hover
             color: white
-//вернуться назад
-.back
-    display: flex
-    align-items: center
-    gap: 10px
-    cursor: pointer
-    &__text
-        color: white
-        font-size: 14px
-//имитация видео
-.video
-    position: relative
-    img
-        width: 100%
-        height: 400px
-        background-size: cover
-    &__play
-        position: absolute
-        background-color: #ea003d
-        transition-duration: .4s
-        width: 85px
-        height: 85px
-        border-radius: 50%
-        cursor: pointer
-        top: 50%
-        right: 50%
-        transform: translate(50%,-50%)
-        display: flex
-        justify-content: center
-        align-items: center
-        img
-            padding-left: 5px
-            height: 40px
-            width: 40px
-            color: white
 //блок с актерами
 .actor
     display: flex
@@ -290,6 +267,32 @@
         line-height: 20px
         font-weight: 500
         font-style: normal
+//имитация видео
+.video
+    position: relative
+    img
+        width: 100%
+        height: 400px
+        background-size: cover
+    &__play
+        position: absolute
+        background-color: #ea003d
+        transition-duration: .4s
+        width: 85px
+        height: 85px
+        border-radius: 50%
+        cursor: pointer
+        top: 50%
+        right: 50%
+        transform: translate(50%,-50%)
+        display: flex
+        justify-content: center
+        align-items: center
+        img
+            padding-left: 5px
+            height: 40px
+            width: 40px
+            color: white
 //кнопки под видео
 .videoBtnBox
     margin-top: 30px
@@ -315,16 +318,12 @@
             height: 20px
             width: 20px
 
-//////////////////////////////////////2 section С ЭТИМ ФИЛЬМОМ СМОТРЯТ
+//////////////////////////////////////С ЭТИМ ФИЛЬМОМ СМОТРЯТ
 
 .secondSection
     margin-bottom: 30px
-
-//слайдер с этим фльмом смотрят
+//slider
 .slider
-    &__list
-        display: flex
-        gap: 25px
     &__item
         cursor: pointer
         &:hover
@@ -348,7 +347,6 @@
             color: rgba(255,255,255,.72)
             font-size: 12px
             font-weight: normal
-
 //карточка слайдера при наведении
 .menu
     position: absolute
@@ -404,9 +402,10 @@
             div
                 background-color: #fd0241
 
-//////////////////////////////////////3 section АКТЕРЫ
+//////////////////////////////////////АКТЕРЫ
 .thirdSection
     margin-bottom: 30px
+
 .actors
     &__list
         display: flex
@@ -442,66 +441,15 @@
         &:hover
             color: white
 
-.modalActors
-    background-color: #00000a
-    position: fixed
-    overflow: hidden !important
-    z-index: 50
-    height: 100vh
-    width: 100%
-    top: 0
-    left: 0
-    padding: 50px
-    &__image
-        width: 130px
-        border-radius: 6px
-        overflow: hidden
-        margin-bottom: 10px
-    &__dialog
-        padding-top: 50px
-        height: 100%
-        width: 60%
-        margin: 0 auto
-        overflow-y: auto
-        display: flex
-        gap: 30px
-        &::-webkit-scrollbar
-            display: none
-    &__info
-        width: 80%
-    &__tabs
-        width: 90%
-        padding-bottom: -4px
-        border-bottom: 1px solid rgba(255, 255, 255, 0.219)
-        margin-bottom: 30px
-    &__creators
-        cursor: pointer
-        height: 40px
-        display: inline-flex
-        align-items: center
-        justify-content: center
-        border-bottom: 3px solid #fd0241
-    &__section
-        margin-bottom: 30px
-    &__title
-        color: white
-        padding-bottom: 30px
-        font-size: 22px
-        font-weight: bold
-    &__list
-        display: flex
-        gap: 25px
-    &__itemImage
-        height: 120px
-        width: 120px
-        border-radius: 50%
-        overflow: hidden
-        margin-bottom: 10px
-        &__name
-            color: #d9d7e0
-            font-weight: 500
-        &__films
-            color: #a5a1b2
-//////////////////////////////////////.fourthSection
+//////////////////////////////////////Комментарии
+.commentsSection
+    margin-bottom: 100px
 
-.fourthSection
+.watchSection
+    margin-bottom: 30px
+    display: flex
+    align-items: center
+    justify-content: space-between
+    &__leftWrapper
+        width: 40%
+    &__rightWrapper

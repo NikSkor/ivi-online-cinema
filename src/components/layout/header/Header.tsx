@@ -13,16 +13,16 @@ const Header = () => {
   const isDropdownOpen = isNotificationsOpen || isProfileOpen
 
   const handleNotificatiOnClick = () => {
-    setIsNotificationsOpen(true)
+    setIsNotificationsOpen(!isNotificationsOpen)
     setIsProfileOpen(false)
   }
 
   const handleProfileOnClick = () => {
-    setIsProfileOpen(true)
+    setIsProfileOpen(!isProfileOpen)
     setIsNotificationsOpen(false)
   }
   return (
-    <header className={`${styles.header} ${isDropdownOpen ? styles.dropdownOpen : ''}`}>
+    <header className={`container ${styles.header} ${isDropdownOpen ? styles.dropdownOpen : ''}`}>
       <div className={styles.headerTop}>
         <Link href="/">
           <Image className={styles.logo} src="/iviLogo.svg" width={66} height={48} alt='logo' />

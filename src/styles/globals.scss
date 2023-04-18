@@ -35,3 +35,14 @@ li, ol, ul {
 button {
   border: 0;
 }
+
+.slick-disabled {
+  display: none !important;
+}
+
+.slick-next:before {
+  content: '›'!important;
+}
+.slick-prev:before {
+  content: '‹'!important;
+}

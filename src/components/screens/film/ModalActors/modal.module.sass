@@ -1,0 +1,110 @@
+.modalActors
+    background-color: #00000a
+    position: fixed
+    overflow: hidden !important
+    z-index: 50
+    height: 100vh
+    width: 100%
+    top: 0
+    left: 0
+    padding: 50px
+    &__image
+        width: 130px
+        border-radius: 6px
+        overflow: hidden
+        margin-bottom: 10px
+    &__dialog
+        padding-top: 50px
+        height: 100%
+        width: 60%
+        margin: 0 auto
+        overflow-y: auto
+        display: flex
+        gap: 30px
+        &::-webkit-scrollbar
+            display: none
+    &__info
+        width: 80%
+    &__tabs
+        width: 90%
+        padding-bottom: -4px
+        border-bottom: 1px solid rgba(255, 255, 255, 0.219)
+        margin-bottom: 30px
+    &__creators
+        cursor: pointer
+        height: 40px
+        display: inline-flex
+        align-items: center
+        justify-content: center
+        border-bottom: 3px solid #fd0241
+    &__section
+        margin-bottom: 30px
+    &__title
+        color: white
+        padding-bottom: 30px
+        font-size: 22px
+        font-weight: bold
+    &__list
+        display: flex
+        gap: 25px
+    &__itemImage
+        height: 120px
+        width: 120px
+        border-radius: 50%
+        overflow: hidden
+        margin-bottom: 10px
+        &__name
+            color: #d9d7e0
+            font-weight: 500
+        &__films
+            color: #a5a1b2
+
+.back
+    display: inline-flex
+    align-items: center
+    gap: 10px
+    cursor: pointer
+    &__text
+        color: white
+        font-size: 14px
+.title
+    font-style: normal
+    color: white
+    font-weight: 700
+    font-size: 42px
+    line-height: 44px
+    margin-bottom: 20px
+
+.menu
+    &__text
+        color: rgba(255,255,255,.72)
+        font-size: 12px
+        margin-bottom: 5px
+        div
+            margin-top: 5px
+            width: 80%
+            height: 4px
+            background-color: rgba(255, 255, 255, 0.253)
+            border-radius: 2px
+            div
+                background-color: #fd0241
+                width: 60%
+    &__rating
+        display: flex
+        gap: 5px
+        align-items: center
+        color: white
+        font-size: 24px
+        font-weight: bold
+    &__ratingBox
+        padding-top: 4px
+        display: flex
+        gap: 2px
+        flex-direction: column
+        width: 20px
+        div
+            width: 100%
+            height: 2px
+            background-color: rgba(255, 255, 255, 0.253)
+            div
+                background-color: #fd0241

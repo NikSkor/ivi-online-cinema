@@ -15,7 +15,7 @@ import SocialLink from './socialLink/SocialLink';
 const Footer = () => {
   return (
     <footer className={styles.footer}>
-      <div className={styles.footer__container}>
+      <div className={`container ${styles.footer__container}`}>
         <div className={styles.footer__container_inner}>
           <div className={`${styles.footer_content} ${styles.fourColumn}`}>
 
@@ -42,7 +42,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className={styles.footer__container}>
+      <div className={`container ${styles.footer__container}`}>
         <div className={styles.footer__container_inner}>
           <div className={`${styles.footer_content} ${styles.twoColumn}`}>
 

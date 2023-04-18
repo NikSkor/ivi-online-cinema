@@ -1,35 +1,31 @@
-import React, { useState } from 'react'
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import styles from './film.module.sass'
-import Link from 'next/link'
-import Image from 'next/image'
-import backIcon from '/public/back_icon.svg'
-import play from './icons/play.svg'
-import playTrailer from './icons/play-trailer.svg'
-import favorite from './icons/favorite.svg'
-import share from './icons/share.svg'
-import volume from './icons/volume.svg'
-import { Comments } from '@/components/ui/comments/Comments'
-import BackLink from '@/components/ui/backLink/BackLink'
-import { FilmItemSlider } from '@/components/ui/filmItemSlider/FilmItemSlider'
+import React, { useState } from 'react';
+import { NextPage } from 'next';
+import styles from './film.module.sass';
+import Link from 'next/link';
+import Image from 'next/image';
+import play from './icons/play.svg';
+import playTrailer from './icons/play-trailer.svg';
+import favorite from './icons/favorite.svg';
+import share from './icons/share.svg';
+import volume from './icons/volume.svg';
+import { Comments } from '@/components/ui/comments/Comments';
+import BackLink from '@/components/ui/backLink/BackLink';
+import { FilmSlider } from './FilmSlider';
+import { FilmActors } from './FilmActors';
+import { Trailers } from './Trailers/Trailers';
+import { ModalActors } from './ModalActors/ModalActors';
+import { MainButton } from '@/components/ui/button/MainBtn/MainButton';
 
 const Film: NextPage = () => {
+
     const [showDescription, setShowDescription] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const router = useRouter();
-    const { asPath, pathname } = useRouter();
     const src = 'https://thumbs.dfs.ivi.ru/storage5/contents/9/6/b7f9eef3eaeb3d500cd994fb130047.jpg/120x144/?q=85';
     const bgImage = "https://thumbs.dfs.ivi.ru/storage38/contents/9/2/1da99afee8d958162fbb8faad3a24b.jpg";
     const prem = "https://thumbs.dfs.ivi.ru/storage33/contents/9/9/ccf5c60716958180b98b81a6a4b447.png?q=85";
-    const image = "https://thumbs.dfs.ivi.ru/storage30/contents/1/9/5a294806819855bd6238d18d176fdd.jpg/234x360/?q=85";
     return (
         <main className={`container ${styles.film__container}`}>
             <div className={styles.film__navbar}>
-                {/*                 <ul className={styles.film__navigation}>
-                    <li><Link href={'/movies'}>Фильмы</Link></li>
-                    <li><Link href={asPath}>Название</Link></li>
-                </ul> */}
                 <BackLink />
                 <div className={styles.film__badge}>бесплатно</div>
             </div>
@@ -127,136 +123,42 @@ const Film: NextPage = () => {
             </section>
             <section className={styles.secondSection}>
                 <h2 className={styles.subtitle}>C фильмом &quot;Калашников&quot; смотрят</h2>
-                <div className={styles.slider__list}>
-                    <FilmItemSlider />
-                    <FilmItemSlider />
-                    <FilmItemSlider />
-                    <FilmItemSlider />
-                </div>
+                <FilmSlider />
             </section>
             <section className={styles.thirdSection}>
-                <h2 className={styles.subtitle}>Актеры и создатели</h2>
+                <h2 className={`${styles.subtitle} ${styles.subtitle__link} `} onClick={() => setShowModal(true)}>Актеры и создатели</h2>
                 <div className={styles.actors__list}>
-                    <Link href='/person/1' className={styles.actors__item}>
-                        <div className={styles.actors__image}>
-                            <Image loader={() => src} src={src} alt='actor' width={88} height={88} />
-                        </div>
-                        <div className={styles.actors__info}>
-                            <h3 className={styles.actors__name}>Айзек</h3>
-                            <h3 className={styles.actors__name}>Оскар</h3>
-                            <h4 className={styles.actors__post}>Актер</h4>
-                        </div>
-                    </Link>
-                    <Link href='/person/1' className={styles.actors__item}>
-                        <div className={styles.actors__image}>
-                            <Image loader={() => src} src={src} alt='actor' width={88} height={88} />
-                        </div>
-                        <div className={styles.actors__info}>
-                            <h3 className={styles.actors__name}>Айзек</h3>
-                            <h3 className={styles.actors__name}>Оскар</h3>
-                            <h4 className={styles.actors__post}>Актер</h4>
-                        </div>
-                    </Link>
+                    <FilmActors />
                     <div className={styles.actors__showMore} onClick={() => setShowModal(true)}>
                         Ещё
                     </div>
                 </div>
+                {
+                    showModal ? <ModalActors setShowModal={setShowModal} /> : null
+                }
             </section>
-            {
-                showModal ? <div className={styles.modalActors}>
-                    <div className={styles.back} onClick={() => setShowModal(false)}>
-                        <Image
-                            priority
-                            height={25}
-                            width={25}
-                            src={backIcon}
-                            alt="back_lcon"
-                        />
-                        <p className={styles.back__text}>К фильму</p>
-                    </div>
-
-                    <div className={styles.modalActors__dialog}>
-                        <div className={styles.modalActors__info}>
-
-                            <h1 className={styles.title}>Калашников (Фильм 2020)</h1>
-
-                            <div className={styles.modalActors__tabs}>
-                                <div className={styles.modalActors__creators}>Создатели</div>
-                            </div>
-                            <div className={styles.modalActors__section}>
-                                <div className={styles.modalActors__title}>Режиссер</div>
-                                <ul className={styles.modalActors__list}>
-                                    <li>
-                                        <Link href='/person/1' className={styles.modalActors__item}>
-                                            <div className={styles.modalActors__itemImage}>
-                                                <Image loader={() => src} src={src} alt='actor' width={120} height={120} />
-                                            </div>
-                                            <div className={styles.actors__info}>
-                                                <h3 className={styles.actors__name}>Айзек</h3>
-                                                <h3 className={styles.actors__name}>Оскар</h3>
-                                                <h4 className={styles.actors__post}>Актер</h4>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div className={styles.modalActors__section}>
-                                <div className={styles.modalActors__title}>Актёры</div>
-                                <ul className={styles.modalActors__list}>
-                                    <li>
-                                        <Link href='/person/1' className={styles.modalActors__item}>
-                                            <div className={styles.modalActors__itemImage}>
-                                                <Image loader={() => src} src={src} alt='actor' width={120} height={120} />
-                                            </div>
-                                            <div className={styles.actors__info}>
-                                                <h3 className={styles.actors__name}>Айзек</h3>
-                                                <h3 className={styles.actors__name}>Оскар</h3>
-                                                <h4 className={styles.actors__post}>Актер</h4>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href='/person/1' className={styles.modalActors__item}>
-                                            <div className={styles.modalActors__itemImage}>
-                                                <Image loader={() => src} src={src} alt='actor' width={120} height={120} />
-                                            </div>
-                                            <div className={styles.actors__info}>
-                                                <h3 className={styles.actors__name}>Айзек</h3>
-                                                <h3 className={styles.actors__name}>Оскар</h3>
-                                                <h4 className={styles.actors__post}>Актер</h4>
-                                            </div>
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div>
-                                <div className={styles.modalActors__image}>
-                                    <Image loader={() => image} src={image} alt='actor' width={153} height={235} />
-                                </div>
-                                <div className={styles.menu__rating}>8.5
-                                    <div className={styles.menu__ratingBox}>
-                                        <div><div style={{ width: '40%' }}></div></div>
-                                        <div><div style={{ width: '70%' }}></div></div>
-                                        <div><div style={{ width: '30%' }}></div></div>
-                                        <div><div style={{ width: '60%' }}></div></div>
-                                    </div>
-                                </div>
-                                <div className={styles.menu__text}>
-                                    сюжет
-                                    <div>
-                                        <div></div>
-                                    </div>
-                                </div>
-                                <h3 className={styles.menu__text}>2019, Россия, Биография</h3>
-                                <h3 className={styles.menu__text}>115 минут</h3>
-                        </div>
-                    </div>
-                </div> : null
-            }
-            <section className={styles.fourthSection}>
+            <section className={styles.trailersSection}>
+                <h2 className={`${styles.subtitle} ${styles.subtitle__link} `}>Трейлеры и доп. материалы</h2>
+                <div className={styles.trailersSection__list}>
+                    <Trailers />
+                </div>
+            </section>
+            <section className={styles.commentsSection}>
                 <Comments />
             </section>
+            <section className={styles.watchSection}>
+                <div className={styles.watchSection__leftWrapper}>
+                    <h2 className={styles.subtitle}>Cмотреть «Непослушная» на всех устройствах</h2>
+                    <p className={styles.text}>Приложение доступно для скачивания на iOS, Android, SmartTV и приставках</p>
+                    <MainButton link='https://www.ivi.ru/devices' text='Подключить устройства' />
+                </div>
+                <div>
+                    <Image loader={() => 'https://www.ivi.ru/images/_ds/watchAllDevices/tv-without-poster.png'}
+                        src={'https://www.ivi.ru/images/_ds/watchAllDevices/tv-without-poster.png'}
+                        alt='prem' width={536} height={272} />
+                </div>
+            </section>
+
         </main>
     )
 }
