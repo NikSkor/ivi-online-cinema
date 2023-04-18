@@ -9,7 +9,6 @@ const BackLink: FC = () => {
   const router = useRouter()
 
   return (
-    <section className='container'>
       <div className={styles.backLink__section_inner}>
         <div 
           className={styles.controlButton__content}
@@ -25,7 +24,6 @@ const BackLink: FC = () => {
           <p className={styles.controlButton__caption}>Назад</p>
         </div>
       </div>
-    </section>
   )
 }
 

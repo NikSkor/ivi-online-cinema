@@ -1,0 +1,28 @@
+.trailersSection
+    &__item
+        display: inline-flex
+        flex-direction: column
+        margin-bottom: 30px
+        cursor: pointer
+        &:hover
+            .trailersSection__image
+                scale: 1.03
+            .trailersSection__name
+                color: white
+    &__image
+        width: 286px
+        height: 160px
+        border-radius: 12px
+        overflow: hidden
+        transition-duration: .4s
+        margin-bottom: 10px
+        img
+            height: 100%
+            background-size: cover
+    &__name
+        transition-duration: .4s
+        color: #d9d7e0
+        font-weight: 500
+    &__duration
+        color: #a5a1b2
+        font-size: 12px

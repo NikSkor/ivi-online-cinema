@@ -5,11 +5,6 @@
   position: relative;
 }
 
-.footer__container {
-  max-width: 1216px;
-  margin-left: auto;
-  margin-right: auto;
-}
 
 .footer__container_inner {
   margin: 0 -12px;
@@ -17,6 +12,7 @@
 }
 
 .footer_content {
+  border-top: 1px solid rgba(255, 255, 255, 0.219);;
   display: grid;
   padding: 48px 0;
   position: relative;
@@ -28,20 +24,13 @@
   &.twoColumn {
     grid-template-columns: repeat(2, 1fr);
   }
-
-  &::before {
-    content: '';
-    background-color: rgba($primary, .16);
-    height: 1px;
-    position: absolute;
-    left: 12px;
-    right: 12px;
-    top: 0;
-  }
 }
 
 .footer__column {
-  padding: 0 12px;
+  padding-right: 24px;
+}
+.footer__column:last-child {
+  padding-right: 0;
 }
 
 .footer__certificateLinkWrapper {
