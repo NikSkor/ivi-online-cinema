@@ -7,7 +7,7 @@ import Image from 'next/image'
 import DropDawn from '../dropDawn/DropDawn'
 import { useOutside } from '@/hooks/useOutside'
 
-const PlankItem: FC<IPlankItem> = ({plankName, hasIcon, dropDawnList}) => {
+const PlankItem: FC<IPlankItem> = ({plankName, filterType, dropDawnList}) => {
 
   const { show, setShow, ref } = useOutside(false)
 
@@ -29,7 +29,7 @@ const PlankItem: FC<IPlankItem> = ({plankName, hasIcon, dropDawnList}) => {
         </div>
         {show &&
           <DropDawn 
-            hasIcon={hasIcon}
+            filterType={filterType}
             dropDawnList={dropDawnList}
           />
         }

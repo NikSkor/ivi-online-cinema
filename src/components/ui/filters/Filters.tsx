@@ -2,6 +2,7 @@ import { FC } from 'react'
 import styles from './Filters.module.scss'
 import PlankItem from './plankItem/PlankItem'
 import { genresData } from './genres.data'
+import { countriesData } from './counties.data'
 
 const Filters: FC = () => {
   return (
@@ -10,13 +11,17 @@ const Filters: FC = () => {
         <div className={styles.filters__plankList}>
           <PlankItem 
             plankName={'Жанры'} 
-            hasIcon={true} 
+            filterType={'genre'} 
             dropDawnList={genresData} />
           <PlankItem 
             plankName={'Страны'} 
-            hasIcon={false} 
-            dropDawnList={genresData} />
+            filterType={'country'} 
+            dropDawnList={countriesData} />
         </div>
+
+         <div className={styles.filters__rangeList}>
+
+         </div>
       </div>
     </section>)
 }

@@ -1,6 +1,6 @@
 export interface IPlankItem {
   plankName: string
-  hasIcon: boolean
+  filterType: string
   dropDawnList: IDropDawn[]
 }
 
