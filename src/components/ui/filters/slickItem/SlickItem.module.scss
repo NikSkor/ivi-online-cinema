@@ -6,27 +6,45 @@
 
 
 .slick_content {
+  width: 108px;
+  height: 88px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 16px 8px;
-  width: 108px;
-  height: 88px;
 
   background-color: $plank_bg;
   border: 1px solid rgba($primary, .32);
   border-radius: 6px;
+  transition: .2s;
 
   &:hover {
-    background-color: $breadCrumbs;
+    background-color: $lightGray;
+  }
+
+  &.not_icon {
+    width: auto;
+    height: auto;
+  
+    padding: 8px 16px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 32px;
+  }
+
+  &.active {
+    background-color: $lightGray;
   }
 }
 
 .slick_text {
-  margin-top: 8px;
   font-size: 13px;
   line-height: 16px;
   font-weight: 700;
   height: 16px;
   white-space: nowrap;
+}
+
+.slick_icon {
+  margin-bottom: 8px;
 }

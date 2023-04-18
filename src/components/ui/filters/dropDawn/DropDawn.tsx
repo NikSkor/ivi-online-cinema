@@ -3,34 +3,29 @@ import styles from './DropDawn.module.scss'
 import { IDropDawn } from '@/interfaces/movies/IPlankItem'
 import Slider from 'react-slick'
 
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
 
 import SlickItem from '../slickItem/SlickItem'
 import Checkbox from '../checkbox/Checkbox';
 
 interface IIDropDawnList {
-  hasIcon: boolean
+  filterType: string
   dropDawnList: IDropDawn[]
 }
 
-const DropDawn: FC<IIDropDawnList> = ({dropDawnList, hasIcon}) => {
-
-
+const DropDawn: FC<IIDropDawnList> = ({dropDawnList, filterType}) => {
 
   const sliderSettings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 5,
-    slidesToScroll: 3
+    slidesToShow: 4,
+    slidesToScroll: 2
   }
 
   return (
     <div className={styles.filter__dropDawn}>
       <div className={styles.dropDawn__content}>
-        {hasIcon &&
           <div className={styles.dropDawn__carousel}>
             <div className={styles.viewport}>
               <div className={styles.slick_track}>
@@ -41,6 +36,8 @@ const DropDawn: FC<IIDropDawnList> = ({dropDawnList, hasIcon}) => {
                           key={item.value}
                           icon={item.icon}
                           name={item.name}
+                          value={item.value}
+                          filterType={filterType}
                         />
                       ))
                     }
@@ -48,20 +45,20 @@ const DropDawn: FC<IIDropDawnList> = ({dropDawnList, hasIcon}) => {
               </div>
             </div>
           </div>
-        }
 
           <div className={styles.list__container}>
             <ul className={styles.dropDawn__list}>
               {
                 dropDawnList.map((item) => (
                   <Checkbox 
+                    key={item.value}
                     value={item.value} 
-                    name={item.name} />
+                    name={item.name}
+                    filterType={filterType}/>
                 ))
               }
             </ul>
           </div>  
-
       </div>
 
     </div>
