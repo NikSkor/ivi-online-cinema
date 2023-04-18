@@ -20,10 +20,10 @@
   font-weight: 600;
   font-size: 13px;
   transition: .2s;
-  box-shadow: 0 2px 0 $breadCrumbs, inset 0 0 0 $breadCrumbs;
+  box-shadow: 0 2px 0 $lightGray, inset 0 0 0 $lightGray;
 
   &:hover {
-    box-shadow: 0 0 0 $breadCrumbs, inset 0 -1.5em 0 $breadCrumbs;
+    box-shadow: 0 0 0 $lightGray, inset 0 -1.5em 0 $lightGray;
   }
 }
 

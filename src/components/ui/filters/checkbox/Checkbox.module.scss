@@ -1,1 +1,55 @@
 @import '/src/styles/vars.scss';
+
+.dropDawnItem {
+  display: list-item;
+  margin-top: 12px;
+}
+
+.dropDawn_label {
+  position: relative;
+  display: block;
+
+  &:hover {
+    .input_checkbox {
+      opacity: 0.5;
+    }
+
+    .input_text {
+      color: $primary;
+    }
+  }
+
+  &.checked {
+    .input_checkbox {
+      opacity: 1;
+    }
+
+    .input_text {
+      color: $primary;
+    }
+  }
+}
+
+.dropDawn_input {
+  display: none;
+}
+
+.input_text {
+  color: rgba(217,215,224,.8);
+  transition: color .2s;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.input_checkbox {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  color: $primary;
+  opacity: 0;
+  transition: .2s;
+}

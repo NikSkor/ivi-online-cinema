@@ -2,16 +2,15 @@
 
 .filter__dropDawn {
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 6px;
+  right: 5px;
   top: 100%;
-  width: 630px;
 
   margin-top: 4px;
   z-index: 999;
   overflow: hidden;
 
-  background: #312b45;
+  background: $plank_bg;
   border-radius: 4px;
   box-shadow: 0 16px 32px rgba(7,5,14,.4);
 }
@@ -32,46 +31,4 @@
   margin-top: 16px;
   padding-top: 4px;
   border-top: 1px solid rgba($primary,.32);
-}
-
-.dropDawnItem {
-  display: list-item;
-  margin-top: 12px;
-}
-
-.dropDawn_label {
-  position: relative;
-  display: block;
-}
-
-.dropDawn_input {
-  display: none;
-}
-
-.input_text {
-  color: rgba(217,215,224,.8);
-  transition: color .3s;
-  cursor: pointer;
-  font-size: 13px;
-  line-height: 16px;
-  font-weight: 500;
-}
-
-.input_checkbox {
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 16px;
-  height: 16px;
-  color: $primary;
-}
-
-
-
-.check__icon {
-  opacity: 0;
-}
-
-.hovered_icon {
-  opacity: 0.5;
 }

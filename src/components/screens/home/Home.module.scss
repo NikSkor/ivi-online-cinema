@@ -1,0 +1,45 @@
+.clause {
+  width: 906px;
+  padding: 24px 0px;
+
+  h4 {
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 900;
+    font-style: normal;
+    color: #fff;
+  }
+
+  .clauseText {
+    margin-top: 12px;
+    color: #a5a1b2;
+    line-height: 22px;
+    font-size: 14px;
+
+    p:not(:first-child) {
+      margin-top: 8px;
+    }
+    
+    ol {
+      li {
+        list-style: disc;
+        margin-left: 30px;
+        margin-top: 8px; 
+      }
+    }
+  }
+
+  .clauseToggle {
+    display: inline-block;
+    margin-top: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 700;
+    color: rgba(255,255,255, 0.87);
+    transition: color .2s;
+
+    &:hover {
+      color: rgba(255,255,255, 1);
+    }
+  }
+}

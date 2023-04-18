@@ -1,23 +1,24 @@
 @import '/src/styles/vars.scss';
 
 .dropdown {
-    position: absolute;
     width: 100%;
-    height: 100%;
+    position: absolute;
     left: 0;
-    top: 0;
-    margin-top: $headerHeight;
-
-    background-color: #1f1b2e;
+    top: $headerHeight;
     
+    display: flex;
+    
+    background-color: #1f1b2e;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 
     opacity: 0;
     visibility: hidden;
-    transition: all 0.2s ease-in;
+    z-index: -1;
+    
+    transition-property: opacity, min-height;
+    transition-duration: .3s;
 
-    z-index: 1;
     
     &::before {
         content: "";
@@ -31,17 +32,13 @@
     &.dropdownOpen {
         opacity: 1;
         visibility: visible;
-        transition: all 0.2s ease-in;
+        z-index: 1;
+        
+        
     }
 
     .dropdownBody {
         min-width: 100%;
-        min-height: 100%;
-
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
         padding: 32px;
     }
 }
