@@ -7,7 +7,9 @@ const ProfileContent = () => {
 		<div className={styles.content}>
 			<MenuList />
 			<div className={styles.authBlock}>
-				<button>Войти или зарегистрироваться</button>
+				<Link href="/auth">
+					<button>Войти или зарегистрироваться</button>
+				</Link>
 				<div className={styles.settings}>
 					<Link href="/">Настройки</Link>
 					<Link href="/">Помощь</Link>
