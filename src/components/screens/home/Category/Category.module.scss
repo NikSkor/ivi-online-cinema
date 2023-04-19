@@ -16,3 +16,36 @@
     }
   }
 }
+
+
+
+.sliderTrack {
+  padding: 10px 5px;
+    .seeMore {
+      min-width: 153px;
+      padding: 12px;
+      max-width: 153px;
+      height: 244px;
+
+      margin-top: 10px;
+
+      border-radius: 8px;
+  
+      background-color: rgb(34, 30, 49);
+      color: rgba(255,255,255, .5);
+      font-weight: 600;
+
+      display: flex !important;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      cursor: pointer;
+
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.04);
+      }
+    }
+}

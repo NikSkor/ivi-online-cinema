@@ -9,7 +9,7 @@ const SliderItem: FC<{ film: IFilmographyItem }> = ({ film }) => {
     <div className={styles.sliderItem}>
       <Link href="/">
         <div className={styles.image}>
-          <img src={film.posterURL} alt="qwe" />
+          <img src={film.posterURL} alt="poster" />
           <div className={styles.imageOverlay} >
             <div className={styles.iconsBlock}>
               <div className={styles.icon}>
@@ -26,7 +26,7 @@ const SliderItem: FC<{ film: IFilmographyItem }> = ({ film }) => {
               </div>
             </div>
             <div className={styles.infoBlock}>
-              <p className={styles.score}>7,6</p>
+              <p className={styles.score}>{film.rating}</p>
               <div className={styles.property}>
                 <p>сюжет</p>
               <div className={styles.progressBar}>
