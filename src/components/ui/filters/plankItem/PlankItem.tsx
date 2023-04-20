@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import styles from './PlankItem.module.scss'
-import { IPlankItem } from '@/interfaces/movies/IPlankItem'
+import { IPlankItem } from '@/interfaces/filters/IPlankItem'
 import downArrow from '/public/down-arrow.svg'
 import upArrow from '/public/up-arrow.svg'
 import Image from 'next/image'
 import DropDawn from '../dropDawn/DropDawn'
 import { useOutside } from '@/hooks/useOutside'
 
-const PlankItem: FC<IPlankItem> = ({plankName, filterType, dropDawnList}) => {
+const PlankItem: FC<IPlankItem> = ({plankName, filterType, dropDawnList, values}) => {
 
   const { show, setShow, ref } = useOutside(false)
 
@@ -29,9 +29,8 @@ const PlankItem: FC<IPlankItem> = ({plankName, filterType, dropDawnList}) => {
         </div>
         {show &&
           <DropDawn 
-            filterType={filterType}
-            dropDawnList={dropDawnList}
-          />
+          filterType={filterType}
+          dropDawnList={dropDawnList} />
         }
       </div>
     </div>

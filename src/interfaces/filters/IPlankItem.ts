@@ -1,6 +1,9 @@
+import { ActionCreatorWithPayload } from "@reduxjs/toolkit"
+
 export interface IPlankItem {
   plankName: string
   filterType: string
+  values: string[]
   dropDawnList: IDropDawn[]
 }
 

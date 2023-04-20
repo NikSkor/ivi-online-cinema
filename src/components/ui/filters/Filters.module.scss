@@ -8,10 +8,8 @@
   background-color: $btn_bg;
   padding: 16px;
   border-radius: 6px;
-}
-
-.filters__plankList {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 20px;
+  grid-row-gap: 20px
 }
