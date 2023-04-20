@@ -1,14 +1,15 @@
 export const countriesData = [
-  {name: 'Беларусь', value: 'Belarus'},
-  {name: 'Бразилия', value: 'Brasil'},
-  {name: 'Ирдандия', value: 'Ireland'},
-  {name: 'Казахстан', value: 'Kazakhstan'},
-  {name: 'Киргизия', value: 'Kyrgyzstan'},
-  {name: 'Латвия', value: 'Latvia'},
-  {name: 'Молдова', value: 'Moldova'},
-  {name: 'Россия', value: 'Russia'},
-  {name: 'СССР', value: 'USSR'},
-  {name: 'США', value: 'USA'},
-  {name: 'Украина', value: 'Ukraine'},
-  {name: 'Япония', value: 'Japan'}
+  {name: 'Беларусь', value: 'blr'},
+  {name: 'Бразилия', value: 'bra'},
+  {name: 'Ирдандия', value: 'irl'},
+  {name: 'Казахстан', value: 'kaz'},
+  {name: 'Киргизия', value: 'kgz'},
+  {name: 'Латвия', value: 'lva'},
+  {name: 'Молдова', value: 'mda'},
+  {name: 'Россия', value: 'rus'},
+  {name: 'СССР', value: 'ussr'},
+  {name: 'США', value: 'usa'},
+  {name: 'Украина', value: 'uk'},
+  {name: 'Япония', value: 'jpn'}
+  
 ]

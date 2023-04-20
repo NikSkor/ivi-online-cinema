@@ -1,1 +1,43 @@
 @import '/src/styles/vars.scss';
+.range {
+  height: 15px;
+  width: 100%;
+  appearance: none;
+  background: $primary;
+  border-radius: 50px;
+  border: 1px solid $secondary;
+  outline: none;
+  overflow: hidden;
+
+  &::-webkit-slider-thumb {
+    height: 15px;
+    width: 25px;
+    background: #c447ff;
+    appearance: none;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: -300px 0 0 285px $lightGray;
+}
+
+  &::-moz-range-thumb {
+    height: 15px;
+    width: 25px;
+    background: $lightGray;
+    appearance: none;
+    cursor: pointer;
+    border-radius: 50px;
+    box-shadow: -300px 0 0 285px $lightGray;
+ }
+}
+
+.rangeTitle {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.rangeValue {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}

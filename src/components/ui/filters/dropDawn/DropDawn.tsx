@@ -1,6 +1,6 @@
-import { FC, useState } from 'react'
+import { FC } from 'react'
 import styles from './DropDawn.module.scss'
-import { IDropDawn } from '@/interfaces/movies/IPlankItem'
+import { IDropDawn } from '@/interfaces/filters/IPlankItem'
 import Slider from 'react-slick'
 
 import "slick-carousel/slick/slick.css";

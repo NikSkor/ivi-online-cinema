@@ -3,31 +3,55 @@ import styles from './Checkbox.module.scss'
 import Image from 'next/image'
 import checkIcon from '/public/check.svg'
 import { ICheckbox } from '@/interfaces/filters/ICheckbox'
-import { addGenre, addCountry, selectGenres, selectCountries } from '@/store/slices/filtersSlice'
+import { setCountries, setGenres, selectGenres, selectCountries } from '@/store/slices/filtersSlice'
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
+import { useRouter } from 'next/router'
 
 const Checkbox: FC<ICheckbox> = ({name, value, filterType}) => {
+
+  const router = useRouter()
 
   const dispatch = useAppDispatch()
   const genresList = useAppSelector(selectGenres)
   const countriesList = useAppSelector(selectCountries)
 
-  const clickHandle = () => {
-    if (filterType === 'genre') {
-      dispatch(addGenre(value))
-    }
-    if (filterType === 'country') {
-      dispatch(addCountry(value))
-    }
-  }
+  const action = (filterType === 'genre') ? setGenres : setCountries
 
-  let activeCategory
+  let localValues: string[] = []
+  let otherValues: string[] = []
+
   if (filterType === 'genre') {
-    activeCategory = genresList.includes(value)
+    localValues = genresList.slice(0)
+    otherValues = countriesList.slice(0)
   }
   if (filterType === 'country') {
-    activeCategory = countriesList.includes(value)
+    localValues = countriesList.slice(0)
+    otherValues = genresList.slice(0)
   }
+  const clickHandle = () => {
+    if (localValues.includes(value)) {
+      localValues = localValues.filter((item) => item !== value)
+      dispatch(action(localValues))
+
+    } else {
+      localValues.push(value)
+    }
+
+    const query = router.query
+    
+    if (!query) router.push({pathname: `/movies`})
+
+    delete query.slug
+
+
+    const newPath = (filterType === 'genre') 
+                    ? `/movies${(localValues.length !== 0) ? ('/' + (localValues.join('+'))) : ''}${(otherValues.length !== 0) ? ('/' + otherValues.slice(0).join('+')) : ''}`
+                    : `/movies${(otherValues.length !==0) ? ('/' + (otherValues.slice(0).join('+'))) : ''}${(localValues.length !== 0) ? ('/' + localValues.join('+')) : ''}`
+
+    router.push({pathname: newPath, query: { ...query }})
+  }
+
+  let activeCategory = localValues.includes(value)
 
   return (
     <li className={styles.dropDawnItem}>
