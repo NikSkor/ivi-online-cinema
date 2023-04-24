@@ -1,0 +1,87 @@
+@import '../../../../styles/vars.scss';
+
+.header {
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 120%;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.subTitle {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.main {
+  padding-bottom: 20px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+}
+
+.itemTitle {
+  font-weight: 500;
+  font-size: 16px;
+  width: 800px;
+}
+
+.actionBtn {
+  font-weight: 500;
+  font-size: 12px;
+
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  padding: 12px 12px;
+
+  border: solid 1px $btn_bg;
+  background-color: $btn_bg;
+  border-radius: 8px;
+
+  cursor: pointer;
+  text-decoration: none;
+  color: $primary;
+
+  transition-property: border-color, background-color;
+  transition-duration: .4s;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  &.square {
+    width: 40px;
+    padding: 0;
+  }
+
+  &:hover {
+    background-color: $btn_hover;
+    border-color: $btn_hover;
+  }
+}
+
+
+.delBtn {
+  width: 40px;
+}
