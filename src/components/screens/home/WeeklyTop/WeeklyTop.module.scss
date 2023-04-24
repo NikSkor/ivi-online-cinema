@@ -1,0 +1,92 @@
+.weeklyTop {
+  padding: 24px 0;
+  .title {
+    display: flex;
+    gap: 10px;
+    margin: 14px 0;
+
+    span {
+      font-size: 22px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: 28px;
+    }
+  }
+
+  .poster {
+    padding: 10px 5px;
+
+    position: relative;
+    height: 492px;
+
+    cursor: pointer;
+    transform: scale(1.0) translateY(0);
+    transition-property: scale, translate;
+    transition-duration: 0.3s;
+
+    &:hover {
+      transform: scale(1.05) translateY(-5px);
+      transition: 0.3s;
+    }
+
+    .imageWrapper {
+      position: absolute;
+      & > img {
+        border-top-right-radius: 8px;
+        border-top-left-radius: 8px;
+      }
+
+
+      .imageLogoArea {
+        bottom: 54px;
+        height: 21.05263158%;
+        left: 24px;
+        position: absolute;
+        right: 24px;
+
+        align-items: flex-end;
+        display: flex;
+        justify-content: center;
+        z-index: 1;
+
+        &::before {
+          content: "";
+          display: block;
+          height: 0;
+          padding-bottom: 120.90163934%;
+        }
+
+      }
+
+      .imageFade {
+        background-image: linear-gradient(0deg, #100e19, rgba(16, 14, 25, 0));
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        right: 0;
+
+        &::before {
+          content: "";
+          display: block;
+          height: 0;
+          padding-bottom: 120.90163934%;
+        }
+      }
+
+      .number {
+        position: absolute;
+        bottom: -33px;
+        height: 66px;
+        left: 50%;
+        transform: translateX(-50%);
+        // white-space: nowrap;
+
+        img {
+          display: inline-block;
+          height: 66px;
+          vertical-align: top;
+        }
+      }
+    }
+  }
+}

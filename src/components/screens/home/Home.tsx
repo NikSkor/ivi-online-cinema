@@ -2,12 +2,14 @@ import Layout from '@/components/layout/Layout'
 import React, { FC, useState } from 'react'
 import styles from './Home.module.scss'
 import Category from './Category/Category'
+import WeeklyTop from './WeeklyTop/WeeklyTop'
 
 const Home: FC = () => {
   const [isClauseOpen, setIsClauseOpen] = useState(false)
   return (
     <Layout title="Онлайн-кинотеатр Иви">
       <main className="container">
+        <WeeklyTop />
         <div className={styles.clause}>
           <h4 className={styles.clauseTitle}>Онлайн-кинотеатр Иви: фильмы в хорошем качестве всегда приносят настоящее удовольствие</h4>
           {isClauseOpen
