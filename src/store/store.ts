@@ -1,13 +1,17 @@
-import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
 import { filtersReducer } from './slices/filtersSlice';
+import adminReducer from './slices/adminSlice';
+
+const rootReducer = combineReducers({
+  filters: filtersReducer,
+  admin: adminReducer
+});
 
 export function makeStore() {
   return configureStore({
-    reducer: {
-      filters: filtersReducer,
-    }
+    reducer: rootReducer
   })
-}
+};
 
 
 export const store = makeStore();
