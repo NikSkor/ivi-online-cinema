@@ -4,10 +4,9 @@ import style from './EditMovie.module.scss';
 import { IFilmographyItem } from "@/interfaces/person/IFilmographyItem";
 import { filmographyData } from "@/components/ui/filmography/filmography.data";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import Link from "next/link";
+import { addFilmValues } from '@/store/slices/adminSlice';
 
-interface IFilmId {
-  id: string | undefined
-}
 
 interface IFilmItem {
   name: string,
@@ -21,12 +20,8 @@ const EditMovie: FC = () => {
 
   const id: number = useAppSelector(state => state.admin.filmId);
 
-  //   const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
-  // dispatch(addId(+id));
-  
-
-  // let [idNum, setIdNum] = useState(0);
 
   let filmItem: IFilmItem = {
     name: '',
@@ -39,10 +34,10 @@ const EditMovie: FC = () => {
   let catalog: IFilmographyItem[] = [...filmographyData];
   
   if (id !== undefined) {
-    // setIdNum(+id);
     catalog.forEach((item) => {
     if (item.filmId === +id) {
       Object.assign(filmItem, item);
+      dispatch(addFilmValues(filmItem));
     }
   })
   }
@@ -53,12 +48,44 @@ const EditMovie: FC = () => {
   let [year, setYear] = useState(filmItem.year);
   let [rating, setRating] = useState(filmItem.rating);
 
+  let resetHandler = (e: any) => {
+    e.preventDefault();
+
+    setName(filmItem.name);
+    setForeignName(filmItem.foreignName);
+    setUrlImg(filmItem.posterURL);
+    setYear(filmItem.year);
+    setRating(filmItem.rating);
+
+  }
+
+  let submitHandler = (e: any) => {
+    e.preventDefault();
+
+    let filmValues: IFilmItem = {
+    name: name,
+    foreignName: foreignName,
+    posterURL: urlImg,
+    year: year,
+    rating: rating,
+  }
+  dispatch(addFilmValues(filmValues));
+  }
+
+  let foreignNameHandler = (e: any) => {
+    let reg = /[а-яА-ЯёЁ]/g;
+    if (e.target.value.search(reg) !=  -1) {
+        e.target.value  =  e.target.value.replace(reg, '');
+    }
+    setForeignName(e.target.value)
+  }
+
   
   return(
       <div className="container">
         <section className={style.header}>
           <BreadCrumbs 
-            pathList={[{pathLink: '/admin/', pathName: 'Администратор'}]} 
+            pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
             slug={'Фильм'} /> 
         </section>
         <section className={style.main}>
@@ -66,25 +93,39 @@ const EditMovie: FC = () => {
           <div className={style.form}>
             <label className={style.label} data-id='url'>
             Ссылка на постер:
-            <input className={style.inputs} type='text' value={urlImg} onChange={(e) => {setUrlImg(e.target.value)}}/>
+            <input 
+              disabled 
+              className={style.inputs} 
+              type='text'
+              value={urlImg} 
+
+              onChange={(e) => {setUrlImg(e.target.value)}}/>
           </label>
           <label className={style.label} data-id='url'>
             Название:
-            <input className={style.inputs} type='text' value={name} onChange={(e) => {setName(e.target.value)}}/>
+            <input placeholder="Введите название" className={style.inputs} type='text' value={name} onChange={(e) => {setName(e.target.value)}}/>
           </label>
           <label className={style.label} data-id='url'>
             Название на английском:
-            <input className={style.inputs} type='text' value={foreignName} onChange={(e) => {setForeignName(e.target.value)}}/>
+            <input placeholder="Введите название" className={style.inputs} type='text' value={foreignName} onChange={(e) => {foreignNameHandler(e)}}/>
           </label>
           <label className={style.label} data-id='url'>
             Год:
-            <input className={style.inputs} type='text' value={year} onChange={(e) => {setYear(+e.target.value)}}/>
+            <input disabled className={style.inputs} type='text' value={year} onChange={(e) => {setYear(+e.target.value)}}/>
           </label>
           <label className={style.label} data-id='url'>
             Рейтинг:
-            <input className={style.inputs} type='number' value={rating} onChange={(e) => {setRating(+e.target.value)}}/>
+            <input disabled className={style.inputs} type='number' value={rating} onChange={(e) => {setRating(+e.target.value)}}/>
           </label>
           </div>
+          <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
+          <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
+          <Link href={'/admin'} onClick={() => {
+            }}>
+          <button className={style.actionBtn}>
+            Назад
+          </button>
+        </Link>
         </section>
       </div>
   )
