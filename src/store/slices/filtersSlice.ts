@@ -7,14 +7,20 @@ export interface filtersState {
   genres: string[]
   countries: string[]
   rating: number
-  gradesCount: number
+  votesCount: number
+  sortProperty: string
+  producer: string
+  actor: string
 }
 
 const initialState: filtersState = {
   genres: [],
   countries: [],
   rating: 0,
-  gradesCount: 0
+  votesCount: 0,
+  sortProperty: '',
+  producer: '',
+  actor: ''
 }
 
 export const filtersSlice = createSlice({
@@ -23,37 +29,43 @@ export const filtersSlice = createSlice({
   reducers: {
     setGenres(state, action) {
       state.genres = action.payload.slice(0)
-      /*if (state.genres.includes(action.payload)) {
-        state.genres = state.genres.filter(item => item !== action.payload)
-      } else {    
-        state.genres.push(action.payload);
-      }*/
     },
 
     setCountries(state, action) {
       state.countries = action.payload.slice(0)
-      /*if (state.countries.includes(action.payload)) {
-        state.countries = state.countries.filter(item => item !== action.payload)
-      } else {    
-        state.countries.push(action.payload);
-      }*/
     },
 
     setRating(state, action) {
       state.rating = action.payload
     },
-    setGradesCount(state, action) {
-      state.gradesCount = action.payload
+
+    setVotesCount(state, action) {
+      state.votesCount = action.payload
+    },
+
+    setSortProperty(state, action) {
+      state.sortProperty = action.payload
+    },
+
+    setProducer(state, action) {
+      state.producer = action.payload
+    },
+
+    setActor(state, action) {
+      state.actor = action.payload
     }
   }
 })
 
-export const { setGenres, setCountries, setRating, setGradesCount } = filtersSlice.actions;
+export const { setGenres, setCountries, setRating, setVotesCount, setSortProperty, setProducer, setActor } = filtersSlice.actions;
 
 export const selectGenres = (state: RootState) => state.filters.genres
 export const selectCountries = (state: RootState) => state.filters.countries
 export const selectRating = (state: RootState) => state.filters.rating
-export const selectGradesCount = (state: RootState) => state.filters.gradesCount
+export const selectVotesCount = (state: RootState) => state.filters.votesCount
+export const selectSortProperty = (state: RootState) => state.filters.sortProperty
+export const selectProducer = (state: RootState) => state.filters.producer
+export const selectActor = (state: RootState) => state.filters.actor
 
 
 export const filtersReducer =  filtersSlice.reducer;
