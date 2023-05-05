@@ -20,12 +20,12 @@
     height: 492px;
 
     cursor: pointer;
-    transform: scale(1.0) translateY(0);
-    transition-property: scale, translate;
+    transform: scale(1.0);
+    transition-property: scale;
     transition-duration: 0.3s;
 
     &:hover {
-      transform: scale(1.05) translateY(-5px);
+      transform: scale(1.05);
       transition: 0.3s;
     }
 
