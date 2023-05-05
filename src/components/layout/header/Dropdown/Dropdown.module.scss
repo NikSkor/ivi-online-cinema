@@ -15,9 +15,9 @@
     opacity: 0;
     visibility: hidden;
     z-index: -1;
+    transition-property: opacity, height;
+    transition-duration: 0.3s;
     
-    transition-property: opacity, min-height;
-    transition-duration: .3s;
 
     
     &::before {
@@ -27,14 +27,12 @@
         position: absolute;
         right: 0;
         left: 0;
-        top: 5px;
+        // top: 5px;
     }
     &.dropdownOpen {
         opacity: 1;
         visibility: visible;
         z-index: 1;
-        
-        
     }
 
     .dropdownBody {

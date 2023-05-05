@@ -66,7 +66,7 @@ const WeeklyTop = () => {
       <Slider {...settings}>
         {
           qwe.map((element, index) => 
-          <div className={styles.poster}>
+          <div key={index} className={styles.poster}>
             <div className={styles.imageWrapper}>
             <img src={element.poster} width={224} alt="q"/>
             <div className={styles.imageLogoArea}>
