@@ -16,8 +16,10 @@ export function makeStore() {
 
 export const store = makeStore();
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof makeStore>
+
+export type AppDispatch = AppStore['dispatch'];
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;

@@ -25,11 +25,11 @@ const Filmography: FC<filmsArray> = ({filmographyArray}) => {
         {
           filmographyArray.map((item) => (
             <FilmographyItem
-              key={item.filmId}
-              filmId={item.filmId}
-              posterURL={item.posterURL} 
-              year={item.year} 
-              name={item.name} 
+              key={item.movieId}
+              movieId={item.movieId}
+              poster={item.poster}
+              premiere={item.premiere}
+              name={item.name}
               rating={item.rating} />
           ))
         }
