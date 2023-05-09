@@ -1,6 +1,7 @@
 import React from 'react'
 import { NextPage } from 'next'
 import Person from '@/components/screens/person/Person'
+import { Context } from 'vm'
 export interface PersonProps {
 	person: IPersonArray | undefined
 }
@@ -51,8 +52,10 @@ export interface IPersonArray {
 	personId: number,
 	professions: IProfessions
 }
-PersonPage.getInitialProps = async () => {
-	const response = await fetch('http://localhost:5000/api/person/1')
+PersonPage.getInitialProps = async (context: Context) => {
+	//const id = ctx //.asPath.match(/\/d+$/)
+	const id = context.query.id
+	const response = await fetch(`http://localhost:5000/api/person/${id}`)
 	const person: IPersonArray[] | undefined = await response.json()
 
 	return {

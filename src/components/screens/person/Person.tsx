@@ -6,8 +6,7 @@ import React, { FC, useRef, useState } from 'react'
 import styles from './Person.module.scss'
 
 // data
-import { personData } from './person.data'
-import { filmographyData } from '@/components/ui/filmography/filmography.data'
+import { personStatic } from './person.data'
 
 // components
 import PersonSection from '@/components/ui/personSection/PersonSection'
@@ -23,9 +22,7 @@ const Person: FC<PersonProps> = ({person}) => {
 
   const biographyRef = useRef<HTMLHeadingElement>(null)
 
-  const biographyParagraphs = personData.biography.split('\n')
-
-	console.log(person)
+  const biographyParagraphs = personStatic.biography.split('\n')
 
 	if (person)
   return (
@@ -39,7 +36,7 @@ const Person: FC<PersonProps> = ({person}) => {
 								photoURL={person.person.photo}
 								personNameRu={person.person.name}
 								personNameEn={person.person.enName}
-								story={person.person.name}
+								story={personStatic.story}
 						/>
 						<div className={styles.anchorLink__container}>
 							<span
@@ -53,22 +50,24 @@ const Person: FC<PersonProps> = ({person}) => {
 
           <PersonSection>
             <Filmography
-                      filmographyArray={filmographyData}
-                    />
-                    <div className={styles.personBiography}>
-                      <h1 ref={biographyRef} className={styles.title}>Биография</h1>
-                      <div className={styles.biography__container}></div>
-                      <p className={styles.biographyParagraph}>{biographyParagraphs[0]}</p>
-                      {showBiography &&
-                        biographyParagraphs.slice(1).map((paragraph) => (
-                          <p className={styles.biographyParagraph}>{paragraph}</p>
-                        ))
-                      }
-                      <span className={styles.content__toggle}
-                            onClick={() => setShowBiography(!showBiography)}>
-                        {showBiography ? 'Свернуть' : 'Развернуть'}
-                      </span>
-                    </div>
+							filmographyArray={person.movies}
+						/>
+						<div className={styles.personBiography}>
+							<h1 ref={biographyRef} className={styles.title}>Биография</h1>
+							<div className={styles.biography__container}></div>
+							<p className={styles.biographyParagraph}>{biographyParagraphs[0]}</p>
+							{showBiography &&
+								biographyParagraphs.slice(1).map((paragraph, index) => (
+									<p
+										key={index}
+										className={styles.biographyParagraph}>{paragraph}</p>
+								))
+							}
+							<span className={styles.content__toggle}
+										onClick={() => setShowBiography(!showBiography)}>
+								{showBiography ? 'Свернуть' : 'Развернуть'}
+							</span>
+						</div>
           </PersonSection>
 
           <PersonSection>
@@ -76,7 +75,7 @@ const Person: FC<PersonProps> = ({person}) => {
               <div className={styles.person__breadCrumbs}>
                 <BreadCrumbs
                   pathList={[{pathLink: '/', pathName: 'Мой Иви'}]}
-                  slug={personData.personNameRu} />
+                  slug={person.person.name} />
               </div>
             </div>
           </PersonSection>
