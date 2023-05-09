@@ -14,12 +14,10 @@ import PersonSection from '@/components/ui/personSection/PersonSection'
 import Filmography from '@/components/ui/filmography/Filmography'
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs'
 import BackLink from '@/components/ui/backLink/BackLink'
+import { PersonProps } from '@/pages/person/[id]'
 
-interface IPerson {
-  path: string | undefined
-}
 
-const Person: FC<IPerson> = ({path}) => {
+const Person: FC<PersonProps> = ({person}) => {
 
   const [showBiography, setShowBiography] = useState(false)
 
@@ -27,31 +25,34 @@ const Person: FC<IPerson> = ({path}) => {
 
   const biographyParagraphs = personData.biography.split('\n')
 
+	console.log(person)
+
+	if (person)
   return (
-    <Layout title="Оскар Айзек">
+    <Layout title={person.person.name}>
       <main>
         <div className={styles.personPage}>
           <BackLink />
 
           <PersonSection>
-            <PersonHeader 
-                        photoURL={personData.photoURL} 
-                        personNameRu={personData.personNameRu} 
-                        personNameEn={personData.personNameEn} 
-                        story={personData.story} 
-                    />
-                    <div className={styles.anchorLink__container}>
-                      <span 
-                        className={styles.anchorLink}
-                        onClick={() => biographyRef.current?.scrollIntoView({behavior: 'smooth'})}
-                        >
-                          Биография
-                      </span>
-                    </div>
+            <PersonHeader
+								photoURL={person.person.photo}
+								personNameRu={person.person.name}
+								personNameEn={person.person.enName}
+								story={person.person.name}
+						/>
+						<div className={styles.anchorLink__container}>
+							<span
+								className={styles.anchorLink}
+								onClick={() => biographyRef.current?.scrollIntoView({behavior: 'smooth'})}
+								>
+									Биография
+							</span>
+						</div>
           </PersonSection>
 
           <PersonSection>
-            <Filmography 
+            <Filmography
                       filmographyArray={filmographyData}
                     />
                     <div className={styles.personBiography}>
@@ -73,8 +74,8 @@ const Person: FC<IPerson> = ({path}) => {
           <PersonSection>
             <div className={styles.breadCrumbs__container}>
               <div className={styles.person__breadCrumbs}>
-                <BreadCrumbs 
-                  pathList={[{pathLink: '/', pathName: 'Мой Иви'}]} 
+                <BreadCrumbs
+                  pathList={[{pathLink: '/', pathName: 'Мой Иви'}]}
                   slug={personData.personNameRu} />
               </div>
             </div>
@@ -83,6 +84,11 @@ const Person: FC<IPerson> = ({path}) => {
       </main>
     </Layout>
   )
+	else return (
+		<Layout title='Страница не найдена'>
+			404
+		</Layout>
+	)
 }
 
 export default Person
