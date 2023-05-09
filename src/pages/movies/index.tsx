@@ -3,7 +3,7 @@ import Movies from '@/components/screens/movies/Movies'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useAppDispatch } from '@/store/hooks'
-import { setGradesCount, setRating } from '@/store/slices/filtersSlice'
+import { setActor, setVotesCount, setProducer, setRating, setSortProperty } from '@/store/slices/filtersSlice'
 
 const MoviesPage: NextPage = () => {
 
@@ -14,7 +14,10 @@ const MoviesPage: NextPage = () => {
     if(!router.isReady) return
 
     if (router.query.rating) dispatch(setRating(+router.query.rating))
-    if (router.query.grades) dispatch(setGradesCount(+router.query.grades))
+    if (router.query.votes) dispatch(setVotesCount(+router.query.votes))
+    if (router.query.sort) dispatch(setSortProperty(router.query.sort))
+    if (router.query.actor) dispatch(setActor(router.query.actor))
+    if (router.query.producer) dispatch(setProducer(router.query.producer))
   })
 
 

@@ -14,7 +14,7 @@ const Dropdown: FC<DropdownProps> = ({ isNotificationsOpen, isProfileOpen, isFil
 	return (
 		<div
 			className={`${styles.dropdown} ${isNotificationsOpen || isProfileOpen || isFilmsOpen ? `${styles.dropdownOpen}` : ''}`}
-			style={isProfileOpen ? { minHeight: "300px" } : isNotificationsOpen ? { minHeight: "260px" } : isFilmsOpen ? { minHeight: "250px"} : {}}
+			style={isProfileOpen ? { height: "320px" } : isNotificationsOpen ? { height: "280px" } : isFilmsOpen ? { height: "410px"} : {}}
 		>
 			<div className={styles.dropdownBody}>
 				{isNotificationsOpen ? <NotificationsContent /> : null}

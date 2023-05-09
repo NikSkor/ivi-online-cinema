@@ -1,0 +1,64 @@
+@import '/src/styles/vars.scss';
+
+.sorting {
+  position: relative;
+}
+.sorting_btn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: .4s;
+  margin-bottom: 10px;
+}
+
+.sorting_dropDawn {
+  position: absolute;
+  top: 32px;
+  z-index: 2;
+  padding-top: 8px;
+  padding-bottom: 12px;
+
+  background-color: $btn_bg;
+  box-shadow: 0 20px 40px rgba(7,5,14,.4);
+}
+
+.caption {
+  margin: 0 8px;
+
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  font-style: normal;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.dropDawn_title,
+.sorting_property {
+  border: 4px;
+  padding: 8px 16px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.dropDawn_title {
+  font-weight: 400;
+  color: $secondary;
+}
+
+.sorting_property {
+  font-weight: 500;
+  cursor: pointer;
+  color: rgba(255,255,255,.72);
+  transition: .2s linear;
+
+  &.selected {
+    border-left: 4px $red solid;
+    color: $primary;
+  }
+
+  &:hover {
+    background-color: $btn_hover;
+  }
+}

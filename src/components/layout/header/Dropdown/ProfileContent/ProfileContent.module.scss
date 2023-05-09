@@ -1,16 +1,22 @@
 .content {
     display: flex;
     align-items: center;
-
     
     .authBlock {
+        position: relative;
         min-width: 300px;
+
         margin: 0 auto;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
+        padding-left: 25px;
+        
+        &:before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.16);
+            left: 0;
+        }
         button {
             display: block;
             width: 100%;
@@ -31,7 +37,7 @@
         }
 
         .settings {
-            margin-top: 50%;
+            margin-top: 40%;
             
             a {
                 display: block;
