@@ -20,11 +20,11 @@ const Footer = () => {
           <div className={`${styles.footer_content} ${styles.fourColumn}`}>
 
             <div className={styles.footer__column}>
-              <FooterLinkList title={firstColumn.title} links={firstColumn.links} />
+              <FooterLinkList title={firstColumn.title} enTitle={firstColumn.enTitle} links={firstColumn.links} />
             </div>
 
             <div className={styles.footer__column}>
-              <FooterLinkList title={secondColumn.title} links={secondColumn.links} />
+              <FooterLinkList title={secondColumn.title} enTitle={secondColumn.enTitle} links={secondColumn.links} />
               <div className={styles.footer__certificateLinkWrapper}>
                 <a href="https://www.ivi.tv/cert" className={styles.footer__certificateLink}>Активация сертификата</a>
               </div>
