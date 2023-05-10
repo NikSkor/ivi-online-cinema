@@ -7,7 +7,8 @@ interface UserState {
   filmValues: IFilmItem,
   genres: IGenres[],
   page: number,
-  genresSize: number
+  genresSize: number,
+  isGenres: boolean
 }
 
 interface IGenres {
@@ -36,7 +37,8 @@ const initialState: UserState = {
   },
   genres: [],
   page: 1,
-  genresSize: 0
+  genresSize: 0,
+  isGenres: true,
 };
 
 export const adminSlice = createSlice({
@@ -69,11 +71,14 @@ export const adminSlice = createSlice({
     addGenresSize(state) {
       state.genresSize = 0;
       state.genresSize = state.genres.length;
+    },
+    setIsGenres(state, action: PayloadAction<boolean>) {
+      state.isGenres = action.payload;
     }
   }
 });
 
-export const { addId, addFilmValues, addGenres, newPage, addGenresSize } = adminSlice.actions;
+export const { addId, addFilmValues, addGenres, newPage, addGenresSize, setIsGenres } = adminSlice.actions;
 
 
 export default adminSlice.reducer;

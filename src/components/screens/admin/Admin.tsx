@@ -14,6 +14,8 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { addGenres, addGenresSize } from "@/store/slices/adminSlice";
 import { paginateCatalog } from "./functions/paginateCatalog";
 import Pagination from "@/components/screens/admin/Pagination/Pagination";
+import UserSwitch from "@/components/screens/admin/UserSwitch/UserSwitch";
+import { searchInCatalog } from "./functions/searchInCatalog";
 
 interface IGenres {
   genreId: number,
@@ -22,10 +24,13 @@ interface IGenres {
 
 const Admin: FC = () => {
 
-  let [isGenres, setIsGenres] = useState(true);
-  const pageNumber: number = useAppSelector(state => state.admin.page);
-  const genresLength: number = useAppSelector(state => state.admin.genresSize);
+  let [search, setSearch] = useState('');
 
+  let isGenres: boolean = useAppSelector(state => state.admin.isGenres);
+  const pageNumber: number = useAppSelector(state => state.admin.page);
+  // const genresLength: number = useAppSelector(state => state.admin.genresSize);
+
+  console.log('isGenres: ', isGenres);
 
     
 
@@ -36,15 +41,6 @@ const Admin: FC = () => {
       behavior: 'smooth',
     });
   };
-
-
-  const toggleHandler = () => {
-    isGenres === true ? setIsGenres(false) : setIsGenres(true);
-  }
-
-    console.log('isGenres: ', isGenres);
-
-  // let catalog: IFilmographyItem[] = [...filmographyData];
 
   let dispatch = useAppDispatch();
   let genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
@@ -57,14 +53,14 @@ const Admin: FC = () => {
     });
     }
     
-  }, [dispatch, isGenres]);
+  }, [dispatch,isGenres]);
 
+  let filteredCatalog: IGenres[] = searchInCatalog(genresCatalog, search);
 
   let paginSize = 10;
-  let paginatedGenresCatalog = paginateCatalog(genresCatalog, paginSize, pageNumber);
-  console.log('paginatedGenresCatalog: ', paginatedGenresCatalog);
+  let paginatedGenresCatalog = paginateCatalog(filteredCatalog, paginSize, pageNumber);
 
-  let pages: number = Math.ceil(genresLength / paginSize);
+  let pages: number = Math.ceil(paginateCatalog.length / paginSize);
 
 
   return(
@@ -77,16 +73,23 @@ const Admin: FC = () => {
       <section className={style.main}>
         <h2 className={style.title}>Управление каталогом</h2>
 
-        <div className={style.toggleContainer}>
-          <h3 className={style.subTitle}>Жанры</h3>
-          <label className={style.toggle} onChange={toggleHandler}>
-            <input type="checkbox" className={style.toggleInput}/>
-            <span className={style.toggleSlider}></span>
-          </label>
-          <h3 className={style.subTitle}>Фильмы</h3>
-        </div>
+        <UserSwitch firstTitle={'Жанры'} secondTitle={'Фильмы'} isTrue={isGenres}/>
+
         {isGenres 
-          ? <h3 className={style.subTitle}>Список жанров</h3> 
+          ? 
+          (
+            <>
+              <h3 className={style.subTitle}>Список жанров</h3>
+              <input 
+                className={style.inputs} 
+                type="text" 
+                placeholder='Поиск по названию...'
+                value = {search}
+                onChange={(e) => setSearch(e.target.value)}
+                />
+            </>
+            
+          )
           : <h3 className={style.subTitle}>Список фильмов</h3> 
         }
         
@@ -96,12 +99,14 @@ const Admin: FC = () => {
           ? paginatedGenresCatalog.map((item)=> {
             return <li key={item.genreId} className={style.item}>
                 <h4 className={style.itemTitle}>{item.name}</h4>
-                <Link href={`/admin/${item.genreId}`} className={style.actionBtn} >
+                <div className={style.actionBlock}>
+                  <Link href={`/admin/${item.genreId}`} className={style.actionBtn} >
                   <p data-id={item.genreId}>Редактировать</p>
                 </Link>
                 <button className={style.actionBtn} onClick={()=>{}}>
                   <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
                 </button>
+                </div>
               </li>
           })
           : <h3 className={style.subTitle}>Список фильмов</h3>

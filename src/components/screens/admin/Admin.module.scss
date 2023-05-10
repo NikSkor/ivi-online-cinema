@@ -92,7 +92,8 @@
 .item {
   display: flex;
   align-items: center;
-  gap: 50px;
+  // gap: 50px;
+  justify-content: space-between;
 }
 
 .itemTitle {
@@ -101,9 +102,15 @@
   width: 800px;
 }
 
+.actionBlock {
+  display: flex;
+  gap: 30px;
+}
+
 .actionBtn {
   font-weight: 500;
   font-size: 12px;
+  justify-self: flex-end;
 
   position: relative;
   display: inline-flex;
@@ -140,7 +147,28 @@
   }
 }
 
-
 .delBtn {
   width: 40px;
+}
+
+.inputs {
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  padding: 12px 12px;
+
+  margin-bottom: 20px;
+
+  border: solid 1px $btn_bg;
+  background-color: $btn_bg;
+  border-radius: 8px;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  &.square {
+    width: 40px;
+    padding: 0;
+  }
 }
