@@ -35,7 +35,7 @@ const EditMovie: FC = () => {
   
   if (id !== undefined) {
     catalog.forEach((item) => {
-    if (item.filmId === +id) {
+    if (item.movieId === +id) {
       Object.assign(filmItem, item);
       dispatch(addFilmValues(filmItem));
     }
