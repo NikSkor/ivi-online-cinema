@@ -5,13 +5,48 @@ import Category from './Category/Category'
 import WeeklyTop from './WeeklyTop/WeeklyTop'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import axios from 'axios'
+
+import { filmographyData } from '@/components/ui/filmography/filmography.data'
 
 const Home: FC = () => {
   const [isClauseOpen, setIsClauseOpen] = useState(false)
+
+  const [dramaMovies, setDramaMovies] = useState([])
+
+  const [moviesWithActor, setMoviesWithActor] = useState([])
+  const actor = 'Леонардо Дикаприо'
+  const enActor = 'Leonardo DiCaprio'
+  
   const locale = useRouter().locale
+
+  useEffect(() => {
+    const getDramas = async () => {
+      const response = await axios.get('http://localhost:5000/api/movie', {
+        params: {
+          page: 1,
+          genres:["драма"],
+          rating: 8
+        }
+      })
+      setDramaMovies(response.data)
+    }
+    const getMoviesWithActor = async () => {
+      const response = await axios.get('http://localhost:5000/api/movie', {
+        params: {
+          page: 1,
+          person: actor
+        }
+      })
+      setMoviesWithActor(response.data)
+    }
+
+    getDramas()
+    getMoviesWithActor()
+  }, [])
   return (
     <Layout title="Онлайн-кинотеатр Иви">
-      <main className="container">
+      <main className={`${styles.main} container`}>
         <Link href="/" locale={'ru'}>
           <button className={styles.langButton}>Русский язык</button>
         </Link>
@@ -129,8 +164,8 @@ const Home: FC = () => {
 
         </div>
         <div className={styles.categoryList}>
-          <Category title={locale === 'ru' ? "Фильмы из США" : 'Films from USA'} />
-          <Category title={locale === 'ru' ? 'Зарубежные мультфильмы' : 'Foreign cartoons'} />
+          <Category title={locale === 'ru' ? "Лучшие драмы" : 'The best dramas'} items={dramaMovies}/>
+          <Category title={locale === 'ru' ? `Фильмы с ${actor}` : `Films with ${enActor}`} items={moviesWithActor} />
         </div>
       </main>
     </Layout>

@@ -21,6 +21,14 @@
   .headerTop {
     display: flex;
     align-items: center;
+
+    .menuContainer {
+      display: block;
+
+      @media (max-width: 1150px) {
+        display: none;
+      }
+    }
   
     .headerIcon {
       display: flex;
@@ -72,6 +80,10 @@
         gap: 5px;
 
         padding: 10px 0;
+
+        @media (max-width: 1150px) {
+          display: none;
+        }
 
         .searchLink {
           fill: rgba(255, 255, 255, 0.5);
