@@ -6,14 +6,18 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 
 const WeeklyTop = () => {
-
   const settings = {
     dots: true,
     infinite: false,
     speed: 500,
+    // slidesToShow: width > 1160 ? 5 : width > 880 ? 4 : width > 600 ? 3 : 2,
     slidesToShow: 5,
     slidesToScroll: 3
   };
+
+
+
+
 
 
   const posters = [

@@ -3,13 +3,14 @@ import styles from './Dropdown.module.scss'
 import NotificationsContent from './NotificationsContent/NotificationsContent'
 import ProfileContent from './ProfileContent/ProfileContent'
 import FilmsContent from './FilmsContent/FilmsContent'
+
 type DropdownProps = {
 	isNotificationsOpen: boolean,
 	isProfileOpen: boolean,
 	isFilmsOpen: boolean,
 
 }
-const Dropdown: FC<DropdownProps> = ({ isNotificationsOpen, isProfileOpen, isFilmsOpen}) => {
+const Dropdown: FC<DropdownProps> = ({ isNotificationsOpen, isProfileOpen, isFilmsOpen }) => {
 
 	return (
 		<div

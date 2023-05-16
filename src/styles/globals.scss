@@ -21,6 +21,19 @@ body {
   width: 1236px;
   padding: 0 10px;
   margin: 0 auto;
+
+  @media (max-width: 1270px) {
+    width: auto;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  @media (max-width: 500px) {
+    width: 95%;
+    margin-right: 0;
+    margin-left: 10px;
+  }
+
 }
 
 a {

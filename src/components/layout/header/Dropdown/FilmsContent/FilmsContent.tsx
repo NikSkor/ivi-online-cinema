@@ -1,109 +1,114 @@
-import { useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './FilmsContent.module.scss'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import axios from 'axios'
 
 const FilmsContent = () => {
-  const [genres, setGenres] = useState([
+
+
+  /*
+
+  */
+ const [genres, setGenres] = useState([
+  {
+    name: 'Артхаус',
+    enTitle: 'Art House'
+  },
+  {
+    name: 'Боевики',
+    enTitle: 'Fighters'
+  },
+  {
+    name: 'Вестерн',
+    enTitle: 'Western'
+  },
+  {
+    name: 'Военные',
+    enTitle: 'Military'
+  },
+  {
+    name: 'Детективы',
+    enTitle: 'Detectives'
+  },
+  {
+    name: 'Для всей семьи',
+    enTitle: 'For family'
+  },
+  {
+    name: 'Для детей',
+    enTitle: 'For children'
+  },
+  {
+    name: 'Документальные',
+    enTitle: 'Documentary'
+  },
+  {
+    name: 'Драмы',
+    enTitle: 'Dramas'
+  },
+  {
+    name: 'Исторические',
+    enTitle: 'Historical'
+  },
+  {
+    name: "Катастрофы",
+    enTitle: 'Disasters'
+  },
+  {
+    name: 'Комедии',
+    enTitle: 'Comedies'
+  },
+  {
+    name: 'Криминальные',
+    enTitle: 'Criminal'
+  },
+  {
+    name: 'Мелодрамы',
+    enTitle: 'Melodramas'
+  },
+  {
+    name: 'Мистические',
+    enTitle: 'Mystical'
+  },
+  {
+    name: 'По комиксам',
+    enTitle: 'By comics'
+  },
+  {
+    name: 'Приключения',
+    enTitle: 'Adventures'
+  },
+  {
+    name: 'Спорт',
+    enTitle: 'Sport'
+  },
+  {
+    name: 'Триллеры',
+    enTitle: 'Thrillers'
+  },
+  {
+    name: 'Ужасы',
+    enTitle: 'Horrors'
+  },
+  {
+    name: 'Фантастика',
+    enTitle: 'Fantasy'
+  }])
+  const [countries, setCountries] = useState( [
     {
-      title: 'Артхаус',
-      enTitle: 'Art House'
-    },
-    {
-      title: 'Боевики',
-      enTitle: 'Fighters'
-    },
-    {
-      title: 'Вестерн',
-      enTitle: 'Western'
-    },
-    {
-      title: 'Военные',
-      enTitle: 'Military'
-    },
-    {
-      title: 'Детективы',
-      enTitle: 'Detectives'
-    },
-    {
-      title: 'Для всей семьи',
-      enTitle: 'For family'
-    },
-    {
-      title: 'Для детей',
-      enTitle: 'For children'
-    },
-    {
-      title: 'Документальные',
-      enTitle: 'Documentary'
-    },
-    {
-      title: 'Драмы',
-      enTitle: 'Dramas'
-    },
-    {
-      title: 'Исторические',
-      enTitle: 'Historical'
-    },
-    {
-      title: "Катастрофы",
-      enTitle: 'Disasters'
-    },
-    {
-      title: 'Комедии',
-      enTitle: 'Comedies'
-    },
-    {
-      title: 'Криминальные',
-      enTitle: 'Criminal'
-    },
-    {
-      title: 'Мелодрамы',
-      enTitle: 'Melodramas'
-    },
-    {
-      title: 'Мистические',
-      enTitle: 'Mystical'
-    },
-    {
-      title: 'По комиксам',
-      enTitle: 'By comics'
-    },
-    {
-      title: 'Приключения',
-      enTitle: 'Adventures'
-    },
-    {
-      title: 'Спорт',
-      enTitle: 'Sport'
-    },
-    {
-      title: 'Триллеры',
-      enTitle: 'Thrillers'
-    },
-    {
-      title: 'Ужасы',
-      enTitle: 'Horrors'
-    },
-    {
-      title: 'Фантастика',
-      enTitle: 'Fantasy'
-    }])
-  const [countries, setCountries] = useState([
-    {
-      title: 'Русские',
+      name: 'Русские',
       enTitle: 'Russians'
     },
     {
-      title: 'Зарубежные',
+      name: 'Зарубежные',
       enTitle: 'Foreign'
     },
     {
-      title: 'Советское кино',
+      name: 'Советское кино',
       enTitle: 'Soviet cinema'
     }
   ])
-
   const locale = useRouter().locale
 
 
@@ -115,7 +120,7 @@ const FilmsContent = () => {
         <p className={styles.title}>{locale === 'ru' ? 'Жанры' : 'Genres'}</p>
         <div className={styles.genreList}>
           {
-            genres.map(genre => <Link href={`/movies/${genre}`}>{locale === 'ru' ? genre.title : genre.enTitle}</Link>)
+            genres.map(genre => <Link href={`/movies/${genre}`}>{genre.name}</Link>)
           }
         </div>
       </div>
@@ -123,7 +128,7 @@ const FilmsContent = () => {
         <div className={`${styles.countries} ${styles.filmSection}`}>
           <p className={styles.title}>{locale === 'ru' ? 'Страны' : 'Countries'}</p>
           {
-            countries.map(country => <Link href={`/movies/${country}`}>{locale === 'ru' ? country.title : country.enTitle}</Link>)
+            countries.map(country => <Link href={`/movies/${country}`}>{country.name}</Link>)
           }
         </div>
         <div className={`${styles.years} ${styles.filmSection}`}>

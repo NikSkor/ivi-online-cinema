@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './Category.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -10,19 +10,51 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { CategoryData } from './CategoryData/CategoryData'
-import { filmographyData } from '@/components/ui/filmography/filmography.data'
 type CategoryProps = {
   title: String
+  items: any[]
 }
-const Category: FC<CategoryProps> = ({ title }) => {
-  const [items, setItems] = useState(filmographyData)
 
+const Category: FC<CategoryProps> = ({ title, items }) => {
+  // console.log(window)
   const settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
     slidesToShow: 7,
-    slidesToScroll: 3
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1270,
+        settings: {
+          slidesToShow: 6
+        }
+      },
+      {
+        breakpoint: 1100,
+        settings: {
+          slidesToShow: 5
+        }
+      },
+      {
+        breakpoint: 920,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 745,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 390,
+        settings: {
+          slidesToShow: 2
+        }
+      }
+    ]
   };
 
   return (

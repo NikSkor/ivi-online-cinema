@@ -1,9 +1,10 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import Image from 'next/image'
 import styles from './Header.module.scss'
 import Navigation from './Navigation/Navigation'
 import Dropdown from './Dropdown/Dropdown'
 import Link from 'next/link'
+import axios from 'axios'
 import { useRouter } from 'next/router'
 
 
@@ -83,7 +84,8 @@ const Header = () => {
       <Dropdown 
       isProfileOpen={isProfileOpen} 
       isNotificationsOpen={isNotificationsOpen}
-      isFilmsOpen={isFilmsOpen}/>
+      isFilmsOpen={isFilmsOpen}
+      />
     </header>
   )
 }
