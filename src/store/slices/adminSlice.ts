@@ -4,17 +4,24 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface UserState {
   filmId: number,
+  genreId: number,
+  genreValues: IGenreItem,
   filmValues: IFilmItem,
   genres: IGenres[],
   page: number,
-  genresSize: number,
-  isGenres: boolean
+  genresSize: number
 }
 
 interface IGenres {
   genreId: number,
   name: string
 } 
+
+interface IGenreItem {
+  id: number,
+  name: string,
+  enName: string,
+}
 
 interface IFilmItem {
   name: string,
@@ -28,6 +35,12 @@ interface IFilmItem {
 
 const initialState: UserState = {
   filmId: 0,
+  genreId: 0,
+  genreValues: {
+    id: 0,
+    name: '',
+    enName: '',
+  },
   filmValues: {
     name: '',
     foreignName: '',
@@ -38,16 +51,27 @@ const initialState: UserState = {
   genres: [],
   page: 1,
   genresSize: 0,
-  isGenres: true,
 };
 
 export const adminSlice = createSlice({
   name: 'admin',
   initialState,
   reducers: {
-    addId(state, action: PayloadAction<number>) {
+    addFilmId(state, action: PayloadAction<number>) {
       state.filmId = 0;
       state.filmId = action.payload;
+    },
+    addGenreId(state, action: PayloadAction<number>) {
+      state.genreId = 0;
+      state.genreId = action.payload;
+    },
+    addGenreValues(state, action: PayloadAction<IGenreItem>) {
+        state.genreValues = {
+          id: 0,
+          name: '',
+          enName: '',
+        }
+      Object.assign(state.genreValues, action.payload);
     },
     addFilmValues(state, action: PayloadAction<IFilmItem>) {
         state.filmValues = {
@@ -72,13 +96,10 @@ export const adminSlice = createSlice({
       state.genresSize = 0;
       state.genresSize = state.genres.length;
     },
-    setIsGenres(state, action: PayloadAction<boolean>) {
-      state.isGenres = action.payload;
-    }
   }
 });
 
-export const { addId, addFilmValues, addGenres, newPage, addGenresSize, setIsGenres } = adminSlice.actions;
+export const { addFilmId, addGenreId,addGenreValues, addFilmValues, addGenres, newPage, addGenresSize} = adminSlice.actions;
 
 
 export default adminSlice.reducer;

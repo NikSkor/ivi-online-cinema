@@ -26,12 +26,14 @@ const Admin: FC = () => {
 
   let [search, setSearch] = useState('');
 
-  let isGenres: boolean = useAppSelector(state => state.admin.isGenres);
+  let [isGenres, setIsGenres] = useState(true);
   const pageNumber: number = useAppSelector(state => state.admin.page);
-  // const genresLength: number = useAppSelector(state => state.admin.genresSize);
 
-  console.log('isGenres: ', isGenres);
+  // console.log('isGenres: ', isGenres);
 
+  const unpdateIsGenres = (value: boolean) => {
+    setIsGenres(value);
+  }
     
 
   const updatePage = () => {
@@ -49,6 +51,7 @@ const Admin: FC = () => {
     if(isGenres) {
       axios.get(API_URL_GET_GENRES).then((response) => {
       dispatch(addGenres(response.data));
+      // console.log('response.data: ', response.data);
       dispatch(addGenresSize());
     });
     }
@@ -73,7 +76,7 @@ const Admin: FC = () => {
       <section className={style.main}>
         <h2 className={style.title}>Управление каталогом</h2>
 
-        <UserSwitch firstTitle={'Жанры'} secondTitle={'Фильмы'} isTrue={isGenres}/>
+        <UserSwitch firstTitle={'Жанры'} secondTitle={'Фильмы'} isTrue={isGenres} isGenres={unpdateIsGenres}/>
 
         {isGenres 
           ? 
@@ -100,7 +103,7 @@ const Admin: FC = () => {
             return <li key={item.genreId} className={style.item}>
                 <h4 className={style.itemTitle}>{item.name}</h4>
                 <div className={style.actionBlock}>
-                  <Link href={`/admin/${item.genreId}`} className={style.actionBtn} >
+                  <Link href={`/admin/genre/${item.genreId}`} className={style.actionBtn} >
                   <p data-id={item.genreId}>Редактировать</p>
                 </Link>
                 <button className={style.actionBtn} onClick={()=>{}}>
