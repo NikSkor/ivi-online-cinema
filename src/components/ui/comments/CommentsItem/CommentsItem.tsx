@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import styles from '../comments.module.sass'
 import like from '../icons/like.svg'
+import { MainButton } from '../../button/MainBtn/MainButton'
 
 export const CommentsItem = () => {
     const [toAnswer, setToAnswer] = useState(false);
@@ -27,7 +28,7 @@ export const CommentsItem = () => {
                 toAnswer ? <div className={styles.newComment__form}>
                     <input type="text" placeholder='Name' className={styles.newComment__name} />
                     <textarea name="message" placeholder='Your message' className={styles.newComment__textarea} rows={5}></textarea>
-                    <button className={styles.newComment__btn} onClick={() => setToAnswer(false)}>Ответить на комментарий</button>
+                    <div onClick={() => setToAnswer(false)}><MainButton text='Ответить на комментарий' /></div>
                 </div> : null
             }
         </li>
