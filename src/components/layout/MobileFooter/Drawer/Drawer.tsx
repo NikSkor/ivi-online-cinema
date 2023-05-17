@@ -25,7 +25,7 @@ const Drawer = () => {
             <p>Активация сертификата</p>
           </button>
         </div>
-        <div className={styles.navigationItem}>
+        <div className={`${styles.navigationItem} ${styles.profileBlock}`}>
           <div className={styles.profile}>
             <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 2C9.243 2 7 4.243 7 7C7 9.757 9.243 12 12 12C14.757 12 17 9.757 17 7C17 4.243 14.757 2 12 2ZM12 10C10.346 10 9 8.654 9 7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7C15 8.654 13.654 10 12 10ZM21 21V20C21 16.141 17.859 13 14 13H10C6.14 13 3 16.141 3 20V21H5V20C5 17.243 7.243 15 10 15H14C16.757 15 19 17.243 19 20V21H21Z" fill="#fff" />
@@ -33,7 +33,7 @@ const Drawer = () => {
             <p>Профиль</p>
           </div>
         </div>
-        <div className={styles.navigationItem}>
+        <div className={`${styles.navigationItem} ${styles.notificationBlock}`}>
           <div className={styles.notifications}>
             <img src="/notification-icon.svg" width={26} height={26} alt="" />
             <p>Уведомления</p>
@@ -168,12 +168,16 @@ const Drawer = () => {
             <p>Наши операторы онлайн 24/7</p>
             </div>
             <button>Написать в чате</button>
-            <div>
-              <img src="" alt="" />
-              <img src="" alt="" />
+            <div className={styles.icons}>
+              <div className={styles.iconContainer}>
+                <img src="/email_icon.svg" width={20} height={20} alt="" />
+              </div>
+              <div className={styles.iconContainer}>
+              <img src="/phone_icon.svg" width={20} height={20} alt="" />
+              </div>
             </div>
             <p>ask.ivi.ru</p>
-            <p>Ответы на вопросы</p>
+            <span>Ответы на вопросы</span>
           </div>
         </div>
         <div className={styles.socials}>
@@ -187,8 +191,10 @@ const Drawer = () => {
                   ))
                 }
         </div>
+        <div className={styles.copyright}>
         <p>© 2023 ООО «Иви.ру»</p>
-        {/* <p>HBO ® and related service marks are the property of Home Box Office, Inc</p> */}
+        <p>HBO ® and related service marks are the property of Home Box Office, Inc</p>
+        </div>
       </div>
 
     </div>

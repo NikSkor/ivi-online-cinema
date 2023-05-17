@@ -6,6 +6,10 @@
   position: relative;
   height: $headerHeight;
   border-bottom: 1px solid rgba(255, 255, 255, 0.219);
+
+  @media (max-width: 600px) {
+    padding-top: 10px;
+  }
   &.dropdownOpen {
     background-color: #1f1b2e;
     border-top-left-radius: 20px;
@@ -105,6 +109,10 @@
       margin-right: 12px;
       padding: 0px 5px;
 
+      @media (max-width: 600px) {
+        display: none;
+      }
+
       &:hover {
         .notificationLink {
           fill: rgba(255, 255, 255, 1)
@@ -120,7 +128,9 @@
     }
 
     .avatar {
-
+      @media (max-width: 600px) {
+        display: none;
+      }
       &:hover {
         .avatarButton {
           border-color: rgba(255, 255, 255, 1);
