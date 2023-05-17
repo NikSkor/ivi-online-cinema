@@ -1,12 +1,11 @@
 import { FC, useEffect, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './EditGenre.module.scss';
-import { IFilmographyItem } from "@/interfaces/person/IFilmographyItem";
-import { filmographyData } from "@/components/ui/filmography/filmography.data";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Link from "next/link";
-import { addFilmValues, addGenreValues } from '@/store/slices/adminSlice';
 import axios from "axios";
+import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
+import { API_URL_PATCH_GENRES } from "../API/const";
 
 
 interface IGenreItem {
@@ -24,6 +23,9 @@ const EditGenre: FC = () => {
 
   const id: number = useAppSelector(state => state.admin.genreId);
   const genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
+  const [modalActive, setModalActive] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
+
   // const values: IGenreItem = useAppSelector(state => state.admin.genreValues); 
   // const [isDisabled, setIsDisabled] = useState(false);
 
@@ -109,21 +111,23 @@ const EditGenre: FC = () => {
   let data = JSON.stringify(genreValues); 
   console.log('data: ', data);
 
-  try {
-  const response = await axios.patch(`http://localhost:5000/api/admin/genre/${id}`, data);
-  console.log('Returned data:', response);
-} catch (e) {
-  console.log(`Axios request failed: ${e}`);
-}
-
-  // axios.patch(`http://localhost:5000/api/admin/genre/${id}`, genreValues)
-  //   .then(res=> {
-  //     console.log(res);
-  //     console.log(res.data);
-  //   })
-
-  // dispatch(addFilmValues(genreValues));
+  const headers = {
+    'Content-type': 'application/json',
+    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MjUxNjIzOTAyMiwiaXNBZG1pbiI6dHJ1ZX0.f1EOoLCXMQPDGD0s9QaO5tkWTsH77lDXpNdAgp_Q-1s'
   }
+
+  try {
+  const response = await axios.patch(`${API_URL_PATCH_GENRES}${id}`, data, {
+    headers: headers
+  });
+  console.log('Returned data:', response);
+  setModalMessage(`Жанр "${genreItem.name}" обновлён.`);
+  } catch (e: any) {
+    console.log(`Axios request failed: ${e}`);
+    setModalMessage(e.message.toString());
+  }
+  setModalActive(true);
+}
 
   let foreignNameHandler = (e: any) => {
     let reg = /[а-яА-ЯёЁ]/g;
@@ -161,6 +165,7 @@ const EditGenre: FC = () => {
           </button>
         </Link>
         </section>
+        <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>
       </div>
   )
 }

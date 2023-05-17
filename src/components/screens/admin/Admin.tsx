@@ -16,6 +16,7 @@ import { paginateCatalog } from "./functions/paginateCatalog";
 import Pagination from "@/components/screens/admin/Pagination/Pagination";
 import UserSwitch from "@/components/screens/admin/UserSwitch/UserSwitch";
 import { searchInCatalog } from "./functions/searchInCatalog";
+import CrudBlock from "./GenreBlock/CrudBlock";
 
 interface IGenres {
   genreId: number,
@@ -100,17 +101,28 @@ const Admin: FC = () => {
         <ul className={style.list}>
         {isGenres 
           ? paginatedGenresCatalog.map((item)=> {
-            return <li key={item.genreId} className={style.item}>
-                <h4 className={style.itemTitle}>{item.name}</h4>
-                <div className={style.actionBlock}>
-                  <Link href={`/admin/genre/${item.genreId}`} className={style.actionBtn} >
-                  <p data-id={item.genreId}>Редактировать</p>
-                </Link>
-                <button className={style.actionBtn} onClick={()=>{}}>
-                  <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
-                </button>
-                </div>
-              </li>
+            // return <li key={item.genreId} className={style.item}>
+            //     <h4 className={style.itemTitle}>{item.name}</h4>
+            //     <div className={style.actionBlock}>
+            //       <Link href={`/admin/genre/${item.genreId}`} className={style.actionBtn} >
+            //       <p data-id={item.genreId}>Редактировать</p>
+            //     </Link>
+            //     <button className={style.actionBtn} onClick={()=>{}}>
+            //       <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
+            //     </button>
+            //     </div>
+            //   </li>
+            return (
+              <CrudBlock 
+                key={item.genreId} 
+                item={{
+                  id: item.genreId,
+                  name: item.name
+                }}  
+                adress={'/admin/genre/'}>
+                <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
+              </CrudBlock>
+            )
           })
           : <h3 className={style.subTitle}>Список фильмов</h3>
         }
