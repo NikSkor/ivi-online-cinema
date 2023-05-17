@@ -1,0 +1,62 @@
+.tabBarPlate {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(31,27,46,.88);
+  backdrop-filter: blur(8px);
+  z-index: 1001;
+
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  @media (max-width: 1160px) {
+    display: flex;
+  }
+  .tabBarMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    a {
+      cursor: pointer;
+      display: flex;
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: center;
+      flex-grow: 1;
+      flex-shrink: 1;
+      max-width: 120px;
+      padding-bottom: 4px;
+      padding-top: 8px;
+      position: relative;
+      text-decoration: none;
+
+
+
+      img,svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      p {
+        margin-top: 4px;
+        align-self: center;
+        color: #a5a1b2;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 700;
+        height: 12px;
+        line-height: 12px;
+        margin-top: 4px;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        
+      }
+    }
+  }
+}

@@ -9,7 +9,7 @@ const SliderItem: FC<{ film: IFilmographyItem }> = ({ film }) => {
     <div className={styles.sliderItem}>
       <Link href="/">
         <div className={styles.image}>
-          <img src={film.posterURL} alt="poster" />
+          <img src={film.poster} alt="poster" />
           <div className={styles.imageOverlay} >
             <div className={styles.iconsBlock}>
               <div className={styles.icon}>

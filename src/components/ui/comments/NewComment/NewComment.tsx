@@ -1,3 +1,4 @@
+import { MainButton } from '../../button/MainBtn/MainButton'
 import styles from '../comments.module.sass'
 
 export const NewComment = () => {
@@ -7,7 +8,7 @@ export const NewComment = () => {
             <div className={styles.newComment__form}>
                 <input type="text" placeholder='Name' className={styles.newComment__name} />
                 <textarea name="message" placeholder='Your message' className={styles.newComment__textarea} rows={5}></textarea>
-                <button className={styles.newComment__btn}>Оставить комментарий</button>
+                <div><MainButton text='Оставить комментарий' /></div>
             </div>
         </div>
     )

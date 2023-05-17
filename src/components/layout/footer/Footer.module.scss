@@ -1,8 +1,12 @@
 @import '/src/styles/vars.scss';
 
 .footer {
-  display: block;
-  position: relative;
+  display: none;
+
+  @media (min-width: 1160px) {
+    display: block;
+    position: relative;
+  }
 }
 
 
@@ -12,7 +16,7 @@
 }
 
 .footer_content {
-  border-top: 1px solid rgba(255, 255, 255, 0.219);;
+  border-top: 1px solid rgba(255, 255, 255, 0.219);
   display: grid;
   padding: 48px 0;
   position: relative;

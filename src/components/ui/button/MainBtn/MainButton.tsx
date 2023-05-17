@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './btn.module.sass'
 interface Props {
-  link: string,
+  link?: string,
   text: string
 }
 export const MainButton: React.FC<Props> = ({ link, text }) => {
