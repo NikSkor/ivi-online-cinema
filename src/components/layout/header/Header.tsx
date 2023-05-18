@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import Image from 'next/image'
 import styles from './Header.module.scss'
 import Navigation from './Navigation/Navigation'
@@ -6,9 +6,12 @@ import Dropdown from './Dropdown/Dropdown'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+interface IHeader {
+  genres: any[]
+  countries: any[]
+}
 
-
-const Header = () => {
+const Header:FC<IHeader> = ({ genres, countries }) => {
 
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
@@ -85,6 +88,8 @@ const Header = () => {
       isProfileOpen={isProfileOpen} 
       isNotificationsOpen={isNotificationsOpen}
       isFilmsOpen={isFilmsOpen}
+      genres={genres}
+      countries={countries}
       />
     </header>
   )

@@ -22,23 +22,31 @@ const Home: FC = () => {
 
   useEffect(() => {
     const getDramas = async () => {
-      const response = await axios.get('http://localhost:5000/api/movie', {
-        params: {
-          page: 1,
-          genres:["драма"],
-          rating: 8
-        }
-      })
-      setDramaMovies(response.data)
+      try {
+        const response = await axios.get('http://localhost:5000/api/movie', {
+          params: {
+            page: 1,
+            genres:["боевик"],
+            rating: 8
+          }
+        })
+        setDramaMovies(response.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
     const getMoviesWithActor = async () => {
-      const response = await axios.get('http://localhost:5000/api/movie', {
-        params: {
-          page: 1,
-          person: actor
-        }
-      })
-      setMoviesWithActor(response.data)
+      try {
+        const response = await axios.get('http://localhost:5000/api/movie', {
+          params: {
+            page: 1,
+            person: actor
+          }
+        })
+        setMoviesWithActor(response.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
     getDramas()
