@@ -2,16 +2,13 @@ import { FC, useEffect, useState } from "react";
 import Layout from '@/components/layout/Layout';
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './Admin.module.scss';
-import { filmographyData } from "@/components/ui/filmography/filmography.data";
-import { IFilmographyItem } from "@/interfaces/person/IFilmographyItem";
 import Image from 'next/image';
 import trashImg from '../../../../public/trash.svg';
 import Link from "next/link";
-// import { getData } from "./functions/getData";
-import { API_URL_GET_GENRES, API_URL_GET_MOVIES } from "./API/const";
+import { API_URL_GET_GENRES, API_URL_GET_MOVIES} from "./API/const";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addGenres, addGenresSize } from "@/store/slices/adminSlice";
+import { addFilms, addGenres, addGenresSize } from "@/store/slices/adminSlice";
 import { paginateCatalog } from "./functions/paginateCatalog";
 import Pagination from "@/components/screens/admin/Pagination/Pagination";
 import UserSwitch from "@/components/screens/admin/UserSwitch/UserSwitch";
@@ -20,8 +17,29 @@ import CrudBlock from "./GenreBlock/CrudBlock";
 
 interface IGenres {
   genreId: number,
-  name: string
+  name: string,
+  enname: null|string
 } 
+
+interface IFilms {
+  ageRating: null|number,
+  countries: [],
+  description: string,
+  enName: null|string,
+  genres: [],
+  movieId: number,
+  movieLength: number,
+  name: string,
+  persons: {},
+  poster: string,
+  premiere: string,
+  rating: number,
+  shortDescription: null|string,
+  slogan: string,
+  trailer: string,
+  type: string,
+  votes: number
+}
 
 const Admin: FC = () => {
 
@@ -47,6 +65,8 @@ const Admin: FC = () => {
 
   let dispatch = useAppDispatch();
   let genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
+  let filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
+
   
   useEffect(() => {
     if(isGenres) {
@@ -59,12 +79,35 @@ const Admin: FC = () => {
     
   }, [dispatch,isGenres]);
 
+  let filmCatalog;
+
+    useEffect(() => {
+    if(!isGenres) {
+      axios.get(`${API_URL_GET_MOVIES}?page=1&sort=1`).then((response) => {
+      // dispatch(addGenres(response.data));
+      console.log('response.data: ', response.data);
+      dispatch(addFilms(response.data));
+      // filmCatalog = response.data;
+    });
+    }
+    
+  }, [dispatch,isGenres]);
+
+      // console.log('filmCatalog: ', filmCatalog);
+
+  console.log('filmsCatalog: ', filmsCatalog);
+
+
+
   let filteredCatalog: IGenres[] = searchInCatalog(genresCatalog, search);
+
 
   let paginSize = 10;
   let paginatedGenresCatalog = paginateCatalog(filteredCatalog, paginSize, pageNumber);
 
-  let pages: number = Math.ceil(paginateCatalog.length / paginSize);
+  let pages: number = Math.ceil(filteredCatalog.length / paginSize);
+
+
 
 
   return(
@@ -101,17 +144,6 @@ const Admin: FC = () => {
         <ul className={style.list}>
         {isGenres 
           ? paginatedGenresCatalog.map((item)=> {
-            // return <li key={item.genreId} className={style.item}>
-            //     <h4 className={style.itemTitle}>{item.name}</h4>
-            //     <div className={style.actionBlock}>
-            //       <Link href={`/admin/genre/${item.genreId}`} className={style.actionBtn} >
-            //       <p data-id={item.genreId}>Редактировать</p>
-            //     </Link>
-            //     <button className={style.actionBtn} onClick={()=>{}}>
-            //       <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
-            //     </button>
-            //     </div>
-            //   </li>
             return (
               <CrudBlock 
                 key={item.genreId} 
@@ -124,7 +156,19 @@ const Admin: FC = () => {
               </CrudBlock>
             )
           })
-          : <h3 className={style.subTitle}>Список фильмов</h3>
+          : filmsCatalog.map((item)=> {
+            return (
+              <CrudBlock 
+                key={item.movieId} 
+                item={{
+                  id: item.movieId,
+                  name: item.name
+                }}  
+                adress={'/admin/film/'}>
+                <Image src={trashImg} data-id={item.movieId} alt="Значок очистки"/>
+              </CrudBlock>
+            )
+          })
         }
         {/* {catalog.map((item)=> {
           return <li key={item.movieId} className={style.item}>

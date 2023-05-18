@@ -16,7 +16,8 @@ interface IGenreItem {
 
 interface IGenres {
   genreId: number,
-  name: string
+  name: string,
+  enname: null|string
 } 
 
 const EditGenre: FC = () => {
@@ -55,7 +56,7 @@ const EditGenre: FC = () => {
       genreItem = {
         id: item.genreId,
         name: item.name,
-        enName: ''
+        enName: item.enname !== null ? item.enname : ''
       }
       // Object.assign(genreItem, item);
       // dispatch(addGenreValues(genreItem));

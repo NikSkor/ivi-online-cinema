@@ -110,3 +110,43 @@
     padding: 0;
   }
 }
+
+.actionBtn {
+  font-weight: 500;
+  font-size: 12px;
+  justify-self: flex-end;
+
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  padding: 12px 12px;
+
+  border: solid 1px $btn_bg;
+  background-color: $btn_bg;
+  border-radius: 8px;
+
+  cursor: pointer;
+  text-decoration: none;
+  color: $primary;
+
+  transition-property: border-color, background-color;
+  transition-duration: .4s;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  &.square {
+    width: 40px;
+    padding: 0;
+  }
+
+  &:hover {
+    background-color: $btn_hover;
+    border-color: $btn_hover;
+  }
+}
