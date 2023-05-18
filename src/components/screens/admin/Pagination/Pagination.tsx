@@ -31,7 +31,7 @@ const Pagination: FC<IPageNumbers> = ({pagesSum, pageActive, getPage}) => {
   return res;
   }
 
-  let pageNumLeftHandler = (e : React.MouseEvent) => {
+  const pageNumLeftHandler = (e : React.MouseEvent) => {
     e.preventDefault();
     if (pageActive - 1 === 0) {
       dispatch(newPage(1));
@@ -41,13 +41,18 @@ const Pagination: FC<IPageNumbers> = ({pagesSum, pageActive, getPage}) => {
     getPage();
   }
 
-  let pageNumRightHandler = (e : React.MouseEvent) => {
+  const pageNumRightHandler = (e : React.MouseEvent) => {
     e.preventDefault();
     if (pageActive + 1 >= pagesSum) {
       dispatch(newPage(pagesSum));
     } else {
       dispatch(newPage(pageActive+1));
     }
+    getPage();
+  }
+
+  const pageNumberClickHandler = (e: any)=> {
+    dispatch(newPage(+e.target.textContent));
     getPage();
   }
 
@@ -64,8 +69,12 @@ const Pagination: FC<IPageNumbers> = ({pagesSum, pageActive, getPage}) => {
       <ul className={style.list}>
         {
           pagesArr.map((item) => {
-            return (item === pageActive) ? <li key={item} className={`${style.item} ${style.itemActive}`}>{item}</li> 
-            : <li key={item} className={style.item}>{item}</li>
+            return (item === pageActive) ? <li key={item} className={`${style.item} ${style.itemActive}`}
+              onClick={pageNumberClickHandler}
+            >{item}</li> 
+            : <li key={item} className={style.item}
+              onClick={pageNumberClickHandler}
+            >{item}</li>
           })
         }
       </ul>

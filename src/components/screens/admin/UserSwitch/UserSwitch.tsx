@@ -1,5 +1,7 @@
 import { FC, useState } from "react";
 import style from './UserSwitch.module.scss';
+import { useAppDispatch } from "@/store/hooks";
+import { newPage } from "@/store/slices/adminSlice";
 
 
 interface ISwitch {
@@ -12,9 +14,12 @@ interface ISwitch {
 
 const UserSwitch: FC<ISwitch> = ({firstTitle, secondTitle, isTrue, isGenres}) => {
 
+  const dispatch = useAppDispatch();
+
   const toggleHandler = () => {
     isTrue === true ? isTrue = false : isTrue = true;
     isGenres(isTrue);
+    dispatch(newPage(1));
   }
   
   return (

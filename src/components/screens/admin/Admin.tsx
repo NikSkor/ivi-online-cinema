@@ -1,10 +1,8 @@
 import { FC, useEffect, useState } from "react";
-import Layout from '@/components/layout/Layout';
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './Admin.module.scss';
 import Image from 'next/image';
 import trashImg from '../../../../public/trash.svg';
-import Link from "next/link";
 import { API_URL_GET_GENRES, API_URL_GET_MOVIES} from "./API/const";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -43,7 +41,9 @@ interface IFilms {
 
 const Admin: FC = () => {
 
-  let [search, setSearch] = useState('');
+  let [searchGenres, setSearchGenres] = useState('');
+  let [searchMovies, setSearchMovies] = useState('');
+
 
   let [isGenres, setIsGenres] = useState(true);
   const pageNumber: number = useAppSelector(state => state.admin.page);
@@ -79,19 +79,19 @@ const Admin: FC = () => {
     
   }, [dispatch,isGenres]);
 
-  let filmCatalog;
+  let search = encodeURIComponent(searchMovies);
 
     useEffect(() => {
     if(!isGenres) {
-      axios.get(`${API_URL_GET_MOVIES}?page=1&sort=1`).then((response) => {
+      axios.get(`${API_URL_GET_MOVIES}?page=${pageNumber}&search=${search}`).then((response) => {
       // dispatch(addGenres(response.data));
-      console.log('response.data: ', response.data);
+      console.log('response.data: ', response);
       dispatch(addFilms(response.data));
       // filmCatalog = response.data;
     });
     }
     
-  }, [dispatch,isGenres]);
+  }, [dispatch,search,isGenres, pageNumber]);
 
       // console.log('filmCatalog: ', filmCatalog);
 
@@ -99,7 +99,7 @@ const Admin: FC = () => {
 
 
 
-  let filteredCatalog: IGenres[] = searchInCatalog(genresCatalog, search);
+  let filteredCatalog: IGenres[] = searchInCatalog(genresCatalog, searchGenres);
 
 
   let paginSize = 10;
@@ -108,7 +108,13 @@ const Admin: FC = () => {
   let pages: number = Math.ceil(filteredCatalog.length / paginSize);
 
 
-
+  const searchHandler = (e: any) => {
+    if (isGenres) {
+      setSearchGenres(e.target.value);
+    } else {
+      setSearchMovies(e.target.value);
+    }
+  }
 
   return(
     <div className="container">
@@ -125,21 +131,18 @@ const Admin: FC = () => {
         {isGenres 
           ? 
           (
-            <>
-              <h3 className={style.subTitle}>Список жанров</h3>
-              <input 
-                className={style.inputs} 
-                type="text" 
-                placeholder='Поиск по названию...'
-                value = {search}
-                onChange={(e) => setSearch(e.target.value)}
-                />
-            </>
+            <h3 className={style.subTitle}>Список жанров</h3>
             
           )
           : <h3 className={style.subTitle}>Список фильмов</h3> 
         }
-        
+        <input 
+          className={style.inputs} 
+          type="text" 
+          placeholder='Поиск по названию...'
+          value = {isGenres ? searchGenres: searchMovies}
+          onChange={searchHandler}
+        />
 
         <ul className={style.list}>
         {isGenres 
@@ -170,20 +173,9 @@ const Admin: FC = () => {
             )
           })
         }
-        {/* {catalog.map((item)=> {
-          return <li key={item.movieId} className={style.item}>
-              <h4 className={style.itemTitle}>{item.name}</h4>
-              <Link href={`/admin/${item.movieId}`} className={style.actionBtn} >
-                <p data-id={item.movieId}>Редактировать</p>
-              </Link>
-              <button className={style.actionBtn} onClick={()=>{}}>
-                <Image src={trashImg} data-id={item.movieId} alt="Значок очистки"/>
-              </button>
-            </li>
-        })} */}
         {isGenres
           ? <Pagination pagesSum={pages} pageActive={pageNumber} getPage={updatePage}/>
-          : ''
+          : <Pagination pagesSum={10} pageActive={pageNumber} getPage={updatePage}/>
         }
       </ul>
         <button className={style.actionBtn}>

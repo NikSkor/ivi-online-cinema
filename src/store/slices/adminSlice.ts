@@ -5,8 +5,8 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 interface UserState {
   filmId: number,
   genreId: number,
-  genreValues: IGenreItem,
-  filmValues: IFilmItem,
+  // genreValues: IGenreItem,
+  // filmValues: IFilmItem,
   genres: IGenres[],
   films: IFilms[],
   page: number,
@@ -56,16 +56,16 @@ interface IFilmItem {
 const initialState: UserState = {
   filmId: 0,
   genreId: 0,
-  genreValues: {
-    id: 0,
-    name: '',
-    enName: '',
-  },
-  filmValues: {
-    id: 0,
-    name: '',
-    enName: '',
-  },
+  // genreValues: {
+  //   id: 0,
+  //   name: '',
+  //   enName: '',
+  // },
+  // filmValues: {
+  //   id: 0,
+  //   name: '',
+  //   enName: '',
+  // },
   genres: [],
   films: [],
   page: 1,
@@ -84,22 +84,22 @@ export const adminSlice = createSlice({
       state.genreId = 0;
       state.genreId = action.payload;
     },
-    addGenreValues(state, action: PayloadAction<IGenreItem>) {
-        state.genreValues = {
-          id: 0,
-          name: '',
-          enName: '',
-        }
-      Object.assign(state.genreValues, action.payload);
-    },
-    addFilmValues(state, action: PayloadAction<IFilmItem>) {
-        state.filmValues = {
-        id: 0,
-        name: '',
-        enName: '',
-      }
-      Object.assign(state.filmValues, action.payload);
-    },
+    // addGenreValues(state, action: PayloadAction<IGenreItem>) {
+    //     state.genreValues = {
+    //       id: 0,
+    //       name: '',
+    //       enName: '',
+    //     }
+    //   Object.assign(state.genreValues, action.payload);
+    // },
+    // addFilmValues(state, action: PayloadAction<IFilmItem>) {
+    //     state.filmValues = {
+    //     id: 0,
+    //     name: '',
+    //     enName: '',
+    //   }
+    //   Object.assign(state.filmValues, action.payload);
+    // },
     addGenres(state, action: PayloadAction<IGenres[]>) {
       state.genres.length = 0;
       state.genres = [...state.genres, ...action.payload];
@@ -120,7 +120,7 @@ export const adminSlice = createSlice({
   }
 });
 
-export const { addFilmId, addGenreId,addGenreValues, addFilmValues, addGenres, addFilms, newPage, addGenresSize} = adminSlice.actions;
+export const { addFilmId, addGenreId, addGenres, addFilms, newPage, addGenresSize} = adminSlice.actions;
 
 
 export default adminSlice.reducer;
