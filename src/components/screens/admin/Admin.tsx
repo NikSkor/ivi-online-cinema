@@ -16,7 +16,7 @@ import CrudBlock from "./GenreBlock/CrudBlock";
 interface IGenres {
   genreId: number,
   name: string,
-  enname: null|string
+  enName: null|string
 } 
 
 interface IFilms {
@@ -43,6 +43,9 @@ const Admin: FC = () => {
 
   let [searchGenres, setSearchGenres] = useState('');
   let [searchMovies, setSearchMovies] = useState('');
+  let [searchInput, setSearchInput] = useState('');
+
+
 
 
   let [isGenres, setIsGenres] = useState(true);
@@ -65,16 +68,29 @@ const Admin: FC = () => {
 
   let dispatch = useAppDispatch();
   let genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
+  console.log('genresCatalog: ', genresCatalog);
   let filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
+  console.log('filmsCatalog: ', filmsCatalog);
 
   
   useEffect(() => {
     if(isGenres) {
-      axios.get(API_URL_GET_GENRES).then((response) => {
-      dispatch(addGenres(response.data));
-      // console.log('response.data: ', response.data);
-      dispatch(addGenresSize());
-    });
+      const loadGenreList = async() => {
+        try {
+          const response = await axios.get(API_URL_GET_GENRES);
+          dispatch(addGenres(response.data));
+        } catch (e: any) {
+            console.log(`Axios request failed: ${e}`);
+        }
+      }
+
+
+    //   axios.get(API_URL_GET_GENRES).then((response) => {
+    //   dispatch(addGenres(response.data));
+    //   // console.log('response.data: ', response.data);
+    //   dispatch(addGenresSize());
+    // });
+      loadGenreList();
     }
     
   }, [dispatch,isGenres]);
@@ -83,19 +99,33 @@ const Admin: FC = () => {
 
     useEffect(() => {
     if(!isGenres) {
-      axios.get(`${API_URL_GET_MOVIES}?page=${pageNumber}&search=${search}`).then((response) => {
-      // dispatch(addGenres(response.data));
-      console.log('response.data: ', response);
-      dispatch(addFilms(response.data));
-      // filmCatalog = response.data;
-    });
+      const loadMovieList = async() => {
+        try {
+        const response = await axios.get(`${API_URL_GET_MOVIES}?page=${pageNumber}&search=${search}`);
+        console.log('Returned data:', response);
+        dispatch(addFilms(response.data));
+        } catch (e: any) {
+          console.log(`Axios request failed: ${e}`);
+          setSearchMovies('');
+        }
+      }
+
+      loadMovieList();
+
+
+    //   axios.get(`${API_URL_GET_MOVIES}?page=${pageNumber}&search=${search}`).then((response) => {
+    //   // dispatch(addGenres(response.data));
+    //   console.log('response.data: ', response);
+    //   if(response.status !== 200) alert('zuzu');
+    //   dispatch(addFilms(response.data));
+    // });
     }
     
   }, [dispatch,search,isGenres, pageNumber]);
 
       // console.log('filmCatalog: ', filmCatalog);
 
-  console.log('filmsCatalog: ', filmsCatalog);
+  // console.log('filmsCatalog: ', filmsCatalog);
 
 
 
@@ -107,12 +137,33 @@ const Admin: FC = () => {
 
   let pages: number = Math.ceil(filteredCatalog.length / paginSize);
 
+  const searchInputHandler = (e: any) => {
+    let reg = /[a-zA-Z]/g;
+    if (e.target.value.search(reg) !=  -1) {
+        e.target.value  =  e.target.value.replace(reg, '');
+    }
+
+    setSearchInput(e.target.value)
+  }
+
+  const enterInputHandler = (e: any) => {
+    if( e.keyCode === 13 ) {
+      if (isGenres) {
+        setSearchGenres(searchInput);
+      } else {
+        setSearchMovies(searchInput);
+      }
+    }
+  }
+
 
   const searchHandler = (e: any) => {
+    e.preventDefault();
+
     if (isGenres) {
-      setSearchGenres(e.target.value);
+      setSearchGenres(searchInput);
     } else {
-      setSearchMovies(e.target.value);
+      setSearchMovies(searchInput);
     }
   }
 
@@ -136,13 +187,21 @@ const Admin: FC = () => {
           )
           : <h3 className={style.subTitle}>Список фильмов</h3> 
         }
-        <input 
-          className={style.inputs} 
+        <div className={style.searchBlock}>
+          <input 
+          className={`${style.inputs} ${style.searchInput}`} 
           type="text" 
           placeholder='Поиск по названию...'
-          value = {isGenres ? searchGenres: searchMovies}
-          onChange={searchHandler}
+          value = {searchInput}
+          onChange={searchInputHandler}
+          onKeyUp={enterInputHandler}
         />
+          <button 
+            className={`${style.actionBtn} ${style.searchBtn}`}
+            onClick={searchHandler}
+            >Искать</button>
+        </div>
+        
 
         <ul className={style.list}>
         {isGenres 

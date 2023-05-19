@@ -1,7 +1,7 @@
 interface IGenres {
   genreId: number,
   name: string,
-  enname: null|string
+  enName: null|string
 } 
 
 export const searchInCatalog = (catalog: IGenres[], searchText: string) => {

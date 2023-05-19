@@ -36,7 +36,7 @@ interface IFilms {
 interface IGenres {
   genreId: number,
   name: string,
-  enname: null|string
+  enName: null|string
 } 
 
 interface IGenreItem {

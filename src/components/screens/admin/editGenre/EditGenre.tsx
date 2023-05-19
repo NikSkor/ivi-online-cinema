@@ -17,13 +17,14 @@ interface IGenreItem {
 interface IGenres {
   genreId: number,
   name: string,
-  enname: null|string
+  enName: null|string
 } 
 
 const EditGenre: FC = () => {
 
   const id: number = useAppSelector(state => state.admin.genreId);
   const genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
+  // console.log('genresCatalog: ', genresCatalog);
   const [modalActive, setModalActive] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
@@ -56,7 +57,7 @@ const EditGenre: FC = () => {
       genreItem = {
         id: item.genreId,
         name: item.name,
-        enName: item.enname !== null ? item.enname : ''
+        enName: item.enName !== null ? item.enName : ''
       }
       // Object.assign(genreItem, item);
       // dispatch(addGenreValues(genreItem));
@@ -67,7 +68,7 @@ const EditGenre: FC = () => {
 
   const titleName = genreItem.name.slice();
 
-  console.log('genreItem: ',genreItem);
+  // console.log('genreItem: ',genreItem);
 
 // useEffect(()=> {
 //   window.localStorage.setItem('genreItem', JSON.stringify(genreItem));
@@ -110,7 +111,7 @@ const EditGenre: FC = () => {
   }
 
   let data = JSON.stringify(genreValues); 
-  console.log('data: ', data);
+  // console.log('data: ', data);
 
   const headers = {
     'Content-type': 'application/json',

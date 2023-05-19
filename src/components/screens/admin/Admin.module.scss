@@ -95,8 +95,6 @@
   height: 40px;
   padding: 12px 12px;
 
-  margin-bottom: 20px;
-
   border: solid 1px $btn_bg;
   background-color: $btn_bg;
   border-radius: 8px;
@@ -149,4 +147,17 @@
     background-color: $btn_hover;
     border-color: $btn_hover;
   }
+}
+
+.searchBlock {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+
+.searchBtn {
+  font-size: 12px;
+  width: 150px;
+  height: 41px;
 }

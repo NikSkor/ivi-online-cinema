@@ -3,7 +3,6 @@ import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './EditMovie.module.scss';
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Link from "next/link";
-import { addFilmValues } from '@/store/slices/adminSlice';
 import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import axios from "axios";
 import { API_URL_PATCH_MOVIES } from "../API/const";
@@ -87,7 +86,7 @@ const EditMovie: FC = () => {
   // dispatch(addFilmValues(filmValues));
 
   let data = JSON.stringify(filmValues); 
-  console.log('data: ', data);
+  // console.log('data: ', data);
 
   const headers = {
     'Content-type': 'application/json',
