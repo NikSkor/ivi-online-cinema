@@ -3,14 +3,12 @@ import style from './UserSwitch.module.scss';
 import { useAppDispatch } from "@/store/hooks";
 import { newPage } from "@/store/slices/adminSlice";
 
-
 interface ISwitch {
   isTrue: boolean,
   firstTitle: string,
   secondTitle: string,
   isGenres: Function
 }
-
 
 const UserSwitch: FC<ISwitch> = ({firstTitle, secondTitle, isTrue, isGenres}) => {
 

@@ -1,0 +1,28 @@
+.preload {
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+
+  &:after {
+    content: '';
+    position: absolute;
+    width: 56px;
+    height: 56px;
+    top: calc(50% - 28px);
+    left: calc(50% - 28px);
+    border: 12px double #F6F3E3;
+    border-radius: 50%;
+    border-left-style: solid;
+    animation: rotate 0.6s infinite linear;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}

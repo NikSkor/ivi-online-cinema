@@ -6,58 +6,47 @@ import trashImg from '../../../../public/trash.svg';
 import { API_URL_GET_GENRES, API_URL_GET_MOVIES} from "./API/const";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addFilms, addGenres, addGenresSize } from "@/store/slices/adminSlice";
+import { addFilms, addGenres} from "@/store/slices/adminSlice";
 import { paginateCatalog } from "./functions/paginateCatalog";
 import Pagination from "@/components/screens/admin/Pagination/Pagination";
 import UserSwitch from "@/components/screens/admin/UserSwitch/UserSwitch";
 import { searchInCatalog } from "./functions/searchInCatalog";
-import CrudBlock from "./GenreBlock/CrudBlock";
-
-interface IGenres {
-  genreId: number,
-  name: string,
-  enName: null|string
-} 
-
-interface IFilms {
-  ageRating: null|number,
-  countries: [],
-  description: string,
-  enName: null|string,
-  genres: [],
-  movieId: number,
-  movieLength: number,
-  name: string,
-  persons: {},
-  poster: string,
-  premiere: string,
-  rating: number,
-  shortDescription: null|string,
-  slogan: string,
-  trailer: string,
-  type: string,
-  votes: number
-}
+import CrudBlock from "@/components/screens/admin/GenreBlock/CrudBlock";
+import Preloader from "@/components/screens/admin/Preloader/Preloader";
+import { IFilms, IGenres } from "./interfaces/interfaces";
+import { type } from "os";
 
 const Admin: FC = () => {
 
   let [searchGenres, setSearchGenres] = useState('');
   let [searchMovies, setSearchMovies] = useState('');
   let [searchInput, setSearchInput] = useState('');
-
-
-
-
+  let [isLoaded, setIsLoaded] = useState(false);
   let [isGenres, setIsGenres] = useState(true);
   const pageNumber: number = useAppSelector(state => state.admin.page);
 
-  // console.log('isGenres: ', isGenres);
+  useEffect(()=> {
+    localStorage.setItem('switch', JSON.stringify(isGenres));
+  });
+
+  useEffect(()=> {
+    const data = localStorage.getItem('switch');
+    if(typeof data === 'string') {
+      let item = JSON.parse(data);
+      if (item) {
+      setIsGenres(item);
+    }
+    }
+  }, [isGenres]);
 
   const unpdateIsGenres = (value: boolean) => {
     setIsGenres(value);
+    setSearchInput('');
+    setSearchGenres('');
+    setSearchMovies('');
+    setIsLoaded(false);
   }
     
-
   const updatePage = () => {
     window.scrollTo({
       top: 0,
@@ -68,28 +57,20 @@ const Admin: FC = () => {
 
   let dispatch = useAppDispatch();
   let genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
-  console.log('genresCatalog: ', genresCatalog);
   let filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
-  console.log('filmsCatalog: ', filmsCatalog);
 
-  
   useEffect(() => {
     if(isGenres) {
       const loadGenreList = async() => {
         try {
           const response = await axios.get(API_URL_GET_GENRES);
           dispatch(addGenres(response.data));
+          setIsLoaded(true);
+
         } catch (e: any) {
             console.log(`Axios request failed: ${e}`);
         }
       }
-
-
-    //   axios.get(API_URL_GET_GENRES).then((response) => {
-    //   dispatch(addGenres(response.data));
-    //   // console.log('response.data: ', response.data);
-    //   dispatch(addGenresSize());
-    // });
       loadGenreList();
     }
     
@@ -104,6 +85,7 @@ const Admin: FC = () => {
         const response = await axios.get(`${API_URL_GET_MOVIES}?page=${pageNumber}&search=${search}`);
         console.log('Returned data:', response);
         dispatch(addFilms(response.data));
+        setIsLoaded(true);
         } catch (e: any) {
           console.log(`Axios request failed: ${e}`);
           setSearchMovies('');
@@ -111,23 +93,9 @@ const Admin: FC = () => {
       }
 
       loadMovieList();
-
-
-    //   axios.get(`${API_URL_GET_MOVIES}?page=${pageNumber}&search=${search}`).then((response) => {
-    //   // dispatch(addGenres(response.data));
-    //   console.log('response.data: ', response);
-    //   if(response.status !== 200) alert('zuzu');
-    //   dispatch(addFilms(response.data));
-    // });
     }
     
   }, [dispatch,search,isGenres, pageNumber]);
-
-      // console.log('filmCatalog: ', filmCatalog);
-
-  // console.log('filmsCatalog: ', filmsCatalog);
-
-
 
   let filteredCatalog: IGenres[] = searchInCatalog(genresCatalog, searchGenres);
 
@@ -153,12 +121,15 @@ const Admin: FC = () => {
       } else {
         setSearchMovies(searchInput);
       }
+      setIsLoaded(false);
     }
   }
 
 
   const searchHandler = (e: any) => {
     e.preventDefault();
+
+    setIsLoaded(false);
 
     if (isGenres) {
       setSearchGenres(searchInput);
@@ -203,35 +174,36 @@ const Admin: FC = () => {
         </div>
         
 
-        <ul className={style.list}>
-        {isGenres 
-          ? paginatedGenresCatalog.map((item)=> {
-            return (
-              <CrudBlock 
-                key={item.genreId} 
-                item={{
-                  id: item.genreId,
-                  name: item.name
-                }}  
-                adress={'/admin/genre/'}>
-                <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
-              </CrudBlock>
-            )
-          })
-          : filmsCatalog.map((item)=> {
-            return (
-              <CrudBlock 
-                key={item.movieId} 
-                item={{
-                  id: item.movieId,
-                  name: item.name
-                }}  
-                adress={'/admin/film/'}>
-                <Image src={trashImg} data-id={item.movieId} alt="Значок очистки"/>
-              </CrudBlock>
-            )
-          })
-        }
+        <ul className={`${style.list}`}>
+          {!isLoaded && <Preloader/>}
+          {isGenres 
+            ? paginatedGenresCatalog.map((item)=> {
+              return (
+                <CrudBlock 
+                  key={item.genreId} 
+                  item={{
+                    id: item.genreId,
+                    name: item.name
+                  }}  
+                  adress={'/admin/genre/'}>
+                  <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
+                </CrudBlock>
+              )
+            })
+            : filmsCatalog.map((item)=> {
+              return (
+                <CrudBlock 
+                  key={item.movieId} 
+                  item={{
+                    id: item.movieId,
+                    name: item.name
+                  }}  
+                  adress={'/admin/film/'}>
+                  <Image src={trashImg} data-id={item.movieId} alt="Значок очистки"/>
+                </CrudBlock>
+              )
+            })
+          }
         {isGenres
           ? <Pagination pagesSum={pages} pageActive={pageNumber} getPage={updatePage}/>
           : <Pagination pagesSum={10} pageActive={pageNumber} getPage={updatePage}/>

@@ -6,33 +6,7 @@ import Link from "next/link";
 import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import axios from "axios";
 import { API_URL_PATCH_MOVIES } from "../API/const";
-
-
-interface IFilmItem {
-  id: number,
-  name: string,
-  enName: string,
-}
-
-interface IFilms {
-  ageRating: null|number,
-  countries: [],
-  description: string,
-  enName: null|string,
-  genres: [],
-  movieId: number,
-  movieLength: number,
-  name: string,
-  persons: {},
-  poster: string,
-  premiere: string,
-  rating: number,
-  shortDescription: null|string,
-  slogan: string,
-  trailer: string,
-  type: string,
-  votes: number
-}
+import { IFilmItem, IFilms } from "../interfaces/interfaces";
 
 const EditMovie: FC = () => {
 
@@ -53,8 +27,6 @@ const EditMovie: FC = () => {
   if (id !== undefined) {
     filmsCatalog.forEach((item) => {
     if (item.movieId === +id) {
-      // Object.assign(filmItem, item);
-      // dispatch(addFilmValues(filmItem));
       filmItem = {
         id: item.movieId,
         name: item.name,
@@ -66,6 +38,7 @@ const EditMovie: FC = () => {
 
   let [name, setName] = useState(filmItem.name);
   let [enName, setEnName] = useState(filmItem.enName);
+  let [isValidName, setIsValidName] = useState(true);
 
 
   let resetHandler = (e: any) => {
@@ -78,32 +51,35 @@ const EditMovie: FC = () => {
   let submitHandler = async (e: any) => {
     e.preventDefault();
 
-    let filmValues: IFilmItem = {
-    id: id,
-    name: name,
-    enName: enName,
-  }
-  // dispatch(addFilmValues(filmValues));
+    if (name === '') {
+      setIsValidName(false);
+      setModalActive(true);
+    } else {
+      let filmValues: IFilmItem = {
+        id: id,
+        name: name,
+        enName: enName,
+      }
 
-  let data = JSON.stringify(filmValues); 
-  // console.log('data: ', data);
+      let data = JSON.stringify(filmValues); 
 
-  const headers = {
-    'Content-type': 'application/json',
-    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MjUxNjIzOTAyMiwiaXNBZG1pbiI6dHJ1ZX0.f1EOoLCXMQPDGD0s9QaO5tkWTsH77lDXpNdAgp_Q-1s'
-  }
+      const headers = {
+        'Content-type': 'application/json',
+        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MjUxNjIzOTAyMiwiaXNBZG1pbiI6dHJ1ZX0.f1EOoLCXMQPDGD0s9QaO5tkWTsH77lDXpNdAgp_Q-1s'
+      }
 
-  try {
-  const response = await axios.patch(`${API_URL_PATCH_MOVIES}${id}`, data, {
-    headers: headers
-  });
-  console.log('Returned data:', response);
-  setModalMessage(`Фильм "${filmItem.name}" обновлён.`);
-  } catch (e: any) {
-    console.log(`Axios request failed: ${e}`);
-    setModalMessage(e.message.toString());
-  }
-  setModalActive(true);
+      try {
+      const response = await axios.patch(`${API_URL_PATCH_MOVIES}${id}`, data, {
+        headers: headers
+      });
+        console.log('Returned data:', response);
+        setModalMessage(`Фильм "${filmItem.name}" обновлён.`);
+      } catch (e: any) {
+        console.log(`Axios request failed: ${e}`);
+        setModalMessage(e.message.toString());
+      }
+      setModalActive(true);
+    }
   }
 
 
@@ -146,7 +122,8 @@ const EditMovie: FC = () => {
           </button>
         </Link>
         </section>
-        <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>
+        {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
+        {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
       </div>
   )
 }

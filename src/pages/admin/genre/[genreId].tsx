@@ -1,10 +1,9 @@
-import { NextPage } from 'next'
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Layout from '@/components/layout/Layout';
 import { useAppDispatch } from '@/store/hooks';
 import { addGenreId} from '@/store/slices/adminSlice';
 import EditGenre from '@/components/screens/admin/editGenre/EditGenre';
-// import { addId } from '../../store/slices/adminSlice';
 
 
 const GenreEditPage: NextPage = () => {

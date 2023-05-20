@@ -1,5 +1,6 @@
 import { changeFirstChar } from '@/components/screens/admin/functions/changeFirstChar';
 import { sortByName } from '@/components/screens/admin/functions/sortByName';
+import { IFilms, IGenres } from '@/components/screens/admin/interfaces/interfaces';
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
 interface UserState {
@@ -13,43 +14,17 @@ interface UserState {
   genresSize: number
 }
 
-interface IFilms {
-  ageRating: null|number,
-  countries: [],
-  description: string,
-  enName: null|string,
-  genres: [],
-  movieId: number,
-  movieLength: number,
-  name: string,
-  persons: {},
-  poster: string,
-  premiere: string,
-  rating: number,
-  shortDescription: null|string,
-  slogan: string,
-  trailer: string,
-  type: string,
-  votes: number
-}
+// interface IGenreItem {
+//   id: number,
+//   name: string,
+//   enName: string,
+// }
 
-interface IGenres {
-  genreId: number,
-  name: string,
-  enName: null|string
-} 
-
-interface IGenreItem {
-  id: number,
-  name: string,
-  enName: string,
-}
-
-interface IFilmItem {
-  id: number,
-  name: string,
-  enName: string,
-}
+// interface IFilmItem {
+//   id: number,
+//   name: string,
+//   enName: string,
+// }
 
 
 
@@ -117,6 +92,10 @@ export const adminSlice = createSlice({
       state.genresSize = 0;
       state.genresSize = state.genres.length;
     },
+    // clearAdminSwitch(state) {
+    //   state.genres.length = 0;
+    //   state.films.length = 0;
+    // }
   }
 });
 
