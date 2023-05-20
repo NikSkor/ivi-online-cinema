@@ -1,5 +1,6 @@
 .weeklyTop {
 
+
   .title {
     margin-top: 24px;
     margin-bottom: 14px;
@@ -15,7 +16,6 @@
     }
   }
   .carousel {
-
     .poster {
       padding-top: 12px;
       padding-bottom: 20%;
@@ -29,22 +29,35 @@
       .imageWrapper {
         position: relative;
         border-radius: 8px;
-
+        margin: 0 5%;
+        
         &>img {
           border-radius: 8px;
+          width: 100%;
         }
 
+        @media (max-width: 1075px) {
+          width: 80%;
+        }
+
+        @media (max-width: 750px) {
+          width: 90%;
+        }
+
+        @media (max-width: 600px) {
+          width: 93%;
+        }
 
         .imageLogoArea {
           bottom: 12%;
           height: 21.05263158%;
-          left: 5%;
+          left: 24px;
           position: absolute;
-          right: 18%;
+          right: 24px;
           z-index: 1;
 
-          align-items: flex-end;
           display: flex;
+          align-items: flex-end;
           justify-content: center;
 
         }

@@ -3,7 +3,7 @@ import styles from './Category.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import SliderItem from './Slider/SliderItem/SliderItem'
+import SliderItem from './SliderItem/SliderItem'
 
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
@@ -70,7 +70,9 @@ const Category: FC<CategoryProps> = ({ title, items }) => {
           items.map((film, index) => <SliderItem key={`film-${index}`} film={film} />)
         }
         <div className={styles.seeMore}>
+          <div>
           <p>Посмотреть все</p>
+          </div>
         </div>
       </Slider>
     </div>

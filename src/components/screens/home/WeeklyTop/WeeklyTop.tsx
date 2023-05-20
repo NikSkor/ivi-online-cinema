@@ -7,12 +7,32 @@ import { useRouter } from 'next/router';
 
 const WeeklyTop = () => {
   const settings = {
-    dots: true,
+    dots: false,
     infinite: false,
     speed: 500,
-    // slidesToShow: width > 1160 ? 5 : width > 880 ? 4 : width > 600 ? 3 : 2,
     slidesToShow: 5,
-    slidesToScroll: 3
+    slidesToScroll: 3,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 4
+        }
+      },
+      {
+        breakpoint: 1075,
+        settings: {
+          slidesToShow: 3
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2
+        }
+      }
+    ]
   };
 
 

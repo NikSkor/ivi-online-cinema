@@ -40,8 +40,10 @@ const SliderItem: FC<{ film: IFilmographyItem }> = ({ film }) => {
             </div>
           </div>
         </div>
-        <p className={styles.name}>{truncateText(film.name, 15, 'break-word')}</p>
-        <span>Бесплатно</span>
+        <div className={styles.text}>
+          <p className={styles.name}>{truncateText(film.name, 15, 'break-word')}</p>
+          <span>Бесплатно</span>
+        </div>
       </Link>
     </div>
   )
