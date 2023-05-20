@@ -5,10 +5,13 @@ import Footer from "./footer/Footer"
 import Header from "./header/Header"
 import MobileFooter from "./MobileFooter/MobileFooter"
 import axios from "axios"
+import { useAppDispatch } from "@/store/hooks"
+import { checkAuth } from "@/store/slices/userSlice"
 
 const Layout: FC<PropsWithChildren<IMeta>> = ({children, title, description}) => {
   const [genres, setGenres] = useState([])
   const [countries, setCountries] = useState([])
+  const dispatch = useAppDispatch()
   useEffect(() => {
     const getGenres = async () => {
       try {
@@ -30,7 +33,12 @@ const Layout: FC<PropsWithChildren<IMeta>> = ({children, title, description}) =>
 
     getGenres()
     getCountries()
+    
+    if(localStorage.getItem('token')) {
+      dispatch(checkAuth())
+    }
   }, [])
+
   return (
     <Meta title={title} description={description}>
       <Header genres={genres} countries={countries}/>

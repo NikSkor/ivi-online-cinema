@@ -7,7 +7,6 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 
-import { filmographyData } from '@/components/ui/filmography/filmography.data'
 
 const Home: FC = () => {
   const [isClauseOpen, setIsClauseOpen] = useState(false)
@@ -23,10 +22,12 @@ const Home: FC = () => {
   useEffect(() => {
     const getDramas = async () => {
       try {
+        const genreResponse = await axios.get('http://localhost:5000/api/movie/genre')
+        const genre = genreResponse.data.find((genre: any) => genre.genreId === 1)
         const response = await axios.get('http://localhost:5000/api/movie', {
           params: {
             page: 1,
-            genres:["боевик"],
+            genres: genre.name,
             rating: 8
           }
         })

@@ -1,0 +1,89 @@
+@import '/src/styles/vars.scss';
+
+.authForm {
+  margin: 0 auto;
+  margin-top: 24px;
+
+  .authIcons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 8px;
+    padding: 0px 5px;
+
+    img {
+      cursor: pointer;
+    }
+  }
+
+  .inputBlock {
+    position: relative;
+    &:not(:first-of-type) {
+      margin-top: 10px;
+    }
+    input {
+      display: block;
+      padding: 11px 11px 11px 36px;
+      width: 280px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.8);
+      color: rgb(0, 0, 0);
+
+      &::placeholder {
+        font-weight: bold;
+        color:rgba(4, 5, 10, 0.3)
+      }
+    }
+
+    svg, img {
+      width: 25px;
+      height: 20px;
+      position: absolute;
+      top: 30%;
+      left: 7px;
+    }
+  }
+
+  .isReg {
+    font-size: 12px;
+    margin-top: 5px;
+
+    span {
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  }
+  button {
+    background-color: #ea003d;
+    padding: 10px 15px;
+    width: 280px;
+    border-radius: 8px;
+    margin-top: 15px;
+    font-weight: bold;
+
+    &:disabled {
+      background-color: rgba(234, 0, 61, 0.4);
+      color: rgba(255, 255, 255, 0.4);
+      cursor: default;
+    }
+  }
+
+  .rules {
+    margin-top: 24px;
+    font-size: 12.2px;
+    color: #a5a1b2;
+    letter-spacing: 0.2px;
+
+    span {
+      color: #fff;
+      cursor: pointer;
+      transition: .2s;
+      box-shadow: 0 2px 0 $lightGray, inset 0 0 0 $lightGray;
+    
+      &:hover {
+        box-shadow: 0 0 0 $lightGray, inset 0 -1.5em 0 $lightGray;
+      }
+    }
+  }
+}

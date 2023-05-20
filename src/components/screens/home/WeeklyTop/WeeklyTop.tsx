@@ -71,16 +71,18 @@ const WeeklyTop = () => {
         <Image src="/top10.svg" width={116} height={50} alt="top" />
         <span>{locale === 'ru' ? 'за неделю' : 'of the week'}</span>
       </div>
+      <div className={styles.carousel}>
       <Slider {...settings}>
         {
           posters.map((element, index) =>
             <div key={index} className={styles.poster}>
               <div className={styles.imageWrapper}>
-                <img src={element.poster} width={224} alt="q" />
+                <img src={element.poster} width={214} alt="q" />
                 <div className={styles.imageLogoArea}>
                   <img src={element.logo} alt="" />
                 </div>
                 <div className={styles.imageFade}></div>
+                <div className={styles.imageFadeFooter}></div>
                 {index + 1 === 1 &&
                   <div className={styles.number}>
                     <img src='numbers/number1.svg' />
@@ -136,6 +138,7 @@ const WeeklyTop = () => {
           )
         }
       </Slider>
+      </div>
     </div>
   )
 }

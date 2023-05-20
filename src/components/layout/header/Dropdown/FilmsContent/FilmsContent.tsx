@@ -17,7 +17,7 @@ const FilmsContent:FC<IFilmsContent> = ({ genres, countries }) => {
         <p className={styles.title}>{locale === 'ru' ? 'Жанры' : 'Genres'}</p>
         <div className={styles.genreList}>
           {
-            genres.map(genre => <Link href={`/movies/${genre}`}>{genre.name}</Link>)
+            genres.map(genre => <Link key={genre.name} href={`/movies/${genre}`}>{genre.name}</Link>)
           }
         </div>
       </div>
@@ -31,7 +31,7 @@ const FilmsContent:FC<IFilmsContent> = ({ genres, countries }) => {
         <div className={`${styles.years} ${styles.filmSection}`}>
           <p className={styles.title}>{locale === 'ru' ? 'Годы' : 'Years'}</p>
           {
-            years.map(year => <Link href={`/movies/${year}`}>{locale === 'ru' ? `Фильмы ${year} года` : `Films of ${year}` }</Link>)
+            years.map(year => <Link key={year} href={`/movies/${year}`}>{locale === 'ru' ? `Фильмы ${year} года` : `Films of ${year}` }</Link>)
           }
         </div>
       </div>
