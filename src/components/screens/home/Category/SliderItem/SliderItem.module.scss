@@ -1,6 +1,7 @@
 .sliderItem {
   border-radius: 8px;
   width: 88%;
+  padding-top: 10px;
 
 
   &:hover {
@@ -8,18 +9,15 @@
       opacity: 1;
       visibility: visible;
     }
+
+    .image {
+      transform: translateY(-10px);
+    }
   }
 
   .image {
-    padding-top: 10px;
     position: relative;
     transition: 0.4s;
-
-    
-
-    &:hover {
-      transform: translateY(-10px);
-    }
     
     img {
       border-radius: 8px;
@@ -45,6 +43,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
   
     .iconsBlock {
       position: absolute;
@@ -58,6 +57,10 @@
         &:not(:last-of-type) {
           margin-bottom: 10px;
         }  
+      }
+
+      @media (max-width: 1160px) {
+        display: none;
       }
     }
   

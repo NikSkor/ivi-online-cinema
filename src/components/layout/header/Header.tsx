@@ -6,6 +6,7 @@ import Dropdown from './Dropdown/Dropdown'
 import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import { useAppSelector } from '@/store/hooks'
 interface IHeader {
   genres: any[]
   countries: any[]
@@ -19,6 +20,8 @@ const Header:FC<IHeader> = ({ genres, countries }) => {
   const isDropdownOpen = isNotificationsOpen || isProfileOpen || isFilmsOpen
 
   const locale = useRouter().locale
+  const isAuth = useAppSelector(state => state.auth.isAuth)
+  const user = useAppSelector(state => state.auth.user)
 
 
   const notificationHandler = () => {
@@ -75,14 +78,20 @@ const Header:FC<IHeader> = ({ genres, countries }) => {
           <svg onMouseEnter={notificationHandler} className={styles.notificationLink} fill="#FFFFFF" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="25px" height="25px"><path d="M 32 10 C 29.662 10 28.306672 11.604938 27.638672 13.085938 C 24.030672 13.809937 17.737984 16.956187 16.958984 24.742188 C 16.665984 29.334188 16.1185 37.883781 13.0625 39.300781 C 12.8505 39.398781 12.655234 39.533219 12.490234 39.699219 C 12.235234 39.954219 10 42.294 10 46 C 10 47.104 10.896 48 12 48 L 25.257812 48 C 25.652433 51.372928 28.522752 54 32 54 C 35.477248 54 38.347567 51.372928 38.742188 48 L 52 48 C 53.104 48 54 47.104 54 46 C 54 42.294 51.764766 39.954219 51.509766 39.699219 C 51.344766 39.534219 51.1495 39.397828 50.9375 39.298828 C 47.8825 37.881828 47.333203 29.333922 47.033203 24.669922 C 46.258203 16.945922 39.966375 13.806984 36.359375 13.083984 C 35.692375 11.603984 34.338 10 32 10 z M 32 14 C 32.603 14 32.766719 14.619859 32.886719 15.255859 C 33.063719 16.190859 33.884422 16.914062 34.857422 16.914062 C 34.931422 16.914063 42.311828 17.650047 43.048828 24.998047 C 43.557828 32.932047 44.389891 40.250797 48.837891 42.716797 C 49.024891 42.956797 49.333937 43.401 49.585938 44 L 14.414062 44 C 14.667063 43.397 14.976203 42.95375 15.158203 42.71875 C 19.609203 40.25475 20.442312 32.935313 20.945312 25.070312 C 21.688313 17.650312 29.068578 16.914062 29.142578 16.914062 C 30.099578 16.914062 30.934375 16.156391 31.109375 15.275391 C 31.232375 14.660391 31.396 14 32 14 z M 29.335938 48 L 34.664062 48 C 34.319789 49.152328 33.262739 50 32 50 C 30.737261 50 29.680211 49.152328 29.335938 48 z" /></svg>
         </div>
 
-        <div className={`${styles.avatar} ${styles.headerIcon}`} onMouseEnter={profileHandler}>
-          <div className={styles.avatarButton}>
-            <svg className={styles.avatarLink} width="25" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2C9.243 2 7 4.243 7 7C7 9.757 9.243 12 12 12C14.757 12 17 9.757 17 7C17 4.243 14.757 2 12 2ZM12 10C10.346 10 9 8.654 9 7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7C15 8.654 13.654 10 12 10ZM21 21V20C21 16.141 17.859 13 14 13H10C6.14 13 3 16.141 3 20V21H5V20C5 17.243 7.243 15 10 15H14C16.757 15 19 17.243 19 20V21H21Z" />
-            </svg>
-
-          </div>
-        </div>
+        {isAuth ? (
+              <div className={styles.authProfileLink} onMouseEnter={profileHandler}>
+                <p>{user?.username[0].toUpperCase()}</p>
+              </div>
+            ) :(
+              <div className={`${styles.avatar} ${styles.headerIcon}`} onMouseEnter={profileHandler}>
+              <div className={styles.avatarButton}>
+             
+                  <svg className={styles.avatarLink} width="25" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C9.243 2 7 4.243 7 7C7 9.757 9.243 12 12 12C14.757 12 17 9.757 17 7C17 4.243 14.757 2 12 2ZM12 10C10.346 10 9 8.654 9 7C9 5.346 10.346 4 12 4C13.654 4 15 5.346 15 7C15 8.654 13.654 10 12 10ZM21 21V20C21 16.141 17.859 13 14 13H10C6.14 13 3 16.141 3 20V21H5V20C5 17.243 7.243 15 10 15H14C16.757 15 19 17.243 19 20V21H21Z" />
+                </svg> 
+              </div>
+            </div>
+            )}
       </div>
       <Dropdown 
       isProfileOpen={isProfileOpen} 

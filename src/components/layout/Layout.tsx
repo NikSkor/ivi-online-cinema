@@ -6,7 +6,7 @@ import Header from "./header/Header"
 import MobileFooter from "./MobileFooter/MobileFooter"
 import axios from "axios"
 import { useAppDispatch } from "@/store/hooks"
-import { checkAuth } from "@/store/slices/userSlice"
+import { checkAuth } from "@/store/slices/authSlice"
 
 const Layout: FC<PropsWithChildren<IMeta>> = ({children, title, description}) => {
   const [genres, setGenres] = useState([])

@@ -15,7 +15,7 @@ const Auth: FC = () => {
   const [authProgress, setAuthProgress] = useState<number>(5)
   const locale = useRouter().locale
   
-  const isAuth = useAppSelector(state => state.user.isAuth)
+  const isAuth = useAppSelector(state => state.auth.isAuth)
   if (useRouter().query.accessToken && useRouter().query.refreshToken) {
     const params: any = useRouter().query
     localStorage.setItem('token', params.accessToken)

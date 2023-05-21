@@ -3,12 +3,12 @@ import MenuList from "./MenuList/MenuList"
 import styles from "./ProfileContent.module.scss"
 import { useRouter } from "next/router"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
-import { logout } from "@/store/slices/userSlice"
+import { logout } from "@/store/slices/authSlice"
 
 const ProfileContent = () => {
 
-	const isAuth = useAppSelector(state => state.user.isAuth)
-	const user = useAppSelector(state => state.user.user)
+	const isAuth = useAppSelector(state => state.auth.isAuth)
+	const user = useAppSelector(state => state.auth.user)
 	const locale = useRouter().locale
 	const dispatch = useAppDispatch()
 

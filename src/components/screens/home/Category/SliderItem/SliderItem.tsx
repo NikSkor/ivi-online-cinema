@@ -4,7 +4,8 @@ import Image from 'next/image'
 import { IFilmographyItem } from '@/interfaces/person/IFilmographyItem'
 import { truncateText } from '@/functions/truncateText'
 import Link from 'next/link'
-const SliderItem: FC<{ film: any }> = ({ film }) => {
+import { IMovie } from '@/interfaces/IMovie'
+const SliderItem: FC<{ film: IMovie }> = ({ film }) => {
   return (
     <div className={styles.sliderItem}>
       <Link href="/">
@@ -26,7 +27,7 @@ const SliderItem: FC<{ film: any }> = ({ film }) => {
               </div>
             </div>
             <div className={styles.infoBlock}>
-              <p className={styles.score}>{film.rating}</p>
+              <p className={styles.score}>{film.rating.toFixed(1)}</p>
               <div className={styles.property}>
                 <p>сюжет</p>
               <div className={styles.progressBar}>
@@ -34,8 +35,8 @@ const SliderItem: FC<{ film: any }> = ({ film }) => {
               </div>
               </div>
               <div className={styles.filmTags}>
-                <p>2014-2016, США, Сериалы</p>
-                <p>180 минут</p>
+                <p>{`${film.premiere.split('-')[0]}`}, {film.countries[0].name}, {film.type === 'movie' && 'фильм'}</p>
+                <p>{film.movieLength} минут</p>
               </div>
             </div>
           </div>

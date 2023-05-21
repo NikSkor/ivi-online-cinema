@@ -1,6 +1,6 @@
 import Auth from "@/components/screens/auth/Auth";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { checkAuth } from "@/store/slices/userSlice";
+import { checkAuth } from "@/store/slices/authSlice";
 import { NextPage } from "next";
 import { useEffect } from "react";
 
@@ -11,7 +11,7 @@ const AuthPage: NextPage = () => {
       dispatch(checkAuth())
     }
   }, [])
-  const isAuth = useAppSelector(state => state.user.isAuth)
+  const isAuth = useAppSelector(state => state.auth.isAuth)
   isAuth ? window.location.href="/" : null
   return(
     <>

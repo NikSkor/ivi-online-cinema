@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { useRouter } from "next/router";
 
 import type { AppThunk, RootState } from "../store";
-import { IUser } from "@/models/IUser";
+import { IUser } from "@/interfaces/IUser";
 import axios from "axios";
 import AuthService from "@/services/AuthService";
 import { AuthResponse } from "@/models/response/AuthResponse";
@@ -79,7 +79,7 @@ const initialState: userState = {
   isAuth: false
 }
 
-export const userSlice = createSlice({
+export const authSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
@@ -147,9 +147,9 @@ export const userSlice = createSlice({
   }
 })
 
-export const { setUser } = userSlice.actions;
+export const { setUser } = authSlice.actions;
 
 // export const selectGenres = (state: RootState) => state.filters.genres
 
 
-export const userReducer =  userSlice.reducer;
+export const authReducer =  authSlice.reducer;

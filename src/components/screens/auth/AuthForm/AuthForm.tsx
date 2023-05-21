@@ -3,7 +3,7 @@ import styles from './AuthForm.module.scss'
 import { useRouter } from 'next/router'
 import axios, { AxiosError } from 'axios'
 import AuthService from '@/services/AuthService'
-import { login, registration } from "@/store/slices/userSlice"
+import { login, registration } from "@/store/slices/authSlice"
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 
@@ -41,8 +41,6 @@ export default function AuthForm() {
       (loginValue.length > 0 && passwordValue.length > 0)  ? setIsButtonDisabled(false) : setIsButtonDisabled(true)
     }
   }, [loginValue, passwordValue, nameValue])
-
-  const isAuth = useAppSelector(state => state.user.isAuth)
 
   return (
     <div className={styles.authForm}>
@@ -84,7 +82,6 @@ export default function AuthForm() {
               <p>{locale === 'ru' ? 'с ' : 'with '}<span>{locale === 'ru' ? 'Политикой конфиденциальности' : 'Privacy Policy'}</span></p>
               <p>{locale === 'ru' ? 'и ' : 'and '}<span>{locale === 'ru' ? 'Пользовательским соглашением' : 'User Agreement'}</span></p>
             </div>
-            {isAuth ? <p>ты авторизован</p> : <p>ты не авторизован</p>}
     </div>
   )
 }
