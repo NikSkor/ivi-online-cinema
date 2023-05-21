@@ -16,15 +16,17 @@ const Auth: FC = () => {
   const locale = useRouter().locale
   
   const isAuth = useAppSelector(state => state.user.isAuth)
+  if (useRouter().query.accessToken && useRouter().query.refreshToken) {
+    const params: any = useRouter().query
+    localStorage.setItem('token', params.accessToken)
+    localStorage.setItem('token/refresh', params.refreshToken)
+    window.location.href = "/"
+  }
+
 
 
   return (
     <div className={styles.authPage}>
-      {
-        isAuth && (
-           window.location.href="/"
-        )
-      }
       <header>
         <p>{locale === 'ru' ? 'Вход или регистрация' : 'Login or registration'}</p>
         <Link href="/">

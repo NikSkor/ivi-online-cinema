@@ -167,6 +167,7 @@ const Drawer = () => {
             <p>Мы всегда готовы вам помочь.</p>
             <p>Наши операторы онлайн 24/7</p>
             </div>
+            <div className={styles.buttons}>
             <button>Написать в чате</button>
             <div className={styles.icons}>
               <div className={styles.iconContainer}>
@@ -176,8 +177,11 @@ const Drawer = () => {
               <img src="/phone_icon.svg" width={20} height={20} alt="" />
               </div>
             </div>
+            </div>
+            <div className={styles.link}>
             <p>ask.ivi.ru</p>
             <span>Ответы на вопросы</span>
+            </div>
           </div>
         </div>
         <div className={styles.socials}>

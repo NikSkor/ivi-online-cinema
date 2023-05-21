@@ -18,6 +18,7 @@
     transition-property: opacity, height;
     transition-duration: 0.3s;
     
+    
 
     
     &::before {
@@ -33,6 +34,8 @@
         opacity: 1;
         visibility: visible;
         z-index: 1;
+
+        box-shadow: 0 20px 96px #12101b;
     }
 
     .dropdownBody {

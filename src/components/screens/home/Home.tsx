@@ -18,7 +18,6 @@ const Home: FC = () => {
   const enActor = 'Leonardo DiCaprio'
   
   const locale = useRouter().locale
-
   useEffect(() => {
     const getDramas = async () => {
       try {
@@ -31,7 +30,7 @@ const Home: FC = () => {
             rating: 8
           }
         })
-        setDramaMovies(response.data)
+        setDramaMovies(response.data.movies)
       } catch (error) {
         console.log(error)
       }
@@ -44,7 +43,7 @@ const Home: FC = () => {
             person: actor
           }
         })
-        setMoviesWithActor(response.data)
+        setMoviesWithActor(response.data.movies)
       } catch (error) {
         console.log(error)
       }
@@ -53,6 +52,7 @@ const Home: FC = () => {
     getDramas()
     getMoviesWithActor()
   }, [])
+  
   return (
     <Layout title="Онлайн-кинотеатр Иви">
       <main className={`${styles.main} container`}>

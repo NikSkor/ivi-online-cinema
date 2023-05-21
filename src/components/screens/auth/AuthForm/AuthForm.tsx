@@ -33,14 +33,6 @@ export default function AuthForm() {
     }
   }
 
-  const vkHandler = async () => {
-    try {
-      const response = await axios.get('http://localhost:5000/api/auth/vk/login')
-      console.log(response.data)
-    } catch (error) {
-      console.log(error)
-    }
-  }
 
   useEffect(() => {
     if (isReg) {
@@ -79,8 +71,12 @@ export default function AuthForm() {
             {isReg && <p className={styles.isReg}>Уже есть аккаунт? <span onClick={() => setIsReg(false)}>Авторизуйтесь!</span></p>}
             {!isReg && <p className={styles.isReg}>Нет аккаунта? <span onClick={() => setIsReg(true)}>Зарегистрируйтесь!</span></p>}
               <div className={styles.authIcons}>
-                <img onClick={vkHandler} src="/google-icon.svg" width={28} height={28} alt="" />
-                <img src="/vk-icon.svg" width={28} height={28} alt="" />
+                <a href="http://localhost:5000/api/auth/google/login">
+                <img src="/google-icon.svg" width={28} height={28} alt="" />
+                </a>
+                <a href="http://localhost:5000/api/auth/vk/login">
+                  <img src="/vk-icon.svg" width={28} height={28} alt="" />
+                </a>
             </div>
             <button onClick={authHandler} disabled={isButtonDisabled}>{locale === 'ru' ? 'Продолжить' : 'Continue'}</button>
             <div className={styles.rules}>

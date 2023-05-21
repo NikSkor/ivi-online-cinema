@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { IFilmographyItem } from '@/interfaces/person/IFilmographyItem'
 import { truncateText } from '@/functions/truncateText'
 import Link from 'next/link'
-const SliderItem: FC<{ film: IFilmographyItem }> = ({ film }) => {
+const SliderItem: FC<{ film: any }> = ({ film }) => {
   return (
     <div className={styles.sliderItem}>
       <Link href="/">

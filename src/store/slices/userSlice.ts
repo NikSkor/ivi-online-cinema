@@ -41,7 +41,8 @@ export const checkAuth = createAsyncThunk("user/checkAuth", async (_, {rejectWit
   try {
     const response = await axios.post('http://localhost:5000/api/auth/refresh', {}, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token/refresh')}`
+        Authorization: `Bearer ${localStorage.getItem('token/refresh')}`,
+        "Content-Type": "application/x-www- form-urlencoded; charset=utf-8"
       }
     })
 
@@ -52,6 +53,7 @@ export const checkAuth = createAsyncThunk("user/checkAuth", async (_, {rejectWit
 
     return user.data
   } catch (error:any) {
+    console.log('error')
     return rejectWithValue(error.response.data.message)
   }
 })

@@ -90,7 +90,7 @@
     }
 
     .navigationItem {
-      margin-top: 15px;
+      margin-top: 25px;
       font-size: 15px;
       font-style: normal;
       font-weight: 700;
@@ -191,25 +191,25 @@
 
     .choiceDevice {
       margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
       button {
         background-color: #1f1b2e;
         border-radius: 8px;
-        height: 40px;
         width: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         gap: 11px;
+        height: 40px;
 
         text-align: start;
 
         img {
           width: 20px;
           height: 20px;
-        }
-
-        &:not(:first-of-type) {
-          margin-top: 12px;
         }
 
         span {
@@ -225,6 +225,11 @@
           letter-spacing: -.01em;
           line-height: 18px;
         }
+      }
+
+      @media (min-width: 500px) {
+        flex-direction: row;   
+ 
       }
     }
 
@@ -246,41 +251,55 @@
           }
         }
 
-        button {
-          background-color: #1f1b2e;
-        border-radius: 8px;
-        height: 40px;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 700;
-        letter-spacing: -.01em;
-        line-height: 18px;
-        }
-
-        .icons {
+        .buttons {
           display: flex;
-          align-items: center;
+          flex-direction: column;
           gap: 10px;
-          margin-top: 10px;
-          margin-bottom: 20px;
-          .iconContainer {
-              display: flex;
-              align-items: center;
-              justify-content: center;
-              width: 40px;
-              height: 40px;
-              border-radius: 8px;
-              background-color: #1f1b2e;
-              border-color: #1f1b2e;
-              transition-duration: 0.4s;
+
+          button {
+            background-color: #1f1b2e;
+          border-radius: 8px;
+          height: 40px;
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+  
+          font-size: 15px;
+          font-style: normal;
+          font-weight: 700;
+          letter-spacing: -.01em;
+          line-height: 18px;
+          }
+  
+          .icons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            .iconContainer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 8px;
+                background-color: #1f1b2e;
+                border-color: #1f1b2e;
+                transition-duration: 0.4s;
+            }
+          }
+
+          @media (min-width:600px) {
+            flex-direction: row;
+
+            button {
+              width: 65%;
+            }
           }
         }
-
+        .link {
+          margin-top: 20px;
+        }
         span {
           color: hsla(0,0%,100%,.48);
           font-size: 14px;
@@ -292,6 +311,15 @@
     .socials {
       display: flex;
       margin-bottom: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 15px;
+      
+      a {
+        margin: 0;
+      }
+
     }
 
     .copyright {

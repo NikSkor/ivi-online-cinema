@@ -9,7 +9,7 @@ import { useAppDispatch } from '@/store/hooks'
 
 import { filmographyData } from '@/components/ui/filmography/filmography.data'
 
-import SliderItem from '../home/Category/Slider/SliderItem/SliderItem'
+import SliderItem from '../home/Category/SliderItem/SliderItem'
 
 const Movies: FC = () => {
 
