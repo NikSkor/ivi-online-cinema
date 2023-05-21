@@ -43,7 +43,7 @@ const Layout: FC<PropsWithChildren<IMeta>> = ({children, title, description}) =>
     <Meta title={title} description={description}>
       <Header genres={genres} countries={countries}/>
       {children}
-      <MobileFooter />
+      <MobileFooter genres={genres} countries={countries}/>
       <Footer />
     </Meta>
   )

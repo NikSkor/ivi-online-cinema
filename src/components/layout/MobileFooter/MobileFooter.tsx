@@ -1,9 +1,10 @@
 import Link from 'next/link'
 import styles from './MobileFooter.module.scss'
 import Drawer from './Drawer/Drawer'
-import { useState } from 'react'
+import { FC, useState } from 'react'
+import { IHeader } from '../header/Header'
 
-const MobileFooter = () => {
+const MobileFooter:FC<IHeader> = ({ countries, genres }) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
 
   const toggleDrawer = () => {
@@ -13,7 +14,7 @@ const MobileFooter = () => {
   }
   return (
     <>
-    {isDrawerOpen ? <Drawer /> : null}
+    {isDrawerOpen ? <Drawer genres={genres} countries={countries} /> : null}
       <div className={styles.tabBarPlate}>
         <div className={styles.tabBarMenu}>
           <Link href="/">

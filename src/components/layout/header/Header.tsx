@@ -7,7 +7,7 @@ import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useAppSelector } from '@/store/hooks'
-interface IHeader {
+export interface IHeader {
   genres: any[]
   countries: any[]
 }

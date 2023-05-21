@@ -5,6 +5,11 @@
     font-size: 22px;
     line-height: 28px;
     font-weight: 700;
+
+    @media (max-width: 600px) {
+      font-size: 20px;
+    }
+
     
     p {
       display: flex;
@@ -13,6 +18,10 @@
 
       @media (max-width: 500px) {
         margin-bottom: 0;
+      }
+      
+      @media (max-width: 600px) {
+        justify-content: space-between;
       }
     }
 
