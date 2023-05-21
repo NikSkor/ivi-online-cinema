@@ -6,7 +6,6 @@ import AuthService from '@/services/AuthService'
 import { login, registration } from "@/store/slices/authSlice"
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
-
 export default function AuthForm() {
   const [loginValue, setLoginValue] = useState<string>('')
   const [passwordValue, setPasswordValue] = useState<string>('')

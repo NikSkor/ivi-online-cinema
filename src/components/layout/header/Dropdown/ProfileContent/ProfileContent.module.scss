@@ -1,6 +1,7 @@
 .content {
     display: flex;
     align-items: center;
+    justify-content: center;
     
     .authBlock {
         position: relative;
@@ -64,6 +65,10 @@
 
         p {
             margin-bottom: 20px;
+        }
+
+        button {
+            min-width: 200px;
         }
     }
 }

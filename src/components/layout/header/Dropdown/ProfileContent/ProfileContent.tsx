@@ -4,6 +4,7 @@ import styles from "./ProfileContent.module.scss"
 import { useRouter } from "next/router"
 import { useAppDispatch, useAppSelector } from "@/store/hooks"
 import { logout } from "@/store/slices/authSlice"
+import SelectLang from "@/components/layout/footer/selectLang/SelectLang"
 
 const ProfileContent = () => {
 
@@ -58,8 +59,8 @@ const ProfileContent = () => {
 			</div>
 			) : (
 				<div className={styles.greetingBlock}>
-				<p>{`Привет, ${user?.username}`}</p>
-				<button className={styles.authButton} onClick={logoutHandler}>Выйти из аккаунта</button>
+				<p>{locale === 'ru' ? `Привет, ${user?.username}` : `Hello, ${user?.username}`}</p>
+				<button className={styles.authButton} onClick={logoutHandler}>{locale === 'ru' ? `Выйти из аккаунта` : `Logout`}</button>
 				</div>
 			)}
 		</div>

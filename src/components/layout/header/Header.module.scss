@@ -10,17 +10,19 @@
   @media (max-width: 600px) {
     padding-top: 10px;
   }
-  &.dropdownOpen {
-    background-color: #1f1b2e;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-
-
-    border: none;
-
-    transition: all 0.3s;
-
-    z-index: 1;
+  @media (min-width: 1800px) {
+    &.dropdownOpen {
+      background-color: #1f1b2e;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+  
+  
+      border: none;
+  
+      transition: all 0.3s;
+  
+      z-index: 1;
+    }
   }
   .headerTop {
     display: flex;

@@ -149,7 +149,6 @@ export const authSlice = createSlice({
 
 export const { setUser } = authSlice.actions;
 
-// export const selectGenres = (state: RootState) => state.filters.genres
 
 
 export const authReducer =  authSlice.reducer;

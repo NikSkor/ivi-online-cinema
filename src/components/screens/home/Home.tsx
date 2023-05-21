@@ -6,6 +6,9 @@ import WeeklyTop from './WeeklyTop/WeeklyTop'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { useAppDispatch } from '@/store/hooks'
+import { setLoading } from '@/store/slices/loadingSlice'
+import SelectLang from '@/components/layout/footer/selectLang/SelectLang'
 
 
 const Home: FC = () => {
@@ -16,6 +19,7 @@ const Home: FC = () => {
   const [moviesWithActor, setMoviesWithActor] = useState([])
   const actor = 'Леонардо Дикаприо'
   const enActor = 'Leonardo DiCaprio'
+  const dispatch = useAppDispatch()
   
   const locale = useRouter().locale
   useEffect(() => {
@@ -49,19 +53,23 @@ const Home: FC = () => {
       }
     }
 
-    getDramas()
-    getMoviesWithActor()
+    const getData = async () => {
+      try {
+        dispatch(setLoading(true))
+        await getDramas()
+        await getMoviesWithActor()
+      } catch (error) {
+        console.log(error)
+      } finally {
+        dispatch(setLoading(false))
+      }
+    }
+    getData()
   }, [])
   
   return (
     <Layout title="Онлайн-кинотеатр Иви">
       <main className={`${styles.main} container`}>
-        <Link href="/" locale={'ru'}>
-          <button className={styles.langButton}>Русский язык</button>
-        </Link>
-        <Link href="/" locale="en">
-          <button className={styles.langButton}>Английский язык</button>
-        </Link>
         <WeeklyTop />
         <div className={styles.clause}>
           <h4 className={styles.clauseTitle}>
@@ -176,6 +184,7 @@ const Home: FC = () => {
           <Category title={locale === 'ru' ? "Лучшие драмы" : 'The best dramas'} items={dramaMovies}/>
           <Category title={locale === 'ru' ? `Фильмы с ${actor}` : `Films with ${enActor}`} items={moviesWithActor} />
         </div>
+        <SelectLang />
       </main>
     </Layout>
   )
