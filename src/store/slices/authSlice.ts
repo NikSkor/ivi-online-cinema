@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 
 import type { AppThunk, RootState } from "../store";
 import { IUser } from "@/interfaces/IUser";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import AuthService from "@/services/AuthService";
 import { AuthResponse } from "@/models/response/AuthResponse";
 
@@ -18,7 +18,7 @@ export const login = createAsyncThunk("user/login", async ({email, password}: {e
 
   } catch (error:any) {
     if (error) {
-      return rejectWithValue(error.response.data.message)
+      return rejectWithValue(error.response.data)
     }
   }
 });
@@ -33,7 +33,7 @@ try {
   return user.data
 
 } catch (error:any) {
-  return rejectWithValue(error.response.data.message)
+  return rejectWithValue(error.response.data)
 }
 })
 
@@ -70,21 +70,23 @@ export const logout = createAsyncThunk('user/logout', async (_, {rejectWithValue
 
 
 interface userState {
-  user: IUser | null,
+  user: IUser | null
   isAuth: boolean
+  error: any | null 
 }
 
 const initialState: userState = {
   user: null,
-  isAuth: false
+  isAuth: false,
+  error: null
 }
 
 export const authSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setUser(state,action: {payload: IUser}) {
-      state.user = action.payload
+    clearError(state) {
+      state.error = null 
     }
   },
   extraReducers: (builder) => {
@@ -98,9 +100,10 @@ export const authSlice = createSlice({
       state.isAuth = true
       state.user = action.payload
     })
-    .addCase(login.rejected, (state) => {
+    .addCase(login.rejected, (state, action: any) => {
       state.isAuth = false
       state.user = null
+      state.error = action.payload
     })
 
     // registration
@@ -112,9 +115,10 @@ export const authSlice = createSlice({
       state.isAuth = true
       state.user = action.payload
     })
-    .addCase(registration.rejected, (state) => {
+    .addCase(registration.rejected, (state, action: any) => {
       state.isAuth = false
       state.user = null
+      state.error = action.payload
     })
 
     // checkAuth
@@ -147,7 +151,7 @@ export const authSlice = createSlice({
   }
 })
 
-export const { setUser } = authSlice.actions;
+export const { clearError } = authSlice.actions;
 
 
 

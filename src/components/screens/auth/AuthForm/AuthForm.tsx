@@ -3,7 +3,7 @@ import styles from './AuthForm.module.scss'
 import { useRouter } from 'next/router'
 import axios, { AxiosError } from 'axios'
 import AuthService from '@/services/AuthService'
-import { login, registration } from "@/store/slices/authSlice"
+import { clearError, login, registration } from "@/store/slices/authSlice"
 import { useAppDispatch, useAppSelector } from '@/store/hooks'
 
 export default function AuthForm() {
@@ -15,6 +15,18 @@ export default function AuthForm() {
 
   const locale = useRouter().locale
   const dispatch = useAppDispatch()
+  const error = useAppSelector(state => state.auth.error)
+  const getErrorMessage = (message: string) => {
+    if (message[0] === 'Не меньше 4 и не больше 16') {
+      return 'Минимальная длина пароля - 4 символа. Максимальная - 16.'
+    }
+
+    if (message === 'Invalid credentials') {
+      return 'Неправильный логин или пароль'
+    }
+
+    return message
+  }
 
   const authHandler = async () => {
     if (isReg) {
@@ -30,6 +42,14 @@ export default function AuthForm() {
         console.log(error)
       }
     }
+  }
+
+
+  const toggleRegHandler = () => {
+    if (isReg) {
+      setIsReg(false)
+    } else setIsReg(true)
+    dispatch(clearError())
   }
 
 
@@ -65,8 +85,9 @@ export default function AuthForm() {
               <svg fill="rgba(4, 5, 10, 0.5)" height="30" viewBox="0 0 30 30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 0C10.364 0 7 3.364 7 7.5v3c0 .657 1 .668 1 0v-3C8 3.904 10.904 1 14.5 1S21 3.904 21 7.5v3c0 .676 1 .644 1 0v-3C22 3.364 18.636 0 14.5 0zm0 17c-1.375 0-2.5 1.125-2.5 2.5 0 .77.406 1.445 1 1.914V23.5c0 .822.678 1.5 1.5 1.5s1.5-.678 1.5-1.5v-2.088c.594-.47 1-1.143 1-1.912 0-1.375-1.125-2.5-2.5-2.5zm0 1c.834 0 1.5.666 1.5 1.5 0 .536-.286 1.027-.75 1.295-.155.09-.25.255-.25.434v2.27c0 .286-.214.5-.5.5-.286 0-.5-.214-.5-.5v-2.27c0-.178-.095-.344-.25-.433-.464-.268-.75-.76-.75-1.297 0-.834.666-1.5 1.5-1.5zm-9-6c-.822 0-1.5.678-1.5 1.5v15c0 .822.678 1.5 1.5 1.5h18c.822 0 1.5-.678 1.5-1.5v-15c0-.822-.678-1.5-1.5-1.5zm0 1h18c.286 0 .5.214.5.5v15c0 .286-.214.5-.5.5h-18c-.286 0-.5-.214-.5-.5v-15c0-.286.214-.5.5-.5z"/></svg>
               <input type="text" name="password" value={passwordValue} onChange={event => setPasswordValue(event.target.value)} placeholder={locale === 'ru' ? "Пароль" : 'Password'}/>
             </div>
-            {isReg && <p className={styles.isReg}>Уже есть аккаунт? <span onClick={() => setIsReg(false)}>Авторизуйтесь!</span></p>}
-            {!isReg && <p className={styles.isReg}>Нет аккаунта? <span onClick={() => setIsReg(true)}>Зарегистрируйтесь!</span></p>}
+            {error && <p className={styles.errorMessage}>{getErrorMessage(error.message)}</p>}
+            {isReg && <p className={styles.isReg}>Уже есть аккаунт? <span onClick={toggleRegHandler}>Авторизуйтесь!</span></p>}
+            {!isReg && <p className={styles.isReg}>Нет аккаунта? <span onClick={toggleRegHandler}>Зарегистрируйтесь!</span></p>}
               <div className={styles.authIcons}>
                 <a href="http://localhost:5000/api/auth/google/login">
                 <img src="/google-icon.svg" width={28} height={28} alt="" />
