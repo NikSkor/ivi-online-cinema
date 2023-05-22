@@ -45,14 +45,18 @@
         font-size: 22px
         font-weight: bold
     &__list
-        display: flex
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(130px, 4fr))
         gap: 25px
     &__itemImage
+        display: flex
         height: 120px
         width: 120px
         border-radius: 50%
         overflow: hidden
         margin-bottom: 10px
+        img
+            object-fit: cover
         &__name
             color: #d9d7e0
             font-weight: 500

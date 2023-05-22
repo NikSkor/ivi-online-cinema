@@ -1,12 +1,14 @@
 import { MainButton } from '../../button/MainBtn/MainButton'
 import styles from '../comments.module.sass'
-
-export const NewComment = () => {
+interface IProps{
+    parentId: null | number,
+    title: string
+}
+export const NewComment:React.FC<IProps> = ({parentId, title}) => {
     return (
         <div className={styles.newComment}>
-            <h2 className={styles.subtitle}>Оставить комментарий</h2>
+            <h2 className={styles.subtitle}>{title}</h2>
             <div className={styles.newComment__form}>
-                <input type="text" placeholder='Name' className={styles.newComment__name} />
                 <textarea name="message" placeholder='Your message' className={styles.newComment__textarea} rows={5}></textarea>
                 <div><MainButton text='Оставить комментарий' /></div>
             </div>
