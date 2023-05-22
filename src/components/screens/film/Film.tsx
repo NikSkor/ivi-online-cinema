@@ -75,11 +75,11 @@ const Film = ( {film} : IProps ) => {
                             <h3>Рейтинг</h3>
                         </div>
                         {
-                            film.persons.slice(0, 4).map((item: IPerson) => <Link key={item.person.personId} href={`/person/${item.person.personId}`} className={styles.actor__wrapper}>
+                            film.persons.актеры.slice(0, 4).map((item: IPerson) => <Link key={item.personId} href={`/person/${item.personId}`} className={styles.actor__wrapper}>
                             <div className={styles.actor__item}>
-                                <Image loader={() => item.person.photo} src={item.person.photo} alt='actor' width={44} height={44} unoptimized={true}/>
+                                <Image loader={() => item.photo} src={item.photo} alt='actor' width={44} height={44} unoptimized={true}/>
                             </div>
-                            <h3>{item.person.name}</h3>
+                            <h3>{item.name}</h3>
                         </Link>)
                         }
 
@@ -144,8 +144,9 @@ const Film = ( {film} : IProps ) => {
             <section className={styles.thirdSection}>
                 <h2 className={`${styles.subtitle} ${styles.subtitle__link} `} onClick={() => setShowModal(true)}>Актеры и создатели</h2>
                 <div className={styles.actors__list}>
+                    <FilmActors actor={film.persons.режиссеры[0]} profession={'Режиссер'}/>
                     {
-                        film.persons.slice(0, 10).map((item) => <FilmActors key={item.person.personId} actor={item}/>)
+                        film.persons.актеры.slice(0, 9).map((item) => <FilmActors key={item.personId} actor={item} profession={'Актер'}/>)
                     }
                     <div className={styles.actors__showMore} onClick={() => setShowModal(true)}>
                         Ещё

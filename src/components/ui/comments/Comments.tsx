@@ -11,12 +11,12 @@ export const Comments = ({ comments }: IProps) => {
             <h2 className={styles.subtitle}>Комментарии</h2>
             <ul className={styles.comments__list}>
                 {
-                    comments.length ? comments.map((item, i) => { return <div key={i}>{item.value}</div> }) : <h2 className={styles.comments__not}>Нет комментариев 😔</h2>
+                    comments.length ? comments.map((item) => <CommentsItem key={item.commentId} item={item} /> ) : <h2 className={styles.comments__not}>Нет комментариев 😔</h2>
                 }
 {/*                 <CommentsItem />
                 <CommentsItem /> */}
             </ul>
-            <NewComment />
+            <NewComment title={"Оставить новый комментарий"} parentId={null}/>
         </>
     )
 }

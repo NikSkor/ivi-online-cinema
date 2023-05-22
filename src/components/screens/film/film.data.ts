@@ -19,7 +19,7 @@ export interface IFilm{
     languages: ILanguages[],
     facts: IFacts[],
     similarMovies: IMovie2[],
-    persons: IPerson[]
+    persons: IPersons
 }
 interface IGenres {
     genreId: number,
@@ -42,26 +42,23 @@ interface ILanguages {
 }
 
 export interface IComments {
+    commentId: number,
+    userName: string,
+    publishDate: string,
     value: string,
-  parentId: number
+    parentId: null | number,
+    childComments: IComments[]
 }
 
 export interface IPerson {
-    person: {
         personId: number,
         name: string,
         enName: string,
         photo: string
-    },
-    profession: {
-        professionId: number,
-        name: string
-    },
-    MoviePerson: {
-        id: number,
-        movieId: number,
-        personProfessionId: number
-    }
+}
+export interface IPersons {
+        актеры: IPerson[],
+        режиссеры: IPerson[],
 }
 
 export interface ISimilarFilms {
