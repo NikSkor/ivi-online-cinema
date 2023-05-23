@@ -12,14 +12,12 @@ interface IProps {
 export const Comments = ({ comments }: IProps) => {
     const locale = useRouter().locale
     const isAuth = useAppSelector(state => state.auth.isAuth)
-    console.log(isAuth)
-    /* const token = useRouter().query.accessToken */
     const [showNewComment, setShowNewComment] = React.useState(false)
     function handleNewComment() {
         if (isAuth) {
             setShowNewComment(true)
         } else {
-            alert('Чтобы оставить комментарий необходимо войти')
+            alert(locale === 'ru' ? 'Чтобы оставить комментарий необходимо войти' : 'To write a comment, you need to log in')
         }
     }
     return (
@@ -27,14 +25,14 @@ export const Comments = ({ comments }: IProps) => {
             <h2 className={styles.subtitle}>{locale === 'ru' ? 'Комментарии' : 'Comments'}</h2>
             <div className={styles.comments__list}>
                 {
-                    comments.length ? comments.map((item) => <CommentsItem key={item.commentId} item={item} />) : <h2 className={styles.comments__not}>Нет комментариев 😔</h2>
+                    comments.length ? comments.map((item) => <CommentsItem key={item.commentId} item={item} />) : <h2 className={styles.comments__not}>{locale === 'ru' ? 'Нет комментариев 😔' : 'No comments 😔'}Нет комментариев 😔</h2>
                 }
             </div>
             {
                 !showNewComment ?
                     <div className={styles.newComment__btn} onClick={handleNewComment}>
-                        <MainButton text='Оставить комментарий' />
-                    </div> : <NewComment title={"Оставить новый комментарий"} parentId={null} close={setShowNewComment} />
+                        <MainButton text={locale === 'ru' ? 'Оставить комментарий' : 'Write a comment'}  />
+                    </div> : <NewComment title={locale === 'ru' ? 'Оставить новый комментарий' : 'Write a new comment'} parentId={null} close={setShowNewComment} />
             }
 
 

@@ -5,6 +5,7 @@ import styles from './modal.module.sass';
 import backIcon from '/public/back_icon.svg'
 import { IFilm } from '../film.data';
 import { ModalItem } from './ModalItem';
+import { useRouter } from 'next/router';
 
 interface Props {
     setShowModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,8 +14,7 @@ interface Props {
 }
 
 export const ModalActors: React.FC<Props> = (props) => {
-    const src = 'https://thumbs.dfs.ivi.ru/storage5/contents/9/6/b7f9eef3eaeb3d500cd994fb130047.jpg/120x144/?q=85';
-    const image = "https://thumbs.dfs.ivi.ru/storage30/contents/1/9/5a294806819855bd6238d18d176fdd.jpg/234x360/?q=85";
+    const locale = useRouter().locale
     const { setShowModal, film, year } = props
     return (
         <div className={styles.modalActors}>
@@ -25,19 +25,19 @@ export const ModalActors: React.FC<Props> = (props) => {
                     src={backIcon}
                     alt="back_lcon"
                 />
-                <p className={styles.back__text}>К фильму</p>
+                <p className={styles.back__text}>{locale === 'ru' ? 'К фильму' : 'Back to film'}</p>
             </div>
 
             <div className={styles.modalActors__dialog}>
                 <div className={styles.modalActors__info}>
 
-                    <h1 className={styles.title}>{film.name} (Фильм {year})</h1>
+                    <h1 className={styles.title}>{locale === 'ru' ? film.name : film.enName} ({locale === 'ru' ? 'Фильм' : 'Movie'} {year})</h1>
 
                     <div className={styles.modalActors__tabs}>
-                        <div className={styles.modalActors__creators}>Создатели</div>
+                        <div className={styles.modalActors__creators}>{locale === 'ru' ? 'Создатели' : 'Creators'}</div>
                     </div>
                     <div className={styles.modalActors__section}>
-                        <div className={styles.modalActors__title}>Режиссер</div>
+                        <div className={styles.modalActors__title}>{locale === 'ru' ? 'Режиссер' : 'Director'}</div>
                         <ul className={styles.modalActors__list}>
                             <li>
                                 <ModalItem person={film.persons.режиссеры[0]} />
@@ -45,7 +45,7 @@ export const ModalActors: React.FC<Props> = (props) => {
                         </ul>
                     </div>
                     <div className={styles.modalActors__section}>
-                        <div className={styles.modalActors__title}>Актёры</div>
+                        <div className={styles.modalActors__title}>{locale === 'ru' ? 'Актёры' : 'Actors'}</div>
                         <ul className={styles.modalActors__list}>
                                 {film.persons.актеры.slice(0, 12).map(item => <ModalItem key={item.personId} person={item}/>)}
                         </ul>
@@ -64,13 +64,13 @@ export const ModalActors: React.FC<Props> = (props) => {
                         </div>
                     </div>
                     <div className={styles.menu__text}>
-                        сюжет
+                    {locale === 'ru' ? 'сюжет' : 'plot'}
                         <div>
                             <div></div>
                         </div>
                     </div>
                     <h3 className={styles.menu__text} style={{ textTransform: 'capitalize' }}>{year}, {film.countries[0].name}, {film.genres[0].name}</h3>
-                    <h3 className={styles.menu__text}>{film.movieLength} минут</h3>
+                    <h3 className={styles.menu__text}>{film.movieLength} {locale === 'ru' ? 'минут' : 'minutes'}</h3>
                 </div>
             </div>
         </div>
