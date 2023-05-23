@@ -19,6 +19,65 @@
   margin-bottom: 20px;
 }
 
+.toggleContainer {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.toggle {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 34px;
+}
+
+.toggleInput {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.toggleSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 34px;
+
+  background-color: $red;
+  transition: .5s;
+}
+
+.toggleSlider::before {
+  content: '';
+  position: absolute;
+  cursor: pointer;
+  left: 4px;
+  bottom: 4px;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+
+  background-color: #fff;
+  transition: .5s;
+}
+
+.toggleInput:focus + .toggleSlider {
+  box-shadow: 0 0 1px $lightGray;
+}
+
+.toggleInput:checked + .toggleSlider{
+  background-color: $secondary;
+}
+
+.toggleInput:checked+.toggleSlider::before {
+  transform: translateX(26px);
+}
+
 .main {
   padding-bottom: 20px;
 }
@@ -30,21 +89,30 @@
   padding-bottom: 20px;
 }
 
-.item {
-  display: flex;
-  align-items: center;
-  gap: 50px;
-}
+.inputs {
+  margin-top: 10px;
+  width: 100%;
+  height: 40px;
+  padding: 12px 12px;
 
-.itemTitle {
-  font-weight: 500;
-  font-size: 16px;
-  width: 800px;
+  border: solid 1px $btn_bg;
+  background-color: $btn_bg;
+  border-radius: 8px;
+
+  &:not(:last-child) {
+    margin-right: 12px;
+  }
+
+  &.square {
+    width: 40px;
+    padding: 0;
+  }
 }
 
 .actionBtn {
   font-weight: 500;
   font-size: 12px;
+  justify-self: flex-end;
 
   position: relative;
   display: inline-flex;
@@ -81,7 +149,14 @@
   }
 }
 
+.searchBlock {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
 
-.delBtn {
-  width: 40px;
+.searchBtn {
+  font-size: 12px;
+  width: 150px;
+  height: 41px;
 }

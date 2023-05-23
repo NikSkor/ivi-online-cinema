@@ -1,34 +1,37 @@
-import { useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import styles from './FilmsContent.module.scss'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+import axios from 'axios'
+interface IFilmsContent {
+  genres: any[],
+  countries: any[]
+}
+const FilmsContent:FC<IFilmsContent> = ({ genres, countries }) => {
 
-const FilmsContent = () => {
-  const [genres, setGenres] = useState(['Артхаус', 'Боевики', 'Вестерн', 'Военные', 'Детективы', 'Для всей семьи', 'Для детей', 'Документальные', 'Драмы', 'Исторические', 'Катастрофы', 'Комедии', 'Криминальные', 'Мелодрамы', 'Мистические', 'По комиксам', 'Приключения', 'Спорт', 'Триллеры', 'Ужасы', 'Фантастика', 'Фэнтези'])
-
-  const [countries, setCountries] = useState(['Русские', 'Зарубежные', 'Советское кино'])
-
+  const locale = useRouter().locale
   const [years, setYears] = useState([2020, 2021, 2022, 2023])
   return (
     <div className={styles.content}>
       <div className={`${styles.genres} ${styles.filmSection}`}>
-        <p className={styles.title}>Жанры</p>
+        <p className={styles.title}>{locale === 'ru' ? 'Жанры' : 'Genres'}</p>
         <div className={styles.genreList}>
-        {
-          genres.map(genre => <Link href={`/movies/${genre}`}>{genre}</Link>)
-        }
+          {
+            genres.map(genre => <Link key={genre.name} href={`/movies/${genre}`}>{genre.name}</Link>)
+          }
         </div>
       </div>
       <div>
         <div className={`${styles.countries} ${styles.filmSection}`}>
-          <p className={styles.title}>Страны</p>
-          {
-            countries.map(country => <Link href={`/movies/${country}`}>{country}</Link>)
-          }
+          <p className={styles.title}>{locale === 'ru' ? 'Страны' : 'Countries'}</p>
+          <Link href={`/movies/abc`}>Русские</Link>
+          <Link href={`/movies/def`}>Зарубежные</Link>
+          <Link href={`/movies/ghj`}>Советское кино</Link>
         </div>
         <div className={`${styles.years} ${styles.filmSection}`}>
-          <p className={styles.title}>Годы</p>
+          <p className={styles.title}>{locale === 'ru' ? 'Годы' : 'Years'}</p>
           {
-            years.map(year => <Link href={`/movies/${year}`}>Фильмы {year} года</Link>)
+            years.map(year => <Link key={year} href={`/movies/${year}`}>{locale === 'ru' ? `Фильмы ${year} года` : `Films of ${year}` }</Link>)
           }
         </div>
       </div>

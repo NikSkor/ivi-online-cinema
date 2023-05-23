@@ -1,84 +1,97 @@
 import { FC, useEffect, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './EditMovie.module.scss';
-import { IFilmographyItem } from "@/interfaces/person/IFilmographyItem";
-import { filmographyData } from "@/components/ui/filmography/filmography.data";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import Link from "next/link";
-import { addFilmValues } from '@/store/slices/adminSlice';
-
-
-interface IFilmItem {
-  name: string,
-  foreignName: string,
-  posterURL: string,
-  year: number,
-  rating: number,
-}
+import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
+import axios from "axios";
+import { API_URL_PATCH_MOVIES } from "../API/const";
+import { IFilmItem, IFilms } from "../interfaces/interfaces";
 
 const EditMovie: FC = () => {
 
   const id: number = useAppSelector(state => state.admin.filmId);
+  const filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
+  const [modalActive, setModalActive] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   const dispatch = useAppDispatch();
 
 
   let filmItem: IFilmItem = {
+    id: 0,
     name: '',
-    foreignName: '',
-    posterURL: '',
-    year: 0,
-    rating: 0,
+    enName: ''
   }
 
-  let catalog: IFilmographyItem[] = [...filmographyData];
-  
   if (id !== undefined) {
-    catalog.forEach((item) => {
-    if (item.filmId === +id) {
-      Object.assign(filmItem, item);
-      dispatch(addFilmValues(filmItem));
+    filmsCatalog.forEach((item) => {
+    if (item.movieId === +id) {
+      filmItem = {
+        id: item.movieId,
+        name: item.name,
+        enName: item.enName !== null ? item.enName : ''
+      }
     }
   })
   }
 
   let [name, setName] = useState(filmItem.name);
-  let [foreignName, setForeignName] = useState(filmItem.foreignName);
-  let [urlImg, setUrlImg] = useState(filmItem.posterURL);
-  let [year, setYear] = useState(filmItem.year);
-  let [rating, setRating] = useState(filmItem.rating);
+  let [enName, setEnName] = useState(filmItem.enName);
+  let [isValidName, setIsValidName] = useState(true);
+
 
   let resetHandler = (e: any) => {
     e.preventDefault();
 
     setName(filmItem.name);
-    setForeignName(filmItem.foreignName);
-    setUrlImg(filmItem.posterURL);
-    setYear(filmItem.year);
-    setRating(filmItem.rating);
-
+    setEnName(filmItem.enName);
   }
 
-  let submitHandler = (e: any) => {
+  let submitHandler = async (e: any) => {
     e.preventDefault();
 
-    let filmValues: IFilmItem = {
-    name: name,
-    foreignName: foreignName,
-    posterURL: urlImg,
-    year: year,
-    rating: rating,
+    if (name === '') {
+      setIsValidName(false);
+      setModalActive(true);
+    } else {
+      let filmValues: IFilmItem = {
+        id: id,
+        name: name,
+        enName: enName,
+      }
+
+      let data = JSON.stringify(filmValues); 
+
+      const headers = {
+        'Content-type': 'application/json',
+        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MjUxNjIzOTAyMiwiaXNBZG1pbiI6dHJ1ZX0.f1EOoLCXMQPDGD0s9QaO5tkWTsH77lDXpNdAgp_Q-1s'
+      }
+
+      try {
+      const response = await axios.patch(`${API_URL_PATCH_MOVIES}${id}`, data, {
+        headers: headers
+      });
+        console.log('Returned data:', response);
+        setModalMessage(`Фильм "${filmItem.name}" обновлён.`);
+      } catch (e: any) {
+        console.log(`Axios request failed: ${e}`);
+        setModalMessage(e.message.toString());
+      }
+      setModalActive(true);
+    }
   }
-  dispatch(addFilmValues(filmValues));
-  }
+
 
   let foreignNameHandler = (e: any) => {
     let reg = /[а-яА-ЯёЁ]/g;
     if (e.target.value.search(reg) !=  -1) {
         e.target.value  =  e.target.value.replace(reg, '');
     }
-    setForeignName(e.target.value)
+    setEnName(e.target.value)
   }
+
+  const titleName = filmItem.name.slice();
 
   
   return(
@@ -89,33 +102,15 @@ const EditMovie: FC = () => {
             slug={'Фильм'} /> 
         </section>
         <section className={style.main}>
-          <h2 className={style.title}>{name}</h2>
+          <h2 className={style.title}>{titleName}</h2>
           <div className={style.form}>
-            <label className={style.label} data-id='url'>
-            Ссылка на постер:
-            <input 
-              disabled 
-              className={style.inputs} 
-              type='text'
-              value={urlImg} 
-
-              onChange={(e) => {setUrlImg(e.target.value)}}/>
-          </label>
           <label className={style.label} data-id='url'>
             Название:
             <input placeholder="Введите название" className={style.inputs} type='text' value={name} onChange={(e) => {setName(e.target.value)}}/>
           </label>
           <label className={style.label} data-id='url'>
             Название на английском:
-            <input placeholder="Введите название" className={style.inputs} type='text' value={foreignName} onChange={(e) => {foreignNameHandler(e)}}/>
-          </label>
-          <label className={style.label} data-id='url'>
-            Год:
-            <input disabled className={style.inputs} type='text' value={year} onChange={(e) => {setYear(+e.target.value)}}/>
-          </label>
-          <label className={style.label} data-id='url'>
-            Рейтинг:
-            <input disabled className={style.inputs} type='number' value={rating} onChange={(e) => {setRating(+e.target.value)}}/>
+            <input placeholder="Введите название" className={style.inputs} type='text' value={enName} onChange={(e) => {foreignNameHandler(e)}}/>
           </label>
           </div>
           <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
@@ -127,6 +122,8 @@ const EditMovie: FC = () => {
           </button>
         </Link>
         </section>
+        {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
+        {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
       </div>
   )
 }

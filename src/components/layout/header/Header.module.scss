@@ -5,20 +5,36 @@
 .header {
   position: relative;
   height: $headerHeight;
-  &.dropdownOpen {
-    background-color: #1f1b2e;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.219);
 
-    border-top-right-radius: 20px; 
-    border-top-left-radius: 20px;
-
-    transition: all 0.2s ease-in;
-
-    z-index: 1;
+  @media (max-width: 600px) {
+    padding-top: 10px;
   }
+    &.dropdownOpen {
+      background-color: #1f1b2e;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+  
+  
+      border: none;
+  
+      transition: all 0.3s;
+  
+      z-index: 1;
+    }
+    
   .headerTop {
     display: flex;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.219);
+
+    .menuContainer {
+      display: block;
+
+      @media (max-width: 1150px) {
+        display: none;
+      }
+    }
+  
     .headerIcon {
       display: flex;
       align-items: center;
@@ -70,6 +86,10 @@
 
         padding: 10px 0;
 
+        @media (max-width: 1150px) {
+          display: none;
+        }
+
         .searchLink {
           fill: rgba(255, 255, 255, 0.5);
           transition-property: fill;
@@ -90,6 +110,10 @@
       margin-right: 12px;
       padding: 0px 5px;
 
+      @media (max-width: 600px) {
+        display: none;
+      }
+
       &:hover {
         .notificationLink {
           fill: rgba(255, 255, 255, 1)
@@ -104,7 +128,36 @@
       }
     }
 
+    .authProfileLink {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+
+      background-color: rgba(119, 187, 42, 0.904);
+
+      text-align: center;
+
+      cursor: pointer;
+      
+      @media (max-width: 600px) {
+        display: none;
+      }
+
+      p {
+        font-size: 30px;
+        font-weight: bold;
+      }
+
+      &:hover {
+        box-shadow: 0px 1px 10px rgba(255, 255, 255, 0.5);
+      }
+    }
+    
     .avatar {
+
+      @media (max-width: 600px) {
+        display: none;
+      }
 
       &:hover {
         .avatarButton {
@@ -112,6 +165,7 @@
           box-shadow: 0 4px 16px rgba(255,255,255, .24);
           transition-property: border-color, box-shadow;
           transition-duration: .4s;
+
 
           .avatarLink {
             fill: rgba(255, 255, 255, 1);

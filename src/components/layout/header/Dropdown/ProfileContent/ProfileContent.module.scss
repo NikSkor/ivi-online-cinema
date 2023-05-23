@@ -1,37 +1,27 @@
 .content {
     display: flex;
     align-items: center;
-
+    justify-content: center;
     
     .authBlock {
+        position: relative;
         min-width: 300px;
+
         margin: 0 auto;
-
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-
-        button {
-            display: block;
-            width: 100%;
-
-            background-color: #c10032;
-            border-radius: 8px;
-            padding: 10px 15px;
-            font-weight: 700;
-
-            transition-property: background-color;
-            transition-duration: 0.2s;
-
-            margin-bottom: 20px;
-            
-            &:hover {
-                background-color: rgb(223, 15, 70);
-            }
+        padding-left: 25px;
+        
+        &:before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.16);
+            left: 0;
         }
+        
 
         .settings {
-            margin-top: 50%;
+            margin-top: 40%;
             
             a {
                 display: block;
@@ -47,6 +37,38 @@
             a:first-of-type {
                 margin-bottom: 12px;
             }
+        }
+    }
+    .authButton {
+        display: block;
+        width: 100%;
+
+        background-color: #c10032;
+        border-radius: 8px;
+        padding: 10px 15px;
+        font-weight: 700;
+
+        transition-property: background-color;
+        transition-duration: 0.2s;
+
+        margin-bottom: 20px;
+        
+        &:hover {
+            background-color: rgb(223, 15, 70);
+        }
+    }
+
+    .greetingBlock {
+        align-self: flex-start;
+        text-align: center;
+        margin: 0 auto;
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        button {
+            min-width: 200px;
         }
     }
 }

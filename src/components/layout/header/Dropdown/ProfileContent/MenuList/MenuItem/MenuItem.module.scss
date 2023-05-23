@@ -6,6 +6,11 @@
     flex-direction: column;
     justify-content: space-between;
 
+    height: 110px;
+
+    @media (min-width: 1240px) {
+        min-width: 190px;
+    }
     background-color: rgb(57, 51, 82);
     border-radius: 8px;
     

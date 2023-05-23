@@ -13,3 +13,16 @@
   grid-column-gap: 20px;
   grid-row-gap: 20px
 }
+
+.btn__container {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.btn__name {
+	font-size: 14px;
+	font-weight: 500;
+	margin-left: 8px;
+	color: $primary;
+}

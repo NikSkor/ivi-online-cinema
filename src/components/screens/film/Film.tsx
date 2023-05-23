@@ -4,54 +4,59 @@ import styles from './film.module.sass';
 import Link from 'next/link';
 import Image from 'next/image';
 import play from './icons/play.svg';
-import playTrailer from './icons/play-trailer.svg';
 import favorite from './icons/favorite.svg';
 import share from './icons/share.svg';
 import volume from './icons/volume.svg';
-import { Comments } from '@/components/ui/comments/Comments';
 import BackLink from '@/components/ui/backLink/BackLink';
+import { Comments } from '@/components/ui/comments/Comments';
 import { FilmSlider } from './FilmSlider';
 import { FilmActors } from './FilmActors';
 import { Trailers } from './Trailers/Trailers';
 import { ModalActors } from './ModalActors/ModalActors';
 import { MainButton } from '@/components/ui/button/MainBtn/MainButton';
 
-const Film: NextPage = () => {
+import { minutesToHHmm } from '@/functions/minutesToHHmm';
 
+import { IFilm, IPerson } from './film.data';
+import { useRouter } from 'next/router';
+
+interface IProps{
+    film: IFilm
+}
+const Film = ( {film} : IProps ) => {
+    const locale = useRouter().locale
+    const year = +film.premiere.slice(0, 4)
     const [showDescription, setShowDescription] = useState(false);
     const [showModal, setShowModal] = useState(false);
-    const src = 'https://thumbs.dfs.ivi.ru/storage5/contents/9/6/b7f9eef3eaeb3d500cd994fb130047.jpg/120x144/?q=85';
-    const bgImage = "https://thumbs.dfs.ivi.ru/storage38/contents/9/2/1da99afee8d958162fbb8faad3a24b.jpg";
-    const prem = "https://thumbs.dfs.ivi.ru/storage33/contents/9/9/ccf5c60716958180b98b81a6a4b447.png?q=85";
+
     return (
         <main className={`container ${styles.film__container}`}>
             <div className={styles.film__navbar}>
                 <BackLink />
-                <div className={styles.film__badge}>бесплатно</div>
+                <div className={styles.film__badge}>{locale === 'ru' ? 'бесплатно' : 'free'}</div>
             </div>
             <section className={styles.film__info}>
                 <div className={styles.film__trailer}>
                     <div className={styles.video}>
-                        <Image loader={() => bgImage} src={bgImage} alt='trailer' width={1920} height={1080} />
-                        <div className={styles.video__play}>
-                            <Image src={playTrailer} alt='trailer' width={34} height={34} />
-                        </div>
+                        <embed src={film.trailer} type='video/webm' width="640" height="480" />
                     </div>
                     <div className={styles.videoBtnBox}>
-                        <div className={styles.videoBtnBox__item}><Image src={play} alt='trailer' width={20} height={20} />Трейлер</div>
+                        <div className={styles.videoBtnBox__item}><Image src={play} alt='trailer' width={20} height={20} /><a href="#trailers">{locale === 'ru' ? 'Трейлер' : 'Trailer'}</a> </div>
                         <div className={styles.videoBtnBox__item}><Image src={favorite} alt='trailer' width={30} height={30} /></div>
                         <div className={styles.videoBtnBox__item}><Image src={share} alt='trailer' width={30} height={30} /></div>
                     </div>
                 </div>
                 <div>
-                    <h1 className={styles.title}>Калашников (Фильм 2020)</h1>
-                    <h2 className={styles.film__text}>2020 1 ч. 44 мин.12+</h2>
+                    <h1 className={styles.title}>{locale === 'ru' ? film.name : film.enName} ({locale === 'ru' ? 'Фильм' : 'Movie'} {year})</h1>
+                    <h2 className={styles.film__text}>{year}, {minutesToHHmm(film.movieLength)}, {film.ageRating}+</h2>
                     <div>
                         <ul className={styles.film__list}>
-                            <li><Link href=''>Россия</Link></li>
-                            <li><Link href=''>Биография</Link></li>
-                            <li><Link href=''>Драмы</Link></li>
-                            <li><Link href=''>Военные</Link></li>
+                            {
+                                film.countries.slice(0, 1).map((item: { countryId: number; name: string  }) => { return <li key={item.countryId}><Link href=''>{item.name}</Link></li> })
+                            }
+                            {
+                                film.genres.slice(0, 4).map((item: { genreId: number; name: string  }) => { return <li key={item.genreId}><Link href=''>{item.name}</Link></li> })
+                            }
                         </ul>
                     </div>
                     <div>
@@ -63,16 +68,25 @@ const Film: NextPage = () => {
                     <div className={styles.actor}>
                         <div className={styles.actor__wrapper}>
                             <div className={styles.actor__item}>
-                                <div className={styles.actor__raiting}>8.7</div>
+                                <div className={
+                                    film.rating > 6.99 ? `${styles.actor__raiting} ${styles.raiting__total_green} ` :
+                                        film.rating > 4.99 ? `${styles.actor__raiting} ${styles.raiting__total_gray} ` :
+                                            `${styles.actor__raiting} ${styles.raiting__total_red} `
+                                }>{film.rating.toFixed(1)}</div>
                             </div>
-                            <h3>Рейтинг</h3>
+                            <h3>{locale === 'ru' ? 'Рейтинг' : 'Rating'}</h3>
                         </div>
-                        <Link href='/person/1' className={styles.actor__wrapper}><div className={styles.actor__item}>
-                            <Image loader={() => src} src={src} alt='actor' width={44} height={44} />
-                        </div><h3>Оскар Айзек</h3></Link>
+                        {
+                            film.persons.актеры.slice(0, 4).map((item: IPerson) => <Link key={item.personId} href={`/person/${item.personId}`} className={styles.actor__wrapper}>
+                            <div className={styles.actor__item}>
+                                <Image loader={() => item.photo} src={item.photo} alt='actor' width={44} height={44} unoptimized={true}/>
+                            </div>
+                            <h3>{locale === 'ru' ? item.name : item.enName}</h3>
+                        </Link>)
+                        }
 
                     </div>
-                    <div className={styles.premies}>
+                    {/*                     <div className={styles.premies}>
                         <div className={styles.premies__image}>
                             <Image loader={() => prem} src={prem} alt='prem' width={60} height={60} />
                         </div>
@@ -80,22 +94,22 @@ const Film: NextPage = () => {
                             <h3 className={styles.premies__title}>Золотой орел</h3>
                             <h4 className={styles.premies__subtitle}>Лучшая мужская роль</h4>
                         </div>
-                    </div>
+                    </div> */}
                     {
                         !showDescription ?
                             <div className={styles.details} >
-                                <p className={styles.details__text}>История советского конструктора-самоучки, создавшего самое распространенное в мире стрелковое оружие АК-47. Покинув фронт из-за тяжелого ранения, молодой сержант Калашников находит другой способ служить Родине. Историко-биографическая драма режиссера Константина Буслова о рождении легендарного автомата и непростом жизненном пути его создателя, в роли которого снялся Юрий Борисов («Бык», «Т-34», «Союз спасения»,...</p>
-                                <h4 className={styles.details__showdes} onClick={() => setShowDescription(true)}>Детали о фильме</h4>
+                                <p className={styles.details__text}>{film.shortDescription}</p>
+                                <h4 className={styles.details__showdes} onClick={() => setShowDescription(true)}>{locale === 'ru' ? 'Детали о фильме' : 'Show datails'}</h4>
                             </div> :
                             <div className={styles.details}>
-                                <p className={styles.details__text}>История советского конструктора-самоучки, создавшего самое распространенное в мире стрелковое оружие АК-47. Покинув фронт из-за тяжелого ранения, молодой сержант Калашников находит другой способ служить Родине. Историко-биографическая драма режиссера Константина Буслова о рождении легендарного автомата и непростом жизненном пути его создателя, в роли которого снялся Юрий Борисов («Бык», «Т-34», «Союз спасения», История советского конструктора-самоучки, создавшего самое распространенное в мире стрелковое оружие АК-47. Покинув фронт из-за тяжелого ранения, молодой сержант Калашников находит другой способ служить Родине. Историко-биографическая драма режиссера Константина Буслова о рождении легендарного автомата и непростом жизненном пути его создателя, в роли которого снялся Юрий Борисов («Бык», «Т-34», «Союз спасения»</p>
+                                <p className={styles.details__text}>{film.shortDescription}</p>
+                                <p className={styles.details__text}>{film.description}</p>
                                 <div className={styles.film__aboutQuality} >
-                                    <h3 className={styles.languages} >Языки</h3>
+                                    <h3 className={styles.languages} >{locale === 'ru' ? 'Языки' : 'Languages'}</h3>
                                     <ul className={styles.languages__list} >
-                                        <li className={styles.languages__item} >Русский</li>
-                                        <li className={styles.languages__item} >БелоРусский</li>
+                                        <li className={styles.languages__item} >{locale === 'ru' ? 'Русский' : 'Russian'}</li>
                                     </ul>
-                                    <h3 className={styles.film__qualityText} ><span>Изображение и звук. </span>Изображение и звук. Фактическое качество зависит от устройства и ограничений правообладателя.</h3>
+                                    <h3 className={styles.film__qualityText} ><span>{locale === 'ru' ? 'Изображение и звук.' : 'Image and sound.'} </span>{locale === 'ru' ? 'Фактическое качество зависит от устройства и ограничений правообладателя.' : 'The actual quality depends on the device and the restrictions of the copyright holder.'}</h3>
                                     <div className={styles.film__quality} >
                                         <div className={styles.label}>FullHD</div>
                                         <div className={styles.label}>HD</div>
@@ -104,58 +118,64 @@ const Film: NextPage = () => {
                                         <div className={styles.label}>5.1</div>
                                     </div>
                                 </div>
-                                <h4 className={styles.details__showdes} onClick={() => setShowDescription(false)}>Свернуть детали</h4>
+                                <h4 className={styles.details__showdes} onClick={() => setShowDescription(false)}>{locale === 'ru' ? 'Скрыть детали' : 'Hide details'}</h4>
                             </div>
                     }
 
                     <div className={styles.raiting}>
-                        <div className={styles.raiting__total}>8,7</div>
+                        <div className={
+                            film.rating > 6.99 ? `${styles.raiting__total} ${styles.raiting__total_green} ` :
+                                film.rating > 5 ? `${styles.raiting__total} ${styles.raiting__total_gray} ` :
+                                    `${styles.raiting__total} ${styles.raiting__total_red} `
+                        }>{film.rating.toFixed(1)}</div>
                         <div className={styles.raiting__des}>
                             <div className={styles.raiting__info}>
-                                <h2>Рейтинг Кинопоиск</h2>
-                                <h3>Интересный сюжет</h3>
-                                <h4>404 111 оценок</h4>
+                                <h2>{locale === 'ru' ? 'Рейтинг Кинопоиск' : 'Kinopoisk rating'}</h2>
+                                <h4>{film.votes} {locale === 'ru' ? 'оценок' : 'votes'}</h4>
                             </div>
-                            <div className={styles.raiting__estimate}>Оценить</div>
+                            <div className={styles.raiting__estimate}>{locale === 'ru' ? 'Оценить' : 'Estimate'}</div>
                         </div>
                     </div>
                 </div>
             </section>
             <section className={styles.secondSection}>
-                <h2 className={styles.subtitle}>C фильмом &quot;Калашников&quot; смотрят</h2>
-                <FilmSlider />
+                <h2 className={styles.subtitle}>{locale === 'ru' ? `C фильмом «${film.name}» смотрят` : `With the movie «${film.enName}» watch`}</h2>
+                <FilmSlider similarMovies={film.similarMovies}/>
             </section>
             <section className={styles.thirdSection}>
-                <h2 className={`${styles.subtitle} ${styles.subtitle__link} `} onClick={() => setShowModal(true)}>Актеры и создатели</h2>
+                <h2 className={`${styles.subtitle} ${styles.subtitle__link} `} onClick={() => setShowModal(true)}>{locale === 'ru' ? 'Актеры и создатели' : 'Actors and creators'}</h2>
                 <div className={styles.actors__list}>
-                    <FilmActors />
+                    <FilmActors actor={film.persons.режиссеры[0]} profession={locale === 'ru' ? 'Режиссер' : 'Director'}/>
+                    {
+                        film.persons.актеры.slice(0, 9).map((item) => <FilmActors key={item.personId} actor={item} profession={locale === 'ru' ? 'Актер' : 'Actor'}/>)
+                    }
                     <div className={styles.actors__showMore} onClick={() => setShowModal(true)}>
-                        Ещё
+                    {locale === 'ru' ? 'Еще' : 'More'}
                     </div>
                 </div>
                 {
-                    showModal ? <ModalActors setShowModal={setShowModal} /> : null
+                    showModal ? <ModalActors setShowModal={setShowModal} film={film} year={year}/> : null
                 }
             </section>
-            <section className={styles.trailersSection}>
-                <h2 className={`${styles.subtitle} ${styles.subtitle__link} `}>Трейлеры и доп. материалы</h2>
+            <section className={styles.trailersSection} id='trailers'>
+                <h2 className={`${styles.subtitle} ${styles.subtitle__link} `}>{locale === 'ru' ? 'Трейлеры и доп. материалы' : 'Trailers and extras materials'}</h2>
                 <div className={styles.trailersSection__list}>
-                    <Trailers />
+                    <Trailers trailer={film.trailer}/>
                 </div>
             </section>
             <section className={styles.commentsSection}>
-                <Comments />
+                <Comments comments={film.comments}/>
             </section>
             <section className={styles.watchSection}>
                 <div className={styles.watchSection__leftWrapper}>
-                    <h2 className={styles.subtitle}>Cмотреть «Непослушная» на всех устройствах</h2>
-                    <p className={styles.text}>Приложение доступно для скачивания на iOS, Android, SmartTV и приставках</p>
-                    <MainButton link='https://www.ivi.ru/devices' text='Подключить устройства' />
+                    <h2 className={styles.subtitle}>{locale === 'ru' ? 'Cмотреть' : 'Watch'} «{locale === 'ru' ? film.name : film.enName}» {locale === 'ru' ? 'на всех устройствах' : 'on all devices'}</h2>
+                    <p className={styles.text}>{locale === 'ru' ? 'Приложение доступно для скачивания на iOS, Android, SmartTV и приставках' : 'The app is available for download on iOS, Android, Smart TV and set-top boxes'}</p>
+                    <MainButton link='https://www.ivi.ru/devices' text={locale === 'ru' ? 'Подключить устройства' : 'Connect devices'} />
                 </div>
                 <div>
                     <Image loader={() => 'https://www.ivi.ru/images/_ds/watchAllDevices/tv-without-poster.png'}
                         src={'https://www.ivi.ru/images/_ds/watchAllDevices/tv-without-poster.png'}
-                        alt='prem' width={536} height={272} />
+                        alt='prem' width={536} height={272} unoptimized={true}/>
                 </div>
             </section>
 
@@ -164,3 +184,5 @@ const Film: NextPage = () => {
 }
 
 export default Film
+
+

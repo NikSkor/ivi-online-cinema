@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import backIcon from '/public/back_icon.svg'
 
 const BackLink: FC = () => {
-
+  const locale = useRouter().locale
   const router = useRouter()
 
   return (
@@ -21,7 +21,7 @@ const BackLink: FC = () => {
             src={backIcon} 
             alt="back_lcon"
             />
-          <p className={styles.controlButton__caption}>Назад</p>
+          <p className={styles.controlButton__caption}>{locale === 'ru' ? 'Назад' : 'Back'}</p>
         </div>
       </div>
   )

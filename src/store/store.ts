@@ -1,10 +1,14 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
 import { filtersReducer } from './slices/filtersSlice';
 import adminReducer from './slices/adminSlice';
+import { authReducer } from './slices/authSlice';
+import { loadingReducer } from './slices/loadingSlice';
 
 const rootReducer = combineReducers({
   filters: filtersReducer,
-  admin: adminReducer
+  admin: adminReducer,
+  auth: authReducer,
+  isLoading: loadingReducer
 });
 
 export function makeStore() {
@@ -16,8 +20,10 @@ export function makeStore() {
 
 export const store = makeStore();
 
-export type RootState = ReturnType<typeof store.getState>;
+export type RootState = ReturnType<typeof rootReducer>;
 
-export type AppDispatch = typeof store.dispatch;
+export type AppStore = ReturnType<typeof makeStore>
+
+export type AppDispatch = AppStore['dispatch'];
 
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, RootState, unknown, Action<string>>;

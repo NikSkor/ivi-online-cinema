@@ -1,6 +1,6 @@
-import React, { FC, useEffect, useState } from 'react'
+import React from 'react';
 import Admin from '@/components/screens/admin/Admin';
-import { NextPage } from 'next'
+import { NextPage } from 'next';
 import Layout from '@/components/layout/Layout';
 
 

@@ -4,17 +4,19 @@ import { IFilmographyItem } from '@/interfaces/person/IFilmographyItem'
 import styles from './FilmographyItem.module.scss'
 import { useRouter } from 'next/router'
 
-const FilmographyItem: FC<IFilmographyItem> = ({filmId, posterURL, year, name, rating}) => {
+const FilmographyItem: FC<IFilmographyItem> = ({movieId, poster, premiere, name, rating}) => {
 
-  const strRating = rating.toString().match(/\./) 
+  const strRating = rating.toString().match(/\./)
                         ? rating.toString().replace('.', ',')
                         : (rating.toString() + ',0' )
+	const date = new Date(premiere)
+	const year = date.getFullYear().toString()
 
   return (
       <div className={styles.filmographyItem}>
-        <Link href={`/film/${filmId}`} className={styles.filmographyItem__body}>
+        <Link href={`/film/${movieId}`} className={styles.filmographyItem__body}>
           <div className={styles.posterWrapper}>
-            <img className={styles.poster__img} src={posterURL} alt="poster" />
+            <img className={styles.poster__img} src={poster} alt="poster" />
           </div>
 
           <div className={styles.filmographyItem__main}>

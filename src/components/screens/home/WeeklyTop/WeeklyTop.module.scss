@@ -1,90 +1,111 @@
 .weeklyTop {
-  padding: 24px 0;
+
+
   .title {
+    margin-top: 24px;
+    margin-bottom: 14px;
     display: flex;
-    gap: 10px;
-    margin: 14px 0;
+    align-items: center;
+    gap: 15px;
 
     span {
-      font-size: 22px;
+      font-size: 24px;
       font-style: normal;
       font-weight: 700;
       line-height: 28px;
     }
   }
+  .carousel {
+    .poster {
+      padding-top: 12px;
+      padding-bottom: 20%;
+      transition: 0.4s;
+      cursor: pointer;
 
-  .poster {
-    padding: 10px 5px;
-
-    position: relative;
-    height: 492px;
-
-    cursor: pointer;
-    transform: scale(1.0) translateY(0);
-    transition-property: scale, translate;
-    transition-duration: 0.3s;
-
-    &:hover {
-      transform: scale(1.05) translateY(-5px);
-      transition: 0.3s;
-    }
-
-    .imageWrapper {
-      position: absolute;
-      & > img {
-        border-top-right-radius: 8px;
-        border-top-left-radius: 8px;
+      &:hover {
+        transform: translateY(-10px);
       }
 
-
-      .imageLogoArea {
-        bottom: 54px;
-        height: 21.05263158%;
-        left: 24px;
-        position: absolute;
-        right: 24px;
-
-        align-items: flex-end;
-        display: flex;
-        justify-content: center;
-        z-index: 1;
-
-        &::before {
-          content: "";
-          display: block;
-          height: 0;
-          padding-bottom: 120.90163934%;
+      .imageWrapper {
+        position: relative;
+        border-radius: 8px;
+        margin: 0 5%;
+        
+        &>img {
+          border-radius: 8px;
+          width: 100%;
         }
 
-      }
-
-      .imageFade {
-        background-image: linear-gradient(0deg, #100e19, rgba(16, 14, 25, 0));
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        right: 0;
-
-        &::before {
-          content: "";
-          display: block;
-          height: 0;
-          padding-bottom: 120.90163934%;
+        @media (max-width: 1075px) {
+          width: 80%;
         }
-      }
 
-      .number {
-        position: absolute;
-        bottom: -33px;
-        height: 66px;
-        left: 50%;
-        transform: translateX(-50%);
-        // white-space: nowrap;
+        @media (max-width: 750px) {
+          width: 90%;
+        }
 
-        img {
-          display: inline-block;
+        @media (max-width: 600px) {
+          width: 93%;
+        }
+
+        .imageLogoArea {
+          bottom: 12%;
+          height: 21.05263158%;
+          left: 24px;
+          position: absolute;
+          right: 24px;
+          z-index: 1;
+
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+
+        }
+
+        .imageFade {
+          background-image: linear-gradient(0deg, #100e19, rgba(16, 14, 25, 0));
+          bottom: 0;
+          left: 0;
+          position: absolute;
+          right: 0;
+
+          &:before {
+            content: "";
+            display: block;
+            height: 0;
+            padding-bottom: 120.90163934%;
+          }
+        }
+
+        .imageFadeFooter {
+          bottom: 0;
+          left: 0;
+          position: absolute;
+          right: 0;
+          background-image: linear-gradient(0deg, #100e19, rgba(16, 14, 25, 0));
+        }
+
+        .number {
+          bottom: -33px;
           height: 66px;
-          vertical-align: top;
+          left: 45%;
+          position: absolute;
+          transform: translateX(-50%);
+          white-space: nowrap;
+
+          img {
+            display: inline-block;
+            height: 66px;
+            vertical-align: top;
+
+            &:nth-of-type(2) {
+              margin-left: -10px;
+            }
+
+            @media (max-width: 450px) {
+              height: auto;
+            }
+          }
         }
       }
     }

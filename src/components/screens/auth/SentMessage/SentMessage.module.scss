@@ -1,0 +1,22 @@
+.messageWrapper {
+  background-color: #312b45;
+  padding: 16px;
+  border-radius: 12px 12px 12px 0;
+  max-width: 450px;
+
+  .messageBody {
+    p {
+      font-weight: bold;
+      font-size: 15px;
+      line-height: 20px;
+      margin-bottom: 2px;
+    }
+
+    span {
+      color: #a5a1b2;
+      font-weight: 400;
+      font-size: 12.2px;
+      line-height: 16px;
+    }
+  }
+}
