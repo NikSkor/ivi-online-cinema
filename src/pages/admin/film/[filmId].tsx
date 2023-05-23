@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import EditMovie from '@/components/screens/admin/editMovie/EditMovie';
 import Layout from '@/components/layout/Layout';
 import { useAppDispatch } from '@/store/hooks';
-import { addId } from '@/store/slices/adminSlice';
+import { addFilmId } from '@/store/slices/adminSlice';
 // import { addId } from '../../store/slices/adminSlice';
 
 
@@ -15,7 +15,7 @@ const FilmEditPage: NextPage = () => {
   const dispatch = useAppDispatch();
 
   if(typeof filmId !== 'undefined') {
-    dispatch(addId(+filmId));
+    dispatch(addFilmId(+filmId));
   }
 
 

@@ -1,34 +1,32 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
-import style from './EditMovie.module.scss';
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import style from './EditGenre.module.scss';
+import { useAppSelector } from "@/store/hooks";
 import Link from "next/link";
-import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import axios from "axios";
-import { API_URL_PATCH_MOVIES } from "../API/const";
-import { IFilmItem, IFilms } from "../interfaces/interfaces";
+import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
+import { API_URL_PATCH_GENRES } from "../API/const";
+import { IGenreItem, IGenres } from "../interfaces/interfaces";
 
-const EditMovie: FC = () => {
+const EditGenre: FC = () => {
 
-  const id: number = useAppSelector(state => state.admin.filmId);
-  const filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
+  const id: number = useAppSelector(state => state.admin.genreId);
+  const genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
   const [modalActive, setModalActive] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  const dispatch = useAppDispatch();
-
-
-  let filmItem: IFilmItem = {
+  let genreItem: IGenreItem = {
     id: 0,
     name: '',
-    enName: ''
+    enName: '',
   }
 
+  
   if (id !== undefined) {
-    filmsCatalog.forEach((item) => {
-    if (item.movieId === +id) {
-      filmItem = {
-        id: item.movieId,
+    genresCatalog.forEach((item) => {
+    if (item.genreId === +id) {
+      genreItem = {
+        id: item.genreId,
         name: item.name,
         enName: item.enName !== null ? item.enName : ''
       }
@@ -36,16 +34,17 @@ const EditMovie: FC = () => {
   })
   }
 
-  let [name, setName] = useState(filmItem.name);
-  let [enName, setEnName] = useState(filmItem.enName);
-  let [isValidName, setIsValidName] = useState(true);
+  const titleName = genreItem.name.slice();
 
+  let [name, setName] = useState(genreItem.name);
+  let [enName, setEnName] = useState(genreItem.enName);
+  let [isValidName, setIsValidName] = useState(true);
 
   let resetHandler = (e: any) => {
     e.preventDefault();
 
-    setName(filmItem.name);
-    setEnName(filmItem.enName);
+    setName(genreItem.name);
+    setEnName(genreItem.enName);
   }
 
   let submitHandler = async (e: any) => {
@@ -55,13 +54,13 @@ const EditMovie: FC = () => {
       setIsValidName(false);
       setModalActive(true);
     } else {
-      let filmValues: IFilmItem = {
+      let genreValues: IGenreItem = {
         id: id,
         name: name,
-        enName: enName,
+        enName: enName
       }
 
-      let data = JSON.stringify(filmValues); 
+      let data = JSON.stringify(genreValues); 
 
       const headers = {
         'Content-type': 'application/json',
@@ -69,11 +68,11 @@ const EditMovie: FC = () => {
       }
 
       try {
-      const response = await axios.patch(`${API_URL_PATCH_MOVIES}${id}`, data, {
+      const response = await axios.patch(`${API_URL_PATCH_GENRES}${id}`, data, {
         headers: headers
       });
         console.log('Returned data:', response);
-        setModalMessage(`Фильм "${filmItem.name}" обновлён.`);
+        setModalMessage(`Жанр "${genreItem.name}" обновлён.`);
       } catch (e: any) {
         console.log(`Axios request failed: ${e}`);
         setModalMessage(e.message.toString());
@@ -82,33 +81,29 @@ const EditMovie: FC = () => {
     }
   }
 
-
   let foreignNameHandler = (e: any) => {
     let reg = /[а-яА-ЯёЁ]/g;
     if (e.target.value.search(reg) !=  -1) {
         e.target.value  =  e.target.value.replace(reg, '');
     }
     setEnName(e.target.value)
-  }
-
-  const titleName = filmItem.name.slice();
-
+    }
   
   return(
       <div className="container">
         <section className={style.header}>
           <BreadCrumbs 
             pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
-            slug={'Фильм'} /> 
+            slug={'Жанр'} /> 
         </section>
         <section className={style.main}>
           <h2 className={style.title}>{titleName}</h2>
           <div className={style.form}>
-          <label className={style.label} data-id='url'>
+          <label className={style.label} data-id='name'>
             Название:
             <input placeholder="Введите название" className={style.inputs} type='text' value={name} onChange={(e) => {setName(e.target.value)}}/>
           </label>
-          <label className={style.label} data-id='url'>
+          <label className={style.label} data-id='enName'>
             Название на английском:
             <input placeholder="Введите название" className={style.inputs} type='text' value={enName} onChange={(e) => {foreignNameHandler(e)}}/>
           </label>
@@ -128,4 +123,4 @@ const EditMovie: FC = () => {
   )
 }
 
-export default EditMovie;
+export default EditGenre;

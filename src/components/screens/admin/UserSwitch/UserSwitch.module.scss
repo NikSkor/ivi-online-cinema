@@ -1,0 +1,67 @@
+@import '../../../../styles/vars.scss';
+
+.title {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.toggleContainer {
+  display: flex;
+  gap: 20px;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.toggle {
+  display: inline-block;
+  position: relative;
+  width: 60px;
+  height: 34px;
+}
+
+.toggleInput {
+  height: 0;
+  width: 0;
+  opacity: 0;
+}
+
+.toggleSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 34px;
+
+  background-color: $red;
+  transition: .5s;
+}
+
+.toggleSlider::before {
+  content: '';
+  position: absolute;
+  cursor: pointer;
+  left: 4px;
+  bottom: 4px;
+  height: 26px;
+  width: 26px;
+  border-radius: 50%;
+
+  background-color: #fff;
+  transition: .5s;
+}
+
+.toggleInput:focus+.toggleSlider {
+  box-shadow: 0 0 1px $lightGray;
+}
+
+.toggleInput:checked+.toggleSlider {
+  background-color: $secondary;
+}
+
+.toggleInput:checked+.toggleSlider::before {
+  transform: translateX(26px);
+}
