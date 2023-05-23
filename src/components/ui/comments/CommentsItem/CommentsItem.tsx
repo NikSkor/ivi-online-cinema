@@ -6,12 +6,14 @@ import { MainButton } from '../../button/MainBtn/MainButton'
 import { IComments } from '@/components/screens/film/film.data'
 import { NewComment } from '../NewComment/NewComment'
 import { useAppSelector } from '@/store/hooks'
+import { useRouter } from 'next/router'
 
 interface IProps {
     item: IComments
 }
 
 export const CommentsItem: React.FC<IProps> = ({ item }) => {
+    const locale = useRouter().locale
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const [toAnswer, setToAnswer] = useState(false);
     return (
@@ -24,14 +26,14 @@ export const CommentsItem: React.FC<IProps> = ({ item }) => {
                 {
                     isAuth ?
                 <div className={styles.comments__toAnswer} onClick={() => setToAnswer(!toAnswer)}>{
-                    toAnswer ? 'Закрыть' : 'Ответить'
+                    toAnswer ? (locale === 'ru' ? 'Закрыть' : 'Close') : (locale === 'ru' ? 'Ответить' : 'Answer')
                 }</div> : <div></div>
                 }
                 <div className={styles.comments__likes}>
                     <Image src={like} alt='actor' width={15} height={15} />16</div>
             </div>
             {
-                toAnswer ? <NewComment title={`Ответить на комментарий ${item.userName}`} parentId={item.parentId} close={setToAnswer} /> : null
+                toAnswer ? <NewComment title={`${locale === 'ru' ? 'Ответить на комментарий' : 'Reply to the comment'} ${item.userName}`} parentId={item.commentId} close={setToAnswer} /> : null
             }
             {
                 item.childComments.length > 0 ? item.childComments.map(item => <CommentsItem key={item.commentId} item={item} />) : null
