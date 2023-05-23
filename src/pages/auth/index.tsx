@@ -10,7 +10,7 @@ const AuthPage: NextPage = () => {
     if(localStorage.getItem('token')) {
       dispatch(checkAuth())
     }
-  }, [])
+  })
   const isAuth = useAppSelector(state => state.auth.isAuth)
   isAuth ? window.location.href="/" : null
   return(

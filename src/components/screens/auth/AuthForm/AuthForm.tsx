@@ -16,15 +16,10 @@ export default function AuthForm() {
   const locale = useRouter().locale
   const dispatch = useAppDispatch()
   const error = useAppSelector(state => state.auth.error)
-  const getErrorMessage = (message: string) => {
-    if (message[0] === 'Не меньше 4 и не больше 16') {
-      return 'Минимальная длина пароля - 4 символа. Максимальная - 16.'
+  const getErrorMessage = (message: string | string[]) => {
+    if (Array.isArray(message)) {
+      return message[0]
     }
-
-    if (message === 'Invalid credentials') {
-      return 'Неправильный логин или пароль'
-    }
-
     return message
   }
 

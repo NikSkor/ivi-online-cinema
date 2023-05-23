@@ -10,7 +10,6 @@
   @media (max-width: 600px) {
     padding-top: 10px;
   }
-  @media (min-width: 1800px) {
     &.dropdownOpen {
       background-color: #1f1b2e;
       border-top-left-radius: 20px;
@@ -23,7 +22,7 @@
   
       z-index: 1;
     }
-  }
+    
   .headerTop {
     display: flex;
     align-items: center;
