@@ -6,8 +6,10 @@ import WeeklyTop from './WeeklyTop/WeeklyTop'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { useAppDispatch } from '@/store/hooks'
+import { setLoading } from '@/store/slices/loadingSlice'
+import SelectLang from '@/components/layout/footer/selectLang/SelectLang'
 
-import { filmographyData } from '@/components/ui/filmography/filmography.data'
 
 const Home: FC = () => {
   const [isClauseOpen, setIsClauseOpen] = useState(false)
@@ -17,42 +19,57 @@ const Home: FC = () => {
   const [moviesWithActor, setMoviesWithActor] = useState([])
   const actor = 'Леонардо Дикаприо'
   const enActor = 'Leonardo DiCaprio'
+  const dispatch = useAppDispatch()
   
   const locale = useRouter().locale
-
   useEffect(() => {
     const getDramas = async () => {
-      const response = await axios.get('http://localhost:5000/api/movie', {
-        params: {
-          page: 1,
-          genres:["драма"],
-          rating: 8
-        }
-      })
-      setDramaMovies(response.data)
+      try {
+        const genreResponse = await axios.get('http://localhost:5000/api/movie/genre')
+        const genre = genreResponse.data.find((genre: any) => genre.genreId === 1)
+        const response = await axios.get('http://localhost:5000/api/movie', {
+          params: {
+            page: 1,
+            genres: genre.name,
+            rating: 8
+          }
+        })
+        setDramaMovies(response.data.movies)
+      } catch (error) {
+        console.log(error)
+      }
     }
     const getMoviesWithActor = async () => {
-      const response = await axios.get('http://localhost:5000/api/movie', {
-        params: {
-          page: 1,
-          person: actor
-        }
-      })
-      setMoviesWithActor(response.data)
+      try {
+        const response = await axios.get('http://localhost:5000/api/movie', {
+          params: {
+            page: 1,
+            person: actor
+          }
+        })
+        setMoviesWithActor(response.data.movies)
+      } catch (error) {
+        console.log(error)
+      }
     }
 
-    getDramas()
-    getMoviesWithActor()
+    const getData = async () => {
+      try {
+        dispatch(setLoading(true))
+        await getDramas()
+        await getMoviesWithActor()
+      } catch (error) {
+        console.log(error)
+      } finally {
+        dispatch(setLoading(false))
+      }
+    }
+    getData()
   }, [])
+  
   return (
     <Layout title="Онлайн-кинотеатр Иви">
       <main className={`${styles.main} container`}>
-        <Link href="/" locale={'ru'}>
-          <button className={styles.langButton}>Русский язык</button>
-        </Link>
-        <Link href="/" locale="en">
-          <button className={styles.langButton}>Английский язык</button>
-        </Link>
         <WeeklyTop />
         <div className={styles.clause}>
           <h4 className={styles.clauseTitle}>
@@ -167,6 +184,7 @@ const Home: FC = () => {
           <Category title={locale === 'ru' ? "Лучшие драмы" : 'The best dramas'} items={dramaMovies}/>
           <Category title={locale === 'ru' ? `Фильмы с ${actor}` : `Films with ${enActor}`} items={moviesWithActor} />
         </div>
+        <SelectLang />
       </main>
     </Layout>
   )

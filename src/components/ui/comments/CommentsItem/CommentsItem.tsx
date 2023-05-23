@@ -3,34 +3,41 @@ import Image from 'next/image'
 import styles from '../comments.module.sass'
 import like from '../icons/like.svg'
 import { MainButton } from '../../button/MainBtn/MainButton'
+import { IComments } from '@/components/screens/film/film.data'
+import { NewComment } from '../NewComment/NewComment'
+import { useAppSelector } from '@/store/hooks'
+import { useRouter } from 'next/router'
 
-export const CommentsItem = () => {
+interface IProps {
+    item: IComments
+}
+
+export const CommentsItem: React.FC<IProps> = ({ item }) => {
+    const locale = useRouter().locale
+    const isAuth = useAppSelector(state => state.auth.isAuth)
     const [toAnswer, setToAnswer] = useState(false);
     return (
-        <li className={styles.comments__item}>
-            <h3 className={styles.comments__name}>Name</h3>
+        <div className={styles.comments__item}>
+            <h3 className={styles.comments__name}>{item.userName}</h3>
             <p className={styles.comments__text}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Quidem corrupti provident voluptate, repellendus enim non maiores repellat sunt aut aperiam vel
-                blanditiis nemo vero reprehenderit quae, nam, nihil recusandae voluptatibus?Lorem ipsum, dolor
-                sit amet consectetur adipisicing elit. Quidem corrupti provident voluptate, repellendus enim non
-                maiores repellat sunt aut aperiam vel blanditiis nemo vero reprehenderit quae, nam, nihil recusandae
-                voluptatibus?
+                {item.value}
             </p>
             <div className={styles.comments__bottomBlock}>
+                {
+                    isAuth ?
                 <div className={styles.comments__toAnswer} onClick={() => setToAnswer(!toAnswer)}>{
-                    toAnswer ? 'Закрыть' : 'Ответить'
-                }</div>
+                    toAnswer ? (locale === 'ru' ? 'Закрыть' : 'Close') : (locale === 'ru' ? 'Ответить' : 'Answer')
+                }</div> : <div></div>
+                }
                 <div className={styles.comments__likes}>
                     <Image src={like} alt='actor' width={15} height={15} />16</div>
             </div>
             {
-                toAnswer ? <div className={styles.newComment__form}>
-                    <input type="text" placeholder='Name' className={styles.newComment__name} />
-                    <textarea name="message" placeholder='Your message' className={styles.newComment__textarea} rows={5}></textarea>
-                    <div onClick={() => setToAnswer(false)}><MainButton text='Ответить на комментарий' /></div>
-                </div> : null
+                toAnswer ? <NewComment title={`${locale === 'ru' ? 'Ответить на комментарий' : 'Reply to the comment'} ${item.userName}`} parentId={item.commentId} close={setToAnswer} /> : null
             }
-        </li>
+            {
+                item.childComments.length > 0 ? item.childComments.map(item => <CommentsItem key={item.commentId} item={item} />) : null
+            }
+        </div>
     )
 }

@@ -8,7 +8,7 @@ const MenuList = () => {
 	return (
 		<div className={styles.menuList}>
 			{
-				MenuListData.map(menuItem => <MenuItem title={locale === 'ru' ? menuItem.title : menuItem.enTitle} icon={menuItem.icon} />)
+				MenuListData.map(menuItem => <MenuItem key={menuItem.title} title={locale === 'ru' ? menuItem.title : menuItem.enTitle} icon={menuItem.icon} />)
 			}
 		</div>
 	)

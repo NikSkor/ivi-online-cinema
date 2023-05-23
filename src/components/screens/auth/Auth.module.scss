@@ -1,0 +1,71 @@
+.authPage {
+  min-width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  header {
+    text-align: center;
+    position: relative;
+    
+    p {
+      padding: 15px 0;
+      display: inline-block;
+      font-size: 14.3px;
+      font-weight: 700;
+    }
+
+    a > img {
+      position: absolute;
+      top: 35%;
+      right: 20px;
+    }
+    .progressBar {
+      height: 1px;
+      background-color: rgb(57, 51, 82);
+  
+      .currentProgress {
+        width: 50%;
+        height:1px;
+        background-color: red;
+      }
+    }
+  }
+  
+  main {
+    flex: 1 auto;
+    background-color: rgba(4, 5, 10, 0.5);
+
+    .chat {
+      width: 600px;
+      margin: 0 auto;
+      height: 500px;
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+
+      @media (max-width: 650px) {
+        & {
+          width: 95%;
+        }
+
+        & > div:first-child {
+          margin: 0 auto;
+        }
+      }
+
+      @media (max-width: 500px) {
+        & > div:first-child {
+          p {
+            font-size: 0.8rem;
+            line-height: 15px;
+          }
+
+          span {
+            font-size: 0.65rem;
+          }
+        }
+      }
+    }
+  }
+
+}

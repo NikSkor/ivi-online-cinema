@@ -2,7 +2,7 @@ export const MenuListData = [
     {
         title: 'Покупки',
         enTitle: 'Purchases',
-        icon: '/films-icon.svg'
+        icon: '/purchases-icon.svg'
     },
     {
         title: 'Смотреть позже',
@@ -27,7 +27,7 @@ export const MenuListData = [
     {
         title: 'Вход по коду',
         enTitle: 'Login by code',
-        icon: '/tv-icon.svg'
+        icon: '/tv.svg'
     },
     {
         title: 'Способы оплаты',

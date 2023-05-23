@@ -3,20 +3,21 @@ import styles from './Category.module.scss'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import SliderItem from './Slider/SliderItem/SliderItem'
+import SliderItem from './SliderItem/SliderItem'
 
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import { CategoryData } from './CategoryData/CategoryData'
+import { useAppSelector } from '@/store/hooks'
+import Skeleton from './Skeleton'
 type CategoryProps = {
   title: String
   items: any[]
 }
 
 const Category: FC<CategoryProps> = ({ title, items }) => {
-  // console.log(window)
   const settings = {
     dots: false,
     infinite: false,
@@ -57,6 +58,7 @@ const Category: FC<CategoryProps> = ({ title, items }) => {
     ]
   };
 
+  const isLoading = useAppSelector(state => state.isLoading.isLoading)
   return (
     <div className={styles.category}>
       <Link href="/">
@@ -67,10 +69,14 @@ const Category: FC<CategoryProps> = ({ title, items }) => {
       </Link>
       <Slider className={styles.sliderTrack} {...settings}>
         {
-          items.map((film, index) => <SliderItem key={`film-${index}`} film={film} />)
+          isLoading 
+          ? [1,2,3,4,5,7,8 ].map((_, index) => <Skeleton key={index}/>)
+          : items.map((film, index) => <SliderItem key={`film-${index}`} film={film} />)
         }
         <div className={styles.seeMore}>
+          <div>
           <p>Посмотреть все</p>
+          </div>
         </div>
       </Slider>
     </div>

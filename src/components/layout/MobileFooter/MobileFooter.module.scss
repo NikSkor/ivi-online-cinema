@@ -1,3 +1,7 @@
+
+.blocked {
+  overflow: hidden;
+}
 .tabBarPlate {
   position: fixed;
   bottom: 0;
@@ -21,6 +25,7 @@
     width: 100%;
 
     a {
+      position: relative;
       cursor: pointer;
       display: flex;
       flex-basis: 100%;
@@ -34,11 +39,16 @@
       position: relative;
       text-decoration: none;
 
-
-
       img,svg {
         width: 20px;
         height: 20px;
+      }
+
+      &:last-of-type {
+        img,svg {
+          width: 18px;
+        height: 18px;
+        }
       }
 
       p {

@@ -1,11 +1,20 @@
 import Link from 'next/link'
 import styles from './MobileFooter.module.scss'
 import Drawer from './Drawer/Drawer'
+import { FC, useState } from 'react'
+import { IHeader } from '../header/Header'
 
-const MobileFooter = () => {
+const MobileFooter:FC<IHeader> = ({ countries, genres }) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false)
+
+  const toggleDrawer = () => {
+    setIsDrawerOpen(!isDrawerOpen)
+    if (isDrawerOpen) document.getElementsByTagName('body')[0].style.overflow="auto";
+      else document.getElementsByTagName('body')[0].style.overflow="hidden";
+  }
   return (
     <>
-    <Drawer />
+    {isDrawerOpen ? <Drawer genres={genres} countries={countries} /> : null}
       <div className={styles.tabBarPlate}>
         <div className={styles.tabBarMenu}>
           <Link href="/">
@@ -24,9 +33,9 @@ const MobileFooter = () => {
             <img src="/tv.svg" alt="" />
             <p>TV+</p>
           </Link>
-          <Link href="/">
-            <img src="/dots-icon.svg" alt="" />
-            <p>Ещё</p>
+          <Link href="/" onClick={toggleDrawer}>
+            <img src={isDrawerOpen ? 'x-icon.svg' : "/dots-icon.svg"} alt="" />
+            <p>{isDrawerOpen ? 'Закрыть' : 'Ещё'}</p>
           </Link>
         </div>
       </div>

@@ -6,7 +6,7 @@ import { Context } from 'vm'
 import { IFilm } from '@/components/screens/film/film.data'
 const FilmPage = (film: IFilm) => {
   return (
-    <Layout title="Фильм">
+    <Layout title={film.name}>
         <Film film={film}/> 
     </Layout>
   )

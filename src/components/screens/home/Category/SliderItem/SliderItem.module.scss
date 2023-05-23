@@ -1,0 +1,121 @@
+.sliderItem {
+  border-radius: 8px;
+  width: 88%;
+  padding-top: 10px;
+
+
+  &:hover {
+    .imageOverlay {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .image {
+      transform: translateY(-10px);
+    }
+  }
+
+  .image {
+    position: relative;
+    transition: 0.4s;
+    
+    img {
+      border-radius: 8px;
+      min-height: 5rem;
+    }
+  }
+  .imageOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    opacity: 0;
+    visibility: hidden;
+    padding: 15px;
+    
+  
+    transition-property: opacity, visibility;
+    transition-duration: .3s;
+  
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+  
+    .iconsBlock {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+     
+      .icon {
+        width: 20px;
+        height: 20px;
+        z-index: 3;
+        &:not(:last-of-type) {
+          margin-bottom: 10px;
+        }  
+      }
+
+      @media (max-width: 1160px) {
+        display: none;
+      }
+    }
+  
+    .infoBlock {
+      display: inline-block;
+      color: #a5a1b2;
+  
+      .score {
+        font-size: 24px;
+        font-weight: 700;
+        color: white;
+      }
+      .property {
+        margin-top: 3px;
+        font-size: 12px;
+        .progressBar {
+          margin-top: 5px;
+          display: block;
+        height: 4px;
+        border-radius: 2px;
+        width: 75%;
+        background-color: rgb(57, 51, 82);
+  
+        .currentProgress {
+          width: 43%;
+          height: 4px;
+          background-color: red;
+        }
+        }
+      }
+  
+      .filmTags {
+        margin-top: 8px;
+        font-size: 12.8px;
+        color: #c6c4ca;
+  
+          p:first-of-type {
+            margin-bottom: 5px;
+          }
+        
+      }
+    }
+  }
+
+  .text {
+    margin-top: 8px;
+    p {
+      font-size: 15px;
+      font-weight: 600;
+      color: rgb(255, 255, 255, 0.85)
+    }
+
+    span {
+      font-size: 12.4px;
+      color: rgb(255, 255, 255, 0.6)
+    }
+  }
+}
