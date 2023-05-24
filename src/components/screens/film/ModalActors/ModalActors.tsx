@@ -31,7 +31,7 @@ export const ModalActors: React.FC<Props> = (props) => {
             <div className={styles.modalActors__dialog}>
                 <div className={styles.modalActors__info}>
 
-                    <h1 className={styles.title}>{locale === 'ru' ? film.name : film.enName} ({locale === 'ru' ? 'Фильм' : 'Movie'} {year})</h1>
+                    <h1 className={styles.title}>{film.name} ({locale === 'ru' ? 'Фильм' : 'Movie'} {year})</h1>
 
                     <div className={styles.modalActors__tabs}>
                         <div className={styles.modalActors__creators}>{locale === 'ru' ? 'Создатели' : 'Creators'}</div>
@@ -51,7 +51,7 @@ export const ModalActors: React.FC<Props> = (props) => {
                         </ul>
                     </div>
                 </div>
-                <div>
+                <div className={styles.modalActors__about}>
                     <div className={styles.modalActors__image}>
                         <Image loader={() => film.poster} src={film.poster} alt='actor' width={153} height={235} unoptimized={true} />
                     </div>
