@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router'
 import { MainButton } from '../../button/MainBtn/MainButton'
 import styles from '../comments.module.sass'
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from 'axios';
 import { useState } from 'react';
 interface IProps {
     parentId: null | number,
