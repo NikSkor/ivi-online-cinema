@@ -14,7 +14,6 @@ import { searchInCatalog } from "./functions/searchInCatalog";
 import CrudBlock from "@/components/screens/admin/GenreBlock/CrudBlock";
 import Preloader from "@/components/screens/admin/Preloader/Preloader";
 import { IFilms, IGenres } from "./interfaces/interfaces";
-import { type } from "os";
 
 const Admin: FC = () => {
 

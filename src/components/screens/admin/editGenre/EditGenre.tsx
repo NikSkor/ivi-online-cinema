@@ -7,6 +7,7 @@ import axios from "axios";
 import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import { API_URL_PATCH_GENRES } from "../API/const";
 import { IGenreItem, IGenres } from "../interfaces/interfaces";
+import { TOKEN } from "../API/token";
 
 const EditGenre: FC = () => {
 
@@ -64,7 +65,7 @@ const EditGenre: FC = () => {
 
       const headers = {
         'Content-type': 'application/json',
-        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MjUxNjIzOTAyMiwiaXNBZG1pbiI6dHJ1ZX0.f1EOoLCXMQPDGD0s9QaO5tkWTsH77lDXpNdAgp_Q-1s'
+        'Authorization': TOKEN
       }
 
       try {
