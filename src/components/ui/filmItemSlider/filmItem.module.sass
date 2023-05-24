@@ -4,6 +4,7 @@
         display: flex
         gap: 25px
     &__item
+        width: 100%
         display: inline-block
         cursor: pointer
         padding: 0
@@ -21,10 +22,8 @@
         cursor: pointer
         img
             height: 235px
-            
     &__info
         h3
-            flex-grow: 1
             color: rgba(255,255,255,.9)
             font-size: 14px
             font-weight: 400
@@ -87,3 +86,41 @@
             background-color: rgba(255, 255, 255, 0.253)
             div
                 background-color: #fd0241
+
+@media ( max-width: 550px )
+    .slider
+        &__image
+            width: 130px
+            img
+                height: 198px
+        &__info
+            h3
+                font-size: 12px
+            h4
+                font-size: 10px
+
+@media ( max-width: 460px )
+    .slider
+        &__image
+            width: 120px
+            img
+                height: 188px
+@media ( max-width: 420px )
+    .slider
+        &__image
+            width: 153px
+            img
+                height: 253px
+@media ( max-width: 375px )
+    .slider
+        &__image
+            width: 140px
+            img
+                height: 230px
+@media ( max-width: 320px )
+    .slider
+        &__image
+            width: 140px
+            img
+                height: 230px
+

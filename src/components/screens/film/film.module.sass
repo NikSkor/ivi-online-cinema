@@ -277,7 +277,6 @@
         font-style: normal
 //имитация видео
 .video
-    position: relative
     embed
         width: 100%
         height: 400px
@@ -312,6 +311,7 @@
     margin-bottom: 30px
 //slider
 .slider
+    justify-content: flex-start
     &__item
         cursor: pointer
         &:hover
@@ -396,8 +396,9 @@
 
 .actors
     &__list
-        display: flex
-        gap: 25px
+        display: grid
+        grid-template-columns: repeat(auto-fill, minmax(88px, 1fr))
+        gap: 20px
     &__item
         font-size: 13px
         line-height: 16px
@@ -444,3 +445,32 @@
     &__leftWrapper
         width: 40%
     &__rightWrapper
+
+@media ( max-width: 1024px )
+    .film
+        &__info
+            width: 100%
+            flex-direction: column-reverse
+
+@media ( max-width: 767px )
+    .watchSection
+        flex-direction: column-reverse
+        &__leftWrapper
+            width: 100%
+            margin-bottom: 50px
+        &__rightWrapper
+            margin-bottom: 50px
+    .title
+        font-size: 34px
+    .video
+        embed
+            height: 300px
+
+@media ( max-width: 420px )
+    .subtitle
+        font-size: 20px
+    .actor
+        flex-wrap: wrap
+    .video
+        embed
+            height: 200px

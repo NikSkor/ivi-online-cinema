@@ -47,15 +47,15 @@ const Film = ( {film} : IProps ) => {
                     </div>
                 </div>
                 <div>
-                    <h1 className={styles.title}>{locale === 'ru' ? film.name : film.enName} ({locale === 'ru' ? 'Фильм' : 'Movie'} {year})</h1>
+                    <h1 className={styles.title}>{film.name} ({locale === 'ru' ? 'Фильм' : 'Movie'} {year})</h1>
                     <h2 className={styles.film__text}>{year}, {minutesToHHmm(film.movieLength)}, {film.ageRating}+</h2>
                     <div>
                         <ul className={styles.film__list}>
                             {
-                                film.countries.slice(0, 1).map((item: { countryId: number; name: string  }) => { return <li key={item.countryId}><Link href=''>{item.name}</Link></li> })
+                                film.countries.slice(0, 1).map((item: { countryId: number; name: string  }) => { return <li key={item.countryId}><Link href={`/movies/[${item.name}]`}>{item.name}</Link></li> })
                             }
                             {
-                                film.genres.slice(0, 4).map((item: { genreId: number; name: string  }) => { return <li key={item.genreId}><Link href=''>{item.name}</Link></li> })
+                                film.genres.slice(0, 4).map((item: { genreId: number; name: string  }) => { return <li key={item.genreId}><Link href={`/movies/[${item.name}]`}>{item.name}</Link></li> })
                             }
                         </ul>
                     </div>
@@ -139,7 +139,7 @@ const Film = ( {film} : IProps ) => {
                 </div>
             </section>
             <section className={styles.secondSection}>
-                <h2 className={styles.subtitle}>{locale === 'ru' ? `C фильмом «${film.name}» смотрят` : `With the movie «${film.enName}» watch`}</h2>
+                <h2 className={styles.subtitle}>{locale === 'ru' ? `C фильмом «${film.name}» смотрят` : `With the movie «${film.name}» watch`}</h2>
                 <FilmSlider similarMovies={film.similarMovies}/>
             </section>
             <section className={styles.thirdSection}>
@@ -168,11 +168,11 @@ const Film = ( {film} : IProps ) => {
             </section>
             <section className={styles.watchSection}>
                 <div className={styles.watchSection__leftWrapper}>
-                    <h2 className={styles.subtitle}>{locale === 'ru' ? 'Cмотреть' : 'Watch'} «{locale === 'ru' ? film.name : film.enName}» {locale === 'ru' ? 'на всех устройствах' : 'on all devices'}</h2>
+                    <h2 className={styles.subtitle}>{locale === 'ru' ? 'Cмотреть' : 'Watch'} «{film.name}» {locale === 'ru' ? 'на всех устройствах' : 'on all devices'}</h2>
                     <p className={styles.text}>{locale === 'ru' ? 'Приложение доступно для скачивания на iOS, Android, SmartTV и приставках' : 'The app is available for download on iOS, Android, Smart TV and set-top boxes'}</p>
                     <MainButton link='https://www.ivi.ru/devices' text={locale === 'ru' ? 'Подключить устройства' : 'Connect devices'} />
                 </div>
-                <div>
+                <div className={styles.watchSection__rightWrapper}>
                     <Image loader={() => 'https://www.ivi.ru/images/_ds/watchAllDevices/tv-without-poster.png'}
                         src={'https://www.ivi.ru/images/_ds/watchAllDevices/tv-without-poster.png'}
                         alt='prem' width={536} height={272} unoptimized={true}/>

@@ -2,7 +2,7 @@
     background-color: #00000a
     position: fixed
     overflow: hidden !important
-    z-index: 50
+    z-index: 10000
     height: 100vh
     width: 100%
     top: 0
@@ -112,3 +112,44 @@
             background-color: rgba(255, 255, 255, 0.253)
             div
                 background-color: #fd0241
+
+@media ( max-width: 1024px )
+    .modalActors
+        &__about
+            display: none
+        &__info
+            width: 100%
+    .title
+        text-align: center
+@media ( max-width: 1024px )
+    .modalActors
+        &__itemImage
+            height: 100px
+            width: 100px
+        &__name
+            color: #d9d7e0
+            font-weight: 500
+        &__films
+            color: #a5a1b2
+@media ( max-width: 767px )
+    .title
+        font-size: 30px
+    .modalActors
+        &__list
+            grid-template-columns: repeat(auto-fill, minmax(80px, 4fr))
+        &__itemImage
+            height: 80px
+            width: 80px
+    .actors
+        &__name
+            font-size: 12px
+
+@media ( max-width: 420px )
+    .title
+        font-size: 24px
+    .modalActors
+        &__list
+            grid-template-columns: repeat(auto-fill, minmax(60px, 4fr))
+        &__itemImage
+            height: 60px
+            width: 60px
