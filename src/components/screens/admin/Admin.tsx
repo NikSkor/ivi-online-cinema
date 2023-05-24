@@ -6,7 +6,7 @@ import trashImg from '../../../../public/trash.svg';
 import { API_URL_GET_GENRES, API_URL_GET_MOVIES} from "./API/const";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { addFilms, addGenres} from "@/store/slices/adminSlice";
+import { addFilms, addGenres, addPageCount, newPage} from "@/store/slices/adminSlice";
 import { paginateCatalog } from "./functions/paginateCatalog";
 import Pagination from "@/components/screens/admin/Pagination/Pagination";
 import UserSwitch from "@/components/screens/admin/UserSwitch/UserSwitch";
@@ -24,6 +24,9 @@ const Admin: FC = () => {
   let [isLoaded, setIsLoaded] = useState(false);
   let [isGenres, setIsGenres] = useState(true);
   const pageNumber: number = useAppSelector(state => state.admin.page);
+  let moviesPagesSum: number = useAppSelector(state => state.admin.pageCount);
+
+  if(moviesPagesSum > 10) moviesPagesSum = 10;
 
   useEffect(()=> {
     localStorage.setItem('switch', JSON.stringify(isGenres));
@@ -46,7 +49,7 @@ const Admin: FC = () => {
     setSearchMovies('');
     setIsLoaded(false);
   }
-    
+
   const updatePage = () => {
     window.scrollTo({
       top: 0,
@@ -61,6 +64,7 @@ const Admin: FC = () => {
 
   useEffect(() => {
     if(isGenres) {
+      setIsLoaded(false);
       const loadGenreList = async() => {
         try {
           const response = await axios.get(API_URL_GET_GENRES);
@@ -80,11 +84,13 @@ const Admin: FC = () => {
 
     useEffect(() => {
     if(!isGenres) {
+      setIsLoaded(false);
       const loadMovieList = async() => {
         try {
         const response = await axios.get(`${API_URL_GET_MOVIES}?page=${pageNumber}&search=${search}`);
         console.log('Returned data:', response);
-        dispatch(addFilms(response.data));
+        dispatch(addFilms(response.data.movies));
+        dispatch(addPageCount(response.data.pageCount));
         setIsLoaded(true);
         } catch (e: any) {
           console.log(`Axios request failed: ${e}`);
@@ -116,12 +122,15 @@ const Admin: FC = () => {
 
   const enterInputHandler = (e: any) => {
     if( e.keyCode === 13 ) {
+      setIsLoaded(false);
+
       if (isGenres) {
         setSearchGenres(searchInput);
       } else {
         setSearchMovies(searchInput);
       }
-      setIsLoaded(false);
+      setIsLoaded(true);
+
     }
   }
 
@@ -130,11 +139,14 @@ const Admin: FC = () => {
     e.preventDefault();
 
     setIsLoaded(false);
+    dispatch(newPage(1));
 
     if (isGenres) {
       setSearchGenres(searchInput);
+      setIsLoaded(true);
     } else {
       setSearchMovies(searchInput);
+      setIsLoaded(true);
     }
   }
 
@@ -206,7 +218,7 @@ const Admin: FC = () => {
           }
         {isGenres
           ? <Pagination pagesSum={pages} pageActive={pageNumber} getPage={updatePage}/>
-          : <Pagination pagesSum={10} pageActive={pageNumber} getPage={updatePage}/>
+          : <Pagination pagesSum={moviesPagesSum} pageActive={pageNumber} getPage={updatePage}/>
         }
       </ul>
         <button className={style.actionBtn}>
