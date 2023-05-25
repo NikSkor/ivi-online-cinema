@@ -8,9 +8,10 @@ import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import { API_URL_PATCH_GENRES } from "../API/const";
 import { IGenreItem, IGenres } from "../interfaces/interfaces";
 import { TOKEN } from "../API/token";
+import { useRouter } from "next/router";
 
 const EditGenre: FC = () => {
-
+  const locale = useRouter().locale;
   const id: number = useAppSelector(state => state.admin.genreId);
   const genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
   const [modalActive, setModalActive] = useState(false);
@@ -35,7 +36,10 @@ const EditGenre: FC = () => {
   })
   }
 
-  const titleName = genreItem.name.slice();
+  let titleName: string;
+  locale !== 'ru' && genreItem.enName !== ''
+    ? titleName = genreItem.enName.slice()
+    : titleName = genreItem.name.slice();
 
   let [name, setName] = useState(genreItem.name);
   let [enName, setEnName] = useState(genreItem.enName);
@@ -93,30 +97,101 @@ const EditGenre: FC = () => {
   return(
       <div className="container">
         <section className={style.header}>
-          <BreadCrumbs 
-            pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
-            slug={'Жанр'} /> 
+          {locale === 'ru'
+          ? <BreadCrumbs 
+          pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
+          slug={'Жанр'} /> 
+          : <BreadCrumbs 
+          pathList={[{pathLink: '/admin', pathName: 'Administrator'}]} 
+          slug={'Genre'} /> 
+          }
         </section>
         <section className={style.main}>
           <h2 className={style.title}>{titleName}</h2>
           <div className={style.form}>
-          <label className={style.label} data-id='name'>
-            Название:
-            <input placeholder="Введите название" className={style.inputs} type='text' value={name} onChange={(e) => {setName(e.target.value)}}/>
-          </label>
-          <label className={style.label} data-id='enName'>
-            Название на английском:
-            <input placeholder="Введите название" className={style.inputs} type='text' value={enName} onChange={(e) => {foreignNameHandler(e)}}/>
-          </label>
+          {locale === 'ru'
+            ? 
+            <>
+              <label 
+                className={style.label} 
+                data-id='name'>
+                  Название:
+                <input 
+                  placeholder="Введите название" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={name} 
+                  onChange={(e) => {setName(e.target.value)}}
+                />
+              </label>
+              <label 
+                className={style.label} 
+                data-id='enName'>
+                  Название на английском:
+                <input 
+                  placeholder="Введите английское название" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={enName} 
+                  onChange={(e) => {foreignNameHandler(e)}}
+                />
+              </label>
+            </>
+            :
+            <>
+              <label 
+                className={style.label} 
+                data-id='name'>
+                  Title:
+                <input 
+                  placeholder="Enter the title" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={name} 
+                  onChange={(e) => {setName(e.target.value)}}
+                />
+              </label>
+              <label 
+                className={style.label} 
+                data-id='enName'>
+                  Title in English::
+                <input 
+                  placeholder="Enter English title" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={enName} 
+                  onChange={(e) => {foreignNameHandler(e)}}
+                />
+              </label>
+            </>
+          }
+          
           </div>
-          <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
-          <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
-          <Link href={'/admin'} onClick={() => {
-            }}>
-          <button className={style.actionBtn}>
-            Назад
-          </button>
-        </Link>
+          {locale === 'ru'
+          ? 
+          <>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
+            <Link href={'/admin'} onClick={() => {
+              }}>
+              <button className={style.actionBtn}>
+                Назад
+              </button>
+            </Link>
+          </>
+          :
+          <>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Reset</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Save</button>
+            <Link href={'/admin'} onClick={() => {
+              }}>
+              <button className={style.actionBtn}>
+                Back
+              </button>
+            </Link>
+          </>
+          }
+          
         </section>
         {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
         {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}

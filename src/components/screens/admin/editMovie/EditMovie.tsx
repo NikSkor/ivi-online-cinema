@@ -8,9 +8,10 @@ import axios from "axios";
 import { API_URL_PATCH_MOVIES } from "../API/const";
 import { IFilmItem, IFilms } from "../interfaces/interfaces";
 import { TOKEN } from "../API/token";
+import { useRouter } from "next/router";
 
 const EditMovie: FC = () => {
-
+  const locale = useRouter().locale;
   const id: number = useAppSelector(state => state.admin.filmId);
   const filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
   const [modalActive, setModalActive] = useState(false);
@@ -92,36 +93,107 @@ const EditMovie: FC = () => {
     setEnName(e.target.value)
   }
 
-  const titleName = filmItem.name.slice();
+let titleName: string;
+  locale !== 'ru' && filmItem.enName !== ''
+    ? titleName = filmItem.enName.slice()
+    : titleName = filmItem.name.slice();
 
-  
   return(
       <div className="container">
         <section className={style.header}>
-          <BreadCrumbs 
-            pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
-            slug={'Фильм'} /> 
+          {locale === 'ru'
+          ? <BreadCrumbs 
+          pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
+          slug={'Фильм'} /> 
+          : <BreadCrumbs 
+          pathList={[{pathLink: '/admin', pathName: 'Administrator'}]} 
+          slug={'Film'} /> 
+          }
         </section>
         <section className={style.main}>
           <h2 className={style.title}>{titleName}</h2>
           <div className={style.form}>
-          <label className={style.label} data-id='url'>
-            Название:
-            <input placeholder="Введите название" className={style.inputs} type='text' value={name} onChange={(e) => {setName(e.target.value)}}/>
-          </label>
-          <label className={style.label} data-id='url'>
-            Название на английском:
-            <input placeholder="Введите название" className={style.inputs} type='text' value={enName} onChange={(e) => {foreignNameHandler(e)}}/>
-          </label>
+          {locale === 'ru'
+            ? 
+            <>
+              <label 
+                className={style.label} 
+                data-id='name'>
+                  Название:
+                <input 
+                  placeholder="Введите название" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={name} 
+                  onChange={(e) => {setName(e.target.value)}}
+                />
+              </label>
+              <label 
+                className={style.label} 
+                data-id='enName'>
+                  Название на английском:
+                <input 
+                  placeholder="Введите английское название" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={enName} 
+                  onChange={(e) => {foreignNameHandler(e)}}
+                />
+              </label>
+            </>
+            :
+            <>
+              <label 
+                className={style.label} 
+                data-id='name'>
+                  Title:
+                <input 
+                  placeholder="Enter the title" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={name} 
+                  onChange={(e) => {setName(e.target.value)}}
+                />
+              </label>
+              <label 
+                className={style.label} 
+                data-id='enName'>
+                  Title in English::
+                <input 
+                  placeholder="Enter English title" 
+                  className={style.inputs} 
+                  type='text' 
+                  value={enName} 
+                  onChange={(e) => {foreignNameHandler(e)}}
+                />
+              </label>
+            </>
+          }
           </div>
-          <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
-          <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
-          <Link href={'/admin'} onClick={() => {
-            }}>
-          <button className={style.actionBtn}>
-            Назад
-          </button>
-        </Link>
+          {locale === 'ru'
+          ? 
+          <>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
+            <Link href={'/admin'} onClick={() => {
+              }}>
+              <button className={style.actionBtn}>
+                Назад
+              </button>
+            </Link>
+          </>
+          :
+          <>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Reset</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Save</button>
+            <Link href={'/admin'} onClick={() => {
+              }}>
+              <button className={style.actionBtn}>
+                Back
+              </button>
+            </Link>
+          </>
+          }
         </section>
         {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
         {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}

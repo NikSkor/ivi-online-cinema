@@ -10,7 +10,8 @@ interface UserState {
   films: IFilms[],
   pageCount: number,
   page: number,
-  genresSize: number
+  genresSize: number,
+  isGenre: boolean
 }
 
 
@@ -22,6 +23,7 @@ const initialState: UserState = {
   films: [],
   page: 1,
   genresSize: 0,
+  isGenre: true
 };
 
 export const adminSlice = createSlice({
@@ -56,11 +58,14 @@ export const adminSlice = createSlice({
     addPageCount(state, action: PayloadAction<number>) {
       state.pageCount = 0;
       state.pageCount = action.payload;
+    },
+    toggleSwitch(state, action: PayloadAction<boolean>) {
+      state.isGenre = action.payload;
     }
   }
 });
 
-export const { addFilmId, addGenreId, addGenres, addFilms, newPage, addGenresSize, addPageCount} = adminSlice.actions;
+export const { addFilmId, addGenreId, addGenres, addFilms, newPage, addGenresSize, addPageCount, toggleSwitch} = adminSlice.actions;
 
 
 export default adminSlice.reducer;
