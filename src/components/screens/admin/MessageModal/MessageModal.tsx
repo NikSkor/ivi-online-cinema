@@ -36,16 +36,6 @@ const MessageModal: FC<IMessageModal> = ({active, setActive, message, link, setV
                 }
               }}>Закрыть</button>
         }
-        {/* <Link href={link}>
-          <button 
-            className={style.btnClose} 
-            onClick={()=> {
-              setActive(false);
-              if (typeof setValidateName === 'function') {
-                setValidateName(true);
-              }
-            }}>Закрыть</button>
-        </Link> */}
       </div>
     </div>
   )
