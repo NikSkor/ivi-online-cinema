@@ -22,7 +22,6 @@ const Admin: FC = () => {
   let [searchMovies, setSearchMovies] = useState('');
   let [searchInput, setSearchInput] = useState('');
   let [isLoaded, setIsLoaded] = useState(false);
-  // let [isGenres, setIsGenres] = useState(true);
   const pageNumber: number = useAppSelector(state => state.admin.page);
   let moviesPagesSum: number = useAppSelector(state => state.admin.pageCount);
   let isGenres: boolean = useAppSelector(state => state.admin.isGenre); 

@@ -11,6 +11,9 @@ interface ISwitch {
 }
 
 const UserSwitch: FC<ISwitch> = ({firstTitle, secondTitle, isTrue, isGenres}) => {
+  console.log('isTrue: ', isTrue);
+
+  let isChecked: boolean = isTrue ? false : true;
 
   const dispatch = useAppDispatch();
 
@@ -24,7 +27,7 @@ const UserSwitch: FC<ISwitch> = ({firstTitle, secondTitle, isTrue, isGenres}) =>
     <div className={style.toggleContainer}>
           <h3 className={style.title}>{firstTitle}</h3>
           <label className={style.toggle} onChange={toggleHandler}>
-            <input type="checkbox" className={style.toggleInput}/>
+            <input type="checkbox" className={style.toggleInput} checked={isChecked}/>
             <span className={style.toggleSlider}></span>
           </label>
           <h3 className={style.title}>{secondTitle}</h3>
