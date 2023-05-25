@@ -44,35 +44,11 @@ const Admin: FC = () => {
     } else {
       info = true;
     }
-    console.log('info: ', info);
-    // console.log('data: ', data);
-
-    // if(info === null) {
-    //   data = true;
-    // } else {
-    //   if(info === 'true') {
-    //     data = true;
-    //   } else {
-    //     data = false;
-    //   }
-    // }
-
-    // let data: string = typeof state !== null
-    //   ? JSON.parse(state)
-    //   : true
-    // ;
-    // if(typeof data === 'string') {
-    //   let item = JSON.parse(data);
-    //   if (item) {
-    //   setIsGenres(item);
-    // }
     dispatch(toggleSwitch(info));
-    // setIsGenres(info);
   }, [dispatch]);
 
   const unpdateIsGenres = (value: boolean) => {
     dispatch(toggleSwitch(value));
-    // setIsGenres(value);
     setSearchInput('');
     setSearchGenres('');
     setSearchMovies('');
