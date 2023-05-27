@@ -11,10 +11,11 @@ import { paginateCatalog } from "./functions/paginateCatalog";
 import Pagination from "@/components/screens/admin/Pagination/Pagination";
 import UserSwitch from "@/components/screens/admin/UserSwitch/UserSwitch";
 import { searchInCatalog } from "./functions/searchInCatalog";
-import CrudBlock from "@/components/screens/admin/GenreBlock/CrudBlock";
+import CrudBlock from "@/components/screens/admin/CrudList/CrudBlock/CrudBlock";
 import Preloader from "@/components/screens/admin/Preloader/Preloader";
 import { IFilms, IGenres } from "./interfaces/interfaces";
 import { useRouter } from "next/router";
+import CrudList from "./CrudList/CrudList";
 
 const Admin: FC = () => {
   const locale = useRouter().locale;
@@ -106,7 +107,7 @@ const Admin: FC = () => {
     
   }, [dispatch,search,isGenres, pageNumber]);
 
-  let filteredCatalog: IGenres[] = searchInCatalog(genresCatalog, searchGenres);
+  let filteredCatalog: IGenres[] = searchInCatalog(genresCatalog, searchGenres, locale);
 
 
   let paginSize = 10;
@@ -119,13 +120,21 @@ const Admin: FC = () => {
     if (e.target.value.search(reg) !=  -1) {
         e.target.value  =  e.target.value.replace(reg, '');
     }
+    setSearchInput(e.target.value)
+  }
 
+    const searchInputHandlerEn = (e: any) => {
+    let reg = /[а-яА-ЯёЁ]/g;
+    if (e.target.value.search(reg) !=  -1) {
+        e.target.value  =  e.target.value.replace(reg, '');
+    }
     setSearchInput(e.target.value)
   }
 
   const enterInputHandler = (e: any) => {
     if( e.keyCode === 13 ) {
       setIsLoaded(false);
+      dispatch(newPage(1));
 
       if (isGenres) {
         setSearchGenres(searchInput);
@@ -212,7 +221,7 @@ const Admin: FC = () => {
                 type="text" 
                 placeholder='Search by name...'
                 value = {searchInput}
-                onChange={searchInputHandler}
+                onChange={searchInputHandlerEn}
                 onKeyUp={enterInputHandler}
               />
               <button 
@@ -224,11 +233,19 @@ const Admin: FC = () => {
           
         </div>
         
-
-        <ul className={`${style.list}`}>
+        {isGenres
+          ? <CrudList catalog={paginatedGenresCatalog} adress={'/admin/genre/'} isLoaded={isLoaded}>
+              <Pagination pagesSum={pages} pageActive={pageNumber} getPage={updatePage}/>
+            </CrudList>
+          : <CrudList catalog={filmsCatalog} adress={'/admin/film/'} isLoaded={isLoaded}>
+              <Pagination pagesSum={moviesPagesSum} pageActive={pageNumber} getPage={updatePage}/>
+            </CrudList>
+        }
+        {/* <ul className={`${style.list}`}>
           {!isLoaded && <Preloader/>}
           {isGenres 
             ? paginatedGenresCatalog.map((item)=> {
+              console.log('paginatedGenresCatalog: ', paginatedGenresCatalog);
               return (
                 <CrudBlock 
                   key={item.genreId} 
@@ -261,7 +278,7 @@ const Admin: FC = () => {
             ? <Pagination pagesSum={pages} pageActive={pageNumber} getPage={updatePage}/>
             : <Pagination pagesSum={moviesPagesSum} pageActive={pageNumber} getPage={updatePage}/>
           }
-        </ul>
+        </ul> */}
         {locale === 'ru'
           ? 
           <button className={style.actionBtn}>

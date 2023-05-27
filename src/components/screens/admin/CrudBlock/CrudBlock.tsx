@@ -19,7 +19,13 @@ const locale = useRouter().locale;
 
   return (
       <li key={item.id} className={style.item}>
-      <h4 className={style.itemTitle}>{item.name}</h4>
+      {locale !== 'ru' && item.enName !== null
+        ? 
+        <h4 className={style.itemTitle}>{item.enName}</h4>
+        :
+        <h4 className={style.itemTitle}>{item.name}</h4>
+      }
+      
       <div className={style.actionBlock}>
         {locale === 'ru'
           ? 

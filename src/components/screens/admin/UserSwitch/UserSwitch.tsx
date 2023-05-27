@@ -11,7 +11,7 @@ interface ISwitch {
 }
 
 const UserSwitch: FC<ISwitch> = ({firstTitle, secondTitle, isTrue, isGenres}) => {
-  console.log('isTrue: ', isTrue);
+  // console.log('isTrue: ', isTrue);
 
   let isChecked: boolean = isTrue ? false : true;
 
