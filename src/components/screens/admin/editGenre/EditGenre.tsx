@@ -2,13 +2,13 @@ import { FC, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './EditGenre.module.scss';
 import { useAppSelector } from "@/store/hooks";
-import Link from "next/link";
 import axios from "axios";
 import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import { API_URL_PATCH_GENRES } from "../API/const";
 import { IGenreItem, IGenres } from "../interfaces/interfaces";
 import { TOKEN } from "../API/token";
 import { useRouter } from "next/router";
+import EditBlock from "@/components/screens/admin/editBlock/editBlock";
 
 const EditGenre: FC = () => {
   const locale = useRouter().locale;
@@ -88,13 +88,13 @@ const EditGenre: FC = () => {
     }
   }
 
-  let foreignNameHandler = (e: any) => {
-    let reg = /[а-яА-ЯёЁ]/g;
-    if (e.target.value.search(reg) !=  -1) {
-        e.target.value  =  e.target.value.replace(reg, '');
-    }
-    setEnName(e.target.value)
-    }
+  // let foreignNameHandler = (e: any) => {
+  //   let reg = /[а-яА-ЯёЁ]/g;
+  //   if (e.target.value.search(reg) !=  -1) {
+  //       e.target.value  =  e.target.value.replace(reg, '');
+  //   }
+  //   setEnName(e.target.value)
+  //   }
   
   return(
       <div className="container">
@@ -108,7 +108,30 @@ const EditGenre: FC = () => {
           slug={'Genre'} /> 
           }
         </section>
-        <section className={style.main}>
+        <EditBlock 
+          titleName={titleName} 
+          name={name} 
+          enName={enName} 
+          getName={setName} 
+          getEnName={setEnName} >
+            {locale === 'ru'
+          ? 
+          <div className={style.btnBlock}>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Назад</button>
+          </div>
+          :
+          <div className={style.btnBlock}>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Reset</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Save</button>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Back</button>
+          </div>
+          }
+          {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
+          {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
+        </EditBlock>
+        {/* <section className={style.main}>
           <h2 className={style.title}>{titleName}</h2>
           <div className={style.form}>
           {locale === 'ru'
@@ -185,7 +208,7 @@ const EditGenre: FC = () => {
           }
           {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
           {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
-        </section>
+        </section> */}
       </div>
   )
 }

@@ -75,6 +75,8 @@ const Admin: FC = () => {
 
         } catch (e: any) {
             console.log(`Axios request failed: ${e}`);
+            setSearchGenres('');
+            setIsLoaded(true);
         }
       }
       loadGenreList();
@@ -96,6 +98,7 @@ const Admin: FC = () => {
         setIsLoaded(true);
         } catch (e: any) {
           console.log(`Axios request failed: ${e}`);
+          setIsLoaded(true);
           setSearchMovies('');
         }
       }
@@ -112,6 +115,19 @@ const Admin: FC = () => {
   let paginatedGenresCatalog: IGenres[] = paginateCatalog(filteredCatalog, paginSize, pageNumber);
 
   let pages: number = Math.ceil(filteredCatalog.length / paginSize);
+
+//   let paginat: IGenres[] = [
+//   {
+//     genreId: 1,
+//     name: 'Аниме',
+//     enName: 'Anime'
+//   },
+//   {
+//     genreId: 2,
+//     name: 'Аниме2',
+//     enName: 'Anime2'
+//   }
+// ]
 
   const searchInputHandler = (e: any) => {
     let reg = /[a-zA-Z]/g;
