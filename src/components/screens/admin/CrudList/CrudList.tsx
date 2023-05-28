@@ -1,9 +1,6 @@
 import { FC } from "react";
-
-import CrudBlock from "./CrudBlock/CrudBlock";
-import Image from "next/image";
+import CrudBlock from "@/components/screens/admin/CrudList/CrudBlock/CrudBlock";
 import style from './CrudList.module.scss';
-import trashImg from '../../../../../public/trash.svg';
 import { IFilms, IGenres } from '@/components/screens/admin/interfaces/interfaces';
 import Preloader from "@/components/screens/admin/Preloader/Preloader";
 
@@ -31,7 +28,6 @@ const CrudList: FC<ICrudList> = ({catalog, adress, isLoaded, children}) => {
                   enName: item.enName
                 }}
                 adress={adress}>
-                <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
               </CrudBlock>
             )
           }
@@ -45,7 +41,6 @@ const CrudList: FC<ICrudList> = ({catalog, adress, isLoaded, children}) => {
                   enName: item.enName
                 }}  
                 adress={adress}>
-                <Image src={trashImg} data-id={item.movieId} alt="Значок очистки"/>
               </CrudBlock>
             )
           }

@@ -10,18 +10,32 @@
 .itemTitle {
   font-weight: 500;
   font-size: 16px;
-  width: 800px;
+  // width: 800px;
+
+  @include mobile {
+    font-size: 12px;
+    max-width: 160px;
+  }
 }
 
 .actionBlock {
   display: flex;
   gap: 30px;
+
+  @include laptop {
+    gap: 10px;
+  }
+
+  @include mobile {
+    gap: 5px;
+  }
 }
 
 .actionBtn {
   font-weight: 500;
   font-size: 12px;
   justify-self: flex-end;
+  min-width: 101px;
 
   position: relative;
   display: inline-flex;
@@ -56,8 +70,28 @@
     background-color: $btn_hover;
     border-color: $btn_hover;
   }
+
+  @include mobile {
+    font-size: 10px;
+  }
 }
 
-.delBtn {
-  width: 40px;
+.minBtn {
+  min-width: 40px;
+}
+
+.visibleBtn {
+  display: none;
+
+  @include mobile {
+    display: block;
+  }
+}
+
+.invisibleBtn {
+  display: block;
+
+  @include mobile {
+    display: none;
+  }
 }

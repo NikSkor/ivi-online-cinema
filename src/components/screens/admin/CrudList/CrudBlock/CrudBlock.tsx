@@ -2,6 +2,10 @@ import { FC, useState } from "react";
 import style from './CrudBlock.module.scss';
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
+import trashImg from '../../../../../../public/trash.svg';
+import editImg from '../../../../../../public/editIcon.svg';
+
 
 interface ICrud {
   item: {
@@ -29,17 +33,21 @@ const locale = useRouter().locale;
       <div className={style.actionBlock}>
         {locale === 'ru'
           ? 
-          <Link href={`${adress}${item.id}`} className={style.actionBtn} >
-            <p data-id={item.id}>Редактировать</p>
+          <Link href={`${adress}${item.id}`} >
+            <button className={`${style.actionBtn} ${style.invisibleBtn}`}>Редактировать</button>
           </Link>
           :
-          <Link href={`${adress}${item.id}`} className={style.actionBtn} >
-            <p data-id={item.id}>Redact</p>
+          <Link href={`${adress}${item.id}`}>
+            <button className={`${style.actionBtn} ${style.invisibleBtn}`}>Redact</button>
           </Link>
         }
-        
-      <button className={style.actionBtn} onClick={()=>{}}>
-        {children}
+      <Link href={`${adress}${item.id}`}>
+          <button className={`${style.actionBtn} ${style.minBtn} ${style.visibleBtn}`}>
+            <Image src={editImg} width={20} height={20} alt="Значок редактирования"/>
+          </button>
+        </Link>
+      <button className={`${style.actionBtn} ${style.minBtn}`} onClick={()=>{}}>
+        <Image src={trashImg} width={19} height={19} alt="Значок очистки"/>
       </button>
       </div>
     </li>

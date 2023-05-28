@@ -1,8 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './Admin.module.scss';
-import Image from 'next/image';
-import trashImg from '../../../../public/trash.svg';
 import { API_URL_GET_GENRES, API_URL_GET_MOVIES} from "./API/const";
 import axios from "axios";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -11,11 +9,9 @@ import { paginateCatalog } from "./functions/paginateCatalog";
 import Pagination from "@/components/screens/admin/Pagination/Pagination";
 import UserSwitch from "@/components/screens/admin/UserSwitch/UserSwitch";
 import { searchInCatalog } from "./functions/searchInCatalog";
-import CrudBlock from "@/components/screens/admin/CrudList/CrudBlock/CrudBlock";
-import Preloader from "@/components/screens/admin/Preloader/Preloader";
 import { IFilms, IGenres } from "./interfaces/interfaces";
 import { useRouter } from "next/router";
-import CrudList from "./CrudList/CrudList";
+import CrudList from "@/components/screens/admin/CrudList/CrudList";
 
 const Admin: FC = () => {
   const locale = useRouter().locale;
@@ -29,6 +25,8 @@ const Admin: FC = () => {
   let dispatch = useAppDispatch();
   let genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
   let filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
+  const router = useRouter();
+
 
   if(moviesPagesSum > 10) moviesPagesSum = 10;
 
@@ -241,53 +239,18 @@ const Admin: FC = () => {
               <Pagination pagesSum={moviesPagesSum} pageActive={pageNumber} getPage={updatePage}/>
             </CrudList>
         }
-        {/* <ul className={`${style.list}`}>
-          {!isLoaded && <Preloader/>}
-          {isGenres 
-            ? paginatedGenresCatalog.map((item)=> {
-              console.log('paginatedGenresCatalog: ', paginatedGenresCatalog);
-              return (
-                <CrudBlock 
-                  key={item.genreId} 
-                  item={{
-                    id: item.genreId,
-                    name: item.name,
-                    enName: item.enName
-                  }}  
-                  adress={'/admin/genre/'}>
-                  <Image src={trashImg} data-id={item.genreId} alt="Значок очистки"/>
-                </CrudBlock>
-              )
-            })
-            : filmsCatalog.map((item)=> {
-              return (
-                <CrudBlock 
-                  key={item.movieId} 
-                  item={{
-                    id: item.movieId,
-                    name: item.name,
-                    enName: item.enName
-                  }}  
-                  adress={'/admin/film/'}>
-                  <Image src={trashImg} data-id={item.movieId} alt="Значок очистки"/>
-                </CrudBlock>
-              )
-            })
-          }
-          {isGenres
-            ? <Pagination pagesSum={pages} pageActive={pageNumber} getPage={updatePage}/>
-            : <Pagination pagesSum={moviesPagesSum} pageActive={pageNumber} getPage={updatePage}/>
-          }
-        </ul> */}
         {locale === 'ru'
           ? 
-          <button className={style.actionBtn}>
-            Добавить
-          </button>
+          <>
+            <button className={style.actionBtn}>Добавить</button>
+            <button className={style.actionBtn} onClick={() => router.push('/')}>Назад</button>
+          </>
+          
           :
-          <button className={style.actionBtn}>
-            Add
-          </button>
+          <>
+            <button className={style.actionBtn}>Add</button>
+            <button className={style.actionBtn} onClick={() => router.push('/')}>Back</button>
+          </>
         }
       </section>
     </div>

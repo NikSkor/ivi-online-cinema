@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './EditMovie.module.scss';
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -16,6 +16,7 @@ const EditMovie: FC = () => {
   const filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
   const [modalActive, setModalActive] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const router = useRouter();
 
   const dispatch = useAppDispatch();
 
@@ -172,31 +173,21 @@ let titleName: string;
           </div>
           {locale === 'ru'
           ? 
-          <>
+          <div className={style.btnBlock}>
             <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
             <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
-            <Link href={'/admin'} onClick={() => {
-              }}>
-              <button className={style.actionBtn}>
-                Назад
-              </button>
-            </Link>
-          </>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Назад</button>
+          </div>
           :
-          <>
+          <div className={style.btnBlock}>
             <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Reset</button>
             <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Save</button>
-            <Link href={'/admin'} onClick={() => {
-              }}>
-              <button className={style.actionBtn}>
-                Back
-              </button>
-            </Link>
-          </>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Back</button>
+          </div>
           }
+          {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
+          {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
         </section>
-        {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
-        {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
       </div>
   )
 }
