@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Modal Window component there is the button 1`] = `
+<button
+  class="btnClose"
+>
+  Закрыть
+</button>
+`;
