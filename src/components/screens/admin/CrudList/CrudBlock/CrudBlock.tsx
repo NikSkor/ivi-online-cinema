@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import style from './CrudBlock.module.scss';
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,10 +14,9 @@ interface ICrud {
     enName: string|null
   },
   adress: string,
-  children: React.ReactNode
 }
 
-const CrudBlock: FC<ICrud> = ({item, adress, children}) => {
+const CrudBlock: FC<ICrud> = ({item, adress}) => {
 
 const locale = useRouter().locale;
 

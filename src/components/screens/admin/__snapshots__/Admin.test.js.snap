@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test Admin component there is the button 1`] = `
+exports[`test Admin component there is the buttons 1`] = `
 <button
   class="actionBtn searchBtn"
 >
@@ -8,7 +8,7 @@ exports[`test Admin component there is the button 1`] = `
 </button>
 `;
 
-exports[`test Admin component there is the button 2`] = `
+exports[`test Admin component there is the buttons 2`] = `
 <button
   class="actionBtn"
 >
@@ -16,10 +16,19 @@ exports[`test Admin component there is the button 2`] = `
 </button>
 `;
 
-exports[`test Admin component there is the button 3`] = `
+exports[`test Admin component there is the buttons 3`] = `
 <button
   class="actionBtn"
 >
   Back
 </button>
+`;
+
+exports[`test Admin component there is the search input 1`] = `
+<input
+  class="inputs searchInput"
+  placeholder="Search by name..."
+  type="text"
+  value=""
+/>
 `;

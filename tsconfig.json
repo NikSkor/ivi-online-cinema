@@ -22,6 +22,6 @@
 
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/screens/home/Category/Category.tsx", "src/components/screens/admin/utils/utils-for-tests.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/screens/home/Category/Category.tsx", "src/components/screens/admin/utils/utils-for-tests.jsx", "src/components/screens/admin/CrudList/CrudBlock/CrudBlock.test.js"],
   "exclude": ["node_modules"]
 }

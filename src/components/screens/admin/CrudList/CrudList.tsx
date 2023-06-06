@@ -27,8 +27,8 @@ const CrudList: FC<ICrudList> = ({catalog, adress, isLoaded, children}) => {
                   name: item.name,
                   enName: item.enName
                 }}
-                adress={adress}>
-              </CrudBlock>
+                adress={adress}
+                />
             )
           }
           if('movieId' in item) {
@@ -40,8 +40,8 @@ const CrudList: FC<ICrudList> = ({catalog, adress, isLoaded, children}) => {
                   name: item.name,
                   enName: item.enName
                 }}  
-                adress={adress}>
-              </CrudBlock>
+                adress={adress}
+                />
             )
           }
         }) 
