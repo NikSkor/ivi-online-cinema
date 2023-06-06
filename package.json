@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
+    "teastClear": "jest --clearCache",
     "coverage": "jest --coverage"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "docker": "^1.0.0",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
+    "jest-svg-transformer": "^1.0.0",
     "next": "13.3.0",
     "next-router-mock": "^0.9.3",
     "react": "18.2.0",
@@ -27,6 +29,7 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "react-slick": "^0.29.0",
+    "react-test-renderer": "^18.2.0",
     "slick-carousel": "^1.8.1",
     "typescript": "5.0.4",
     "use-debounce": "^9.0.4"

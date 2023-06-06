@@ -1,26 +1,23 @@
 import Admin from './Admin';
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { renderHook } from '@testing-library/react';
+// import { renderHook } from '@testing-library/react';
+import { renderWithProviders } from './utils/utils-for-tests';
+import { screen } from '@testing-library/react';
 
 
 jest.mock('next/router', () => require('next-router-mock'));
 
 
-describe('test EditGenre component', () => {
+describe('test Admin component', () => {
   afterEach(cleanup);
 
-  renderHook(() => useAppDispatch());
-  renderHook(() => useAppSelector());
-
-
   test('there is the button', () => {
-    render(
-      <Admin>
-      </Admin>
-    );
-    const btn = screen.getByRole('button');
-    expect(btn).toBeInTheDocument();
-    expect(btn).toMatchSnapshot();
+    renderWithProviders(<Admin/>);
+    const btns = screen.getAllByRole('button');
+    btns.forEach((item) => {
+      expect(item).toBeInTheDocument();
+      expect(item).toMatchSnapshot();
+    })
   });
 });

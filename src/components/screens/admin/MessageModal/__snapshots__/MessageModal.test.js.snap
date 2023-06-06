@@ -1,6 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`test Modal Window component there is the button 1`] = `
+exports[`test MessageModal component component renders props correctly, falsy values 1`] = `
+<div
+  className="modal"
+>
+  <div
+    className="modalContent"
+    onClick={[Function]}
+  >
+    <p
+      className="modalText"
+    />
+    <button
+      className="btnClose"
+      onClick={[Function]}
+    >
+      Закрыть
+    </button>
+  </div>
+</div>
+`;
+
+exports[`test MessageModal component component renders props correctly, truthy values 1`] = `
+<div
+  className="modal active"
+>
+  <div
+    className="modalContent active"
+    onClick={[Function]}
+  >
+    <p
+      className="modalText"
+    >
+      Всё работает!
+    </p>
+    <button
+      className="btnClose"
+      onClick={[Function]}
+    >
+      Закрыть
+    </button>
+  </div>
+</div>
+`;
+
+exports[`test MessageModal component there is the button 1`] = `
 <button
   class="btnClose"
 >
