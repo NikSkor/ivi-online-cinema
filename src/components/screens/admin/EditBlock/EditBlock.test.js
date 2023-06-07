@@ -1,4 +1,4 @@
-import { cleanup, screen } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import EditBlock from '@/components/screens/admin/EditBlock/EditBlock';
 import { renderWithProviders } from '../utils/utils-for-tests';

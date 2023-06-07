@@ -1,6 +1,5 @@
 import { FC, useState } from "react";
 import style from './UserSwitch.module.scss';
-// import { useAppDispatch } from "@/store/hooks";
 import { newPage } from "@/store/slices/adminSlice";
 import { useAppDispatch } from "@/store/hooks";
 
