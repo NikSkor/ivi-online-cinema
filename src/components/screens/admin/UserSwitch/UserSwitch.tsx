@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import style from './UserSwitch.module.scss';
-import { useAppDispatch } from "@/store/hooks";
 import { newPage } from "@/store/slices/adminSlice";
+import { useAppDispatch } from "@/store/hooks";
 
 interface ISwitch {
   isTrue: boolean,
@@ -11,7 +11,7 @@ interface ISwitch {
 }
 
 const UserSwitch: FC<ISwitch> = ({firstTitle, secondTitle, isTrue, isGenres}) => {
-  console.log('isTrue: ', isTrue);
+  // console.log('isTrue: ', isTrue);
 
   let isChecked: boolean = isTrue ? false : true;
 
@@ -26,8 +26,8 @@ const UserSwitch: FC<ISwitch> = ({firstTitle, secondTitle, isTrue, isGenres}) =>
   return (
     <div className={style.toggleContainer}>
           <h3 className={style.title}>{firstTitle}</h3>
-          <label className={style.toggle} onChange={toggleHandler}>
-            <input type="checkbox" className={style.toggleInput} checked={isChecked}/>
+          <label className={style.toggle}>
+            <input type="checkbox" role="checkbox" className={style.toggleInput} checked={isChecked} onChange={toggleHandler}/>
             <span className={style.toggleSlider}></span>
           </label>
           <h3 className={style.title}>{secondTitle}</h3>

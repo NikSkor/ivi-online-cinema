@@ -5,7 +5,9 @@ const nextConfig = {
     locales: ['ru', 'en'],
     defaultLocale: 'ru',
   },
-
-}
+  images: {
+    loader: 'cloudinary',
+  },
+};
 
 module.exports = nextConfig

@@ -1,0 +1,11 @@
+@import '../../../../styles/vars.scss';
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 20px;
+
+  @include mobile {
+    gap: 5px;
+  }
+}

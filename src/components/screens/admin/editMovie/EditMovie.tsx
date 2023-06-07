@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './EditMovie.module.scss';
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import Link from "next/link";
+import { useAppSelector } from "@/store/hooks";
 import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import axios from "axios";
 import { API_URL_PATCH_MOVIES } from "../API/const";
 import { IFilmItem, IFilms } from "../interfaces/interfaces";
 import { TOKEN } from "../API/token";
 import { useRouter } from "next/router";
+import EditBlock from "../EditBlock/EditBlock";
 
 const EditMovie: FC = () => {
   const locale = useRouter().locale;
@@ -16,9 +16,7 @@ const EditMovie: FC = () => {
   const filmsCatalog: IFilms[] = useAppSelector(state => state.admin.films);
   const [modalActive, setModalActive] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
-
-  const dispatch = useAppDispatch();
-
+  const router = useRouter();
 
   let filmItem: IFilmItem = {
     id: 0,
@@ -42,6 +40,14 @@ const EditMovie: FC = () => {
   let [enName, setEnName] = useState(filmItem.enName);
   let [isValidName, setIsValidName] = useState(true);
 
+  useEffect(()=> {
+    if (name !== '') {
+      setIsValidName(true);
+    } else {
+      setIsValidName(false);
+    }
+  }, [name]);
+
 
   let resetHandler = (e: any) => {
     e.preventDefault();
@@ -53,8 +59,7 @@ const EditMovie: FC = () => {
   let submitHandler = async (e: any) => {
     e.preventDefault();
 
-    if (name === '') {
-      setIsValidName(false);
+    if (!isValidName) {
       setModalActive(true);
     } else {
       let filmValues: IFilmItem = {
@@ -76,21 +81,13 @@ const EditMovie: FC = () => {
       });
         console.log('Returned data:', response);
         setModalMessage(`Фильм "${filmItem.name}" обновлён.`);
+        setModalActive(true);
       } catch (e: any) {
         console.log(`Axios request failed: ${e}`);
         setModalMessage(e.message.toString());
+        setModalActive(true);
       }
-      setModalActive(true);
     }
-  }
-
-
-  let foreignNameHandler = (e: any) => {
-    let reg = /[а-яА-ЯёЁ]/g;
-    if (e.target.value.search(reg) !=  -1) {
-        e.target.value  =  e.target.value.replace(reg, '');
-    }
-    setEnName(e.target.value)
   }
 
 let titleName: string;
@@ -110,93 +107,29 @@ let titleName: string;
           slug={'Film'} /> 
           }
         </section>
-        <section className={style.main}>
-          <h2 className={style.title}>{titleName}</h2>
-          <div className={style.form}>
-          {locale === 'ru'
-            ? 
-            <>
-              <label 
-                className={style.label} 
-                data-id='name'>
-                  Название:
-                <input 
-                  placeholder="Введите название" 
-                  className={style.inputs} 
-                  type='text' 
-                  value={name} 
-                  onChange={(e) => {setName(e.target.value)}}
-                />
-              </label>
-              <label 
-                className={style.label} 
-                data-id='enName'>
-                  Название на английском:
-                <input 
-                  placeholder="Введите английское название" 
-                  className={style.inputs} 
-                  type='text' 
-                  value={enName} 
-                  onChange={(e) => {foreignNameHandler(e)}}
-                />
-              </label>
-            </>
-            :
-            <>
-              <label 
-                className={style.label} 
-                data-id='name'>
-                  Title:
-                <input 
-                  placeholder="Enter the title" 
-                  className={style.inputs} 
-                  type='text' 
-                  value={name} 
-                  onChange={(e) => {setName(e.target.value)}}
-                />
-              </label>
-              <label 
-                className={style.label} 
-                data-id='enName'>
-                  Title in English::
-                <input 
-                  placeholder="Enter English title" 
-                  className={style.inputs} 
-                  type='text' 
-                  value={enName} 
-                  onChange={(e) => {foreignNameHandler(e)}}
-                />
-              </label>
-            </>
-          }
-          </div>
+        <EditBlock
+          titleName={titleName} 
+          name={name} 
+          enName={enName} 
+          getName={setName} 
+          getEnName={setEnName} 
+        >
           {locale === 'ru'
           ? 
-          <>
+          <div className={style.btnBlock}>
             <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
             <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
-            <Link href={'/admin'} onClick={() => {
-              }}>
-              <button className={style.actionBtn}>
-                Назад
-              </button>
-            </Link>
-          </>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Назад</button>
+          </div>
           :
-          <>
+          <div className={style.btnBlock}>
             <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Reset</button>
             <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Save</button>
-            <Link href={'/admin'} onClick={() => {
-              }}>
-              <button className={style.actionBtn}>
-                Back
-              </button>
-            </Link>
-          </>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Back</button>
+          </div>
           }
-        </section>
-        {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
-        {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
+          <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage} isValidName={isValidName}/>
+        </EditBlock>
       </div>
   )
 }

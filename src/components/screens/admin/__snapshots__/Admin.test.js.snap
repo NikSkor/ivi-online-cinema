@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test Admin component there is the buttons 1`] = `
+<button
+  class="actionBtn searchBtn"
+>
+  Search
+</button>
+`;
+
+exports[`test Admin component there is the buttons 2`] = `
+<button
+  class="actionBtn"
+>
+  Add
+</button>
+`;
+
+exports[`test Admin component there is the buttons 3`] = `
+<button
+  class="actionBtn"
+>
+  Back
+</button>
+`;
+
+exports[`test Admin component there is the search input 1`] = `
+<input
+  class="inputs searchInput"
+  placeholder="Search by name..."
+  type="text"
+  value=""
+/>
+`;

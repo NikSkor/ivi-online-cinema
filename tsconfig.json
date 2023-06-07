@@ -16,9 +16,12 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"],
-      "@/pages/*": ["./src/pages/*"]
+      "@/pages/*": ["./src/pages/*"],
+      "@/store/*": ["./src/store/*"],
+      "@/store/hooks": ["./src/store/hooks.ts"],
+
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/screens/home/Category/Category.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/screens/home/Category/Category.tsx", "src/components/screens/admin/utils/utils-for-tests.jsx", "src/components/screens/admin/CrudList/CrudBlock/CrudBlock.test.js"],
   "exclude": ["node_modules"]
 }

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import style from './Pagination.module.scss';
 import ArrowLeft from '../../../../../public/arrow-left.svg';
 import ArrowRight from '../../../../../public/arrow-right.svg';
-import { useAppDispatch} from '@/store/hooks';
+import { useAppDispatch } from '@/store/hooks';
 import { newPage } from '@/store/slices/adminSlice';
 import Image from 'next/image';
 

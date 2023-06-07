@@ -12,3 +12,25 @@ $red: #ea003d;
 $link_gradient: linear-gradient(-45deg,#c447ff,#ea003d);
 
 $headerHeight: 72px;
+
+$laptop: 1160px;
+$tablet: 768px;
+$mobile: 520px;
+
+@mixin laptop {
+  @media (max-width: #{$laptop}) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: #{$tablet}) {
+    @content;
+  }
+}
+
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
