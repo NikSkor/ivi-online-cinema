@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test EditGenre component there are the arrow btns 1`] = `
+<button
+  class="actionBtn"
+>
+  Reset
+</button>
+`;
+
+exports[`test EditGenre component there are the arrow btns 2`] = `
+<button
+  class="actionBtn"
+>
+  Save
+</button>
+`;
+
+exports[`test EditGenre component there are the arrow btns 3`] = `
+<button
+  class="actionBtn"
+>
+  Back
+</button>
+`;
+
+exports[`test EditGenre component there are the arrow btns 4`] = `
+<button
+  class="btnClose"
+>
+  Закрыть
+</button>
+`;

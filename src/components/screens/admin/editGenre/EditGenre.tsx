@@ -8,7 +8,7 @@ import { API_URL_PATCH_GENRES } from "../API/const";
 import { IGenreItem, IGenres } from "../interfaces/interfaces";
 import { TOKEN } from "../API/token";
 import { useRouter } from "next/router";
-import EditBlock from "@/components/screens/admin/editBlock/editBlock";
+import EditBlock from "@/components/screens/admin/EditBlock/EditBlock";
 
 const EditGenre: FC = () => {
   const locale = useRouter().locale;

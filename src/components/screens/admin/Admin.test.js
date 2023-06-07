@@ -1,7 +1,6 @@
 import Admin from './Admin';
 import { cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
 import { renderWithProviders } from './utils/utils-for-tests';
 import { screen } from '@testing-library/react';
 import mockRouter from 'next-router-mock';
@@ -30,17 +29,17 @@ describe('test Admin component', () => {
     expect(input).toMatchSnapshot();
   });
 
-    test('extBtn returns to main page', () => {
-      mockRouter.push('/');
+  test('extBtn returns to main page', () => {
+    mockRouter.push('/');
 
-      renderWithProviders(<Admin />);
+    renderWithProviders(<Admin />);
 
-      fireEvent.click(screen.getByText('Back'));
+    fireEvent.click(screen.getByText('Back'));
 
-      expect(mockRouter).toMatchObject({
-        asPath: '/',
-        pathname: '/',
+    expect(mockRouter).toMatchObject({
+      asPath: '/',
+      pathname: '/',
 
-      });
     });
+  });
 });

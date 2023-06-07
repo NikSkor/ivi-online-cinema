@@ -1,6 +1,6 @@
 import { searchInCatalog } from './searchInCatalog.ts';
 
-describe('test sortByName function', () => {
+describe('test searchInCatalog function', () => {
   test('function search rus name correctly', () => {
     let arr = [
       {

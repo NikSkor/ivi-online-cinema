@@ -8,7 +8,7 @@ import { API_URL_PATCH_MOVIES } from "../API/const";
 import { IFilmItem, IFilms } from "../interfaces/interfaces";
 import { TOKEN } from "../API/token";
 import { useRouter } from "next/router";
-import EditBlock from "../editBlock/editBlock";
+import EditBlock from "../EditBlock/EditBlock";
 
 const EditMovie: FC = () => {
   const locale = useRouter().locale;

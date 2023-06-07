@@ -50,6 +50,7 @@ const EditBlock: FC<IRedact> = ({titleName, name, enName, getName, getEnName, ch
                   type='text' 
                   value={name} 
                   onChange={(e) => {nameHandler(e)}}
+                  test-id={'input'}
                 />
               </label>
               <label 
@@ -62,6 +63,7 @@ const EditBlock: FC<IRedact> = ({titleName, name, enName, getName, getEnName, ch
                   type='text' 
                   value={enName} 
                   onChange={(e) => {foreignNameHandler(e)}}
+                  test-id={'input'}
                 />
               </label>
             </>
@@ -77,6 +79,7 @@ const EditBlock: FC<IRedact> = ({titleName, name, enName, getName, getEnName, ch
                   type='text' 
                   value={name} 
                   onChange={(e) => {nameHandler(e)}}
+                  test-id={'input'}
                 />
               </label>
               <label 
@@ -89,6 +92,7 @@ const EditBlock: FC<IRedact> = ({titleName, name, enName, getName, getEnName, ch
                   type='text' 
                   value={enName} 
                   onChange={(e) => {foreignNameHandler(e)}}
+                  test-id={'input'}
                 />
               </label>
             </>
