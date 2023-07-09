@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test EditBlock component component renders props correctly, falsy values 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <section
+        class="main"
+      >
+        <h2
+          class="title"
+        />
+        <div
+          class="form"
+        >
+          <label
+            class="label"
+          >
+            Title:
+            <input
+              class="inputs"
+              placeholder="Enter the title"
+              test-id="input"
+              type="text"
+              value=""
+            />
+          </label>
+          <label
+            class="label"
+          >
+            Title in English::
+            <input
+              class="inputs"
+              placeholder="Enter English title"
+              test-id="input"
+              type="text"
+              value=""
+            />
+          </label>
+        </div>
+      </section>
+    </div>
+  </body>,
+  "container": <div>
+    <section
+      class="main"
+    >
+      <h2
+        class="title"
+      />
+      <div
+        class="form"
+      >
+        <label
+          class="label"
+        >
+          Title:
+          <input
+            class="inputs"
+            placeholder="Enter the title"
+            test-id="input"
+            type="text"
+            value=""
+          />
+        </label>
+        <label
+          class="label"
+        >
+          Title in English::
+          <input
+            class="inputs"
+            placeholder="Enter English title"
+            test-id="input"
+            type="text"
+            value=""
+          />
+        </label>
+      </div>
+    </section>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "store": {
+    "@@observable": [Function],
+    "dispatch": [Function],
+    "getState": [Function],
+    "replaceReducer": [Function],
+    "subscribe": [Function],
+  },
+  "unmount": [Function],
+}
+`;
+
+exports[`test EditBlock component component renders props correctly, truthy values 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <section
+        class="main"
+      >
+        <h2
+          class="title"
+        >
+          Название
+        </h2>
+        <div
+          class="form"
+        >
+          <label
+            class="label"
+          >
+            Title:
+            <input
+              class="inputs"
+              placeholder="Enter the title"
+              test-id="input"
+              type="text"
+              value="Жанр"
+            />
+          </label>
+          <label
+            class="label"
+          >
+            Title in English::
+            <input
+              class="inputs"
+              placeholder="Enter English title"
+              test-id="input"
+              type="text"
+              value="Genre"
+            />
+          </label>
+        </div>
+      </section>
+    </div>
+  </body>,
+  "container": <div>
+    <section
+      class="main"
+    >
+      <h2
+        class="title"
+      >
+        Название
+      </h2>
+      <div
+        class="form"
+      >
+        <label
+          class="label"
+        >
+          Title:
+          <input
+            class="inputs"
+            placeholder="Enter the title"
+            test-id="input"
+            type="text"
+            value="Жанр"
+          />
+        </label>
+        <label
+          class="label"
+        >
+          Title in English::
+          <input
+            class="inputs"
+            placeholder="Enter English title"
+            test-id="input"
+            type="text"
+            value="Genre"
+          />
+        </label>
+      </div>
+    </section>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "store": {
+    "@@observable": [Function],
+    "dispatch": [Function],
+    "getState": [Function],
+    "replaceReducer": [Function],
+    "subscribe": [Function],
+  },
+  "unmount": [Function],
+}
+`;

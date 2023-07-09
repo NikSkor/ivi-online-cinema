@@ -1,7 +1,7 @@
 export interface IGenres {
   genreId: number,
   name: string,
-  enName: null|string
+  enName: string|null
 } 
 
 export interface IGenreItem {

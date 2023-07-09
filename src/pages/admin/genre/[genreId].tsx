@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Layout from '@/components/layout/Layout';
 import { useAppDispatch } from '@/store/hooks';
 import { addGenreId} from '@/store/slices/adminSlice';
-import EditGenre from '@/components/screens/admin/editGenre/EditGenre';
+import EditGenre from '@/components/screens/admin/EditGenre/EditGenre';
 
 
 const GenreEditPage: NextPage = () => {

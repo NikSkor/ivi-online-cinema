@@ -6,45 +6,24 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 interface UserState {
   filmId: number,
   genreId: number,
-  // genreValues: IGenreItem,
-  // filmValues: IFilmItem,
   genres: IGenres[],
   films: IFilms[],
+  pageCount: number,
   page: number,
-  genresSize: number
+  genresSize: number,
+  isGenre: boolean
 }
-
-// interface IGenreItem {
-//   id: number,
-//   name: string,
-//   enName: string,
-// }
-
-// interface IFilmItem {
-//   id: number,
-//   name: string,
-//   enName: string,
-// }
-
 
 
 const initialState: UserState = {
   filmId: 0,
   genreId: 0,
-  // genreValues: {
-  //   id: 0,
-  //   name: '',
-  //   enName: '',
-  // },
-  // filmValues: {
-  //   id: 0,
-  //   name: '',
-  //   enName: '',
-  // },
+  pageCount: 0,
   genres: [],
   films: [],
   page: 1,
   genresSize: 0,
+  isGenre: true
 };
 
 export const adminSlice = createSlice({
@@ -59,22 +38,6 @@ export const adminSlice = createSlice({
       state.genreId = 0;
       state.genreId = action.payload;
     },
-    // addGenreValues(state, action: PayloadAction<IGenreItem>) {
-    //     state.genreValues = {
-    //       id: 0,
-    //       name: '',
-    //       enName: '',
-    //     }
-    //   Object.assign(state.genreValues, action.payload);
-    // },
-    // addFilmValues(state, action: PayloadAction<IFilmItem>) {
-    //     state.filmValues = {
-    //     id: 0,
-    //     name: '',
-    //     enName: '',
-    //   }
-    //   Object.assign(state.filmValues, action.payload);
-    // },
     addGenres(state, action: PayloadAction<IGenres[]>) {
       state.genres.length = 0;
       state.genres = [...state.genres, ...action.payload];
@@ -92,14 +55,17 @@ export const adminSlice = createSlice({
       state.genresSize = 0;
       state.genresSize = state.genres.length;
     },
-    // clearAdminSwitch(state) {
-    //   state.genres.length = 0;
-    //   state.films.length = 0;
-    // }
+    addPageCount(state, action: PayloadAction<number>) {
+      state.pageCount = 0;
+      state.pageCount = action.payload;
+    },
+    toggleSwitch(state, action: PayloadAction<boolean>) {
+      state.isGenre = action.payload;
+    }
   }
 });
 
-export const { addFilmId, addGenreId, addGenres, addFilms, newPage, addGenresSize} = adminSlice.actions;
+export const { addFilmId, addGenreId, addGenres, addFilms, newPage, addGenresSize, addPageCount, toggleSwitch} = adminSlice.actions;
 
 
 export default adminSlice.reducer;

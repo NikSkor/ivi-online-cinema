@@ -1,6 +1,7 @@
 interface IGenres {
   genreId: number,
-  name: string
+  name: string,
+  enName: string|null
 } 
 
 export const paginateCatalog = (catalog: IGenres[], paginSize: number, pageNumber: number)=> {

@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test CrudList component component renders props correctly, falsy values 1`] = `
+<ul
+  className="list"
+>
+  <div
+    className="preload"
+  />
+</ul>
+`;
+
+exports[`test CrudList component component renders props correctly, truthy values 1`] = `
+<ul
+  className="list"
+>
+  <li
+    className="item"
+  >
+    <h4
+      className="itemTitle"
+    >
+      Anime
+    </h4>
+    <div
+      className="actionBlock"
+    >
+      <a
+        href="/foo1"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onTouchStart={[Function]}
+      >
+        <button
+          className="actionBtn invisibleBtn"
+        >
+          Redact
+        </button>
+      </a>
+      <a
+        href="/foo1"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onTouchStart={[Function]}
+      >
+        <button
+          className="actionBtn minBtn visibleBtn"
+        >
+          <img
+            alt="Значок редактирования"
+            data-nimg="1"
+            decoding="async"
+            height={20}
+            loading="lazy"
+            onError={[Function]}
+            onLoad={[Function]}
+            src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+            srcSet="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+            style={
+              {
+                "color": "transparent",
+              }
+            }
+            width={20}
+          />
+        </button>
+      </a>
+      <button
+        className="actionBtn minBtn"
+        onClick={[Function]}
+      >
+        <img
+          alt="Значок очистки"
+          data-nimg="1"
+          decoding="async"
+          height={19}
+          loading="lazy"
+          onError={[Function]}
+          onLoad={[Function]}
+          src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+          srcSet="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+          style={
+            {
+              "color": "transparent",
+            }
+          }
+          width={19}
+        />
+      </button>
+    </div>
+  </li>
+  <li
+    className="item"
+  >
+    <h4
+      className="itemTitle"
+    >
+      Anime2
+    </h4>
+    <div
+      className="actionBlock"
+    >
+      <a
+        href="/foo2"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onTouchStart={[Function]}
+      >
+        <button
+          className="actionBtn invisibleBtn"
+        >
+          Redact
+        </button>
+      </a>
+      <a
+        href="/foo2"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onTouchStart={[Function]}
+      >
+        <button
+          className="actionBtn minBtn visibleBtn"
+        >
+          <img
+            alt="Значок редактирования"
+            data-nimg="1"
+            decoding="async"
+            height={20}
+            loading="lazy"
+            onError={[Function]}
+            onLoad={[Function]}
+            src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+            srcSet="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+            style={
+              {
+                "color": "transparent",
+              }
+            }
+            width={20}
+          />
+        </button>
+      </a>
+      <button
+        className="actionBtn minBtn"
+        onClick={[Function]}
+      >
+        <img
+          alt="Значок очистки"
+          data-nimg="1"
+          decoding="async"
+          height={19}
+          loading="lazy"
+          onError={[Function]}
+          onLoad={[Function]}
+          src="/_next/image?url=%2Fimg.jpg&w=48&q=75"
+          srcSet="/_next/image?url=%2Fimg.jpg&w=32&q=75 1x, /_next/image?url=%2Fimg.jpg&w=48&q=75 2x"
+          style={
+            {
+              "color": "transparent",
+            }
+          }
+          width={19}
+        />
+      </button>
+    </div>
+  </li>
+</ul>
+`;

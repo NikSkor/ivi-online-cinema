@@ -1,19 +1,23 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import BreadCrumbs from '@/components/ui/breadCrumbs/BreadCrumbs';
 import style from './EditGenre.module.scss';
 import { useAppSelector } from "@/store/hooks";
-import Link from "next/link";
 import axios from "axios";
 import MessageModal from "@/components/screens/admin/MessageModal/MessageModal";
 import { API_URL_PATCH_GENRES } from "../API/const";
 import { IGenreItem, IGenres } from "../interfaces/interfaces";
+import { TOKEN } from "../API/token";
+import { useRouter } from "next/router";
+import EditBlock from "@/components/screens/admin/EditBlock/EditBlock";
 
 const EditGenre: FC = () => {
-
+  const locale = useRouter().locale;
   const id: number = useAppSelector(state => state.admin.genreId);
   const genresCatalog: IGenres[] = useAppSelector(state => state.admin.genres);
   const [modalActive, setModalActive] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
+  const router = useRouter();
+
 
   let genreItem: IGenreItem = {
     id: 0,
@@ -34,11 +38,22 @@ const EditGenre: FC = () => {
   })
   }
 
-  const titleName = genreItem.name.slice();
+  let titleName: string;
+  locale !== 'ru' && genreItem.enName !== ''
+    ? titleName = genreItem.enName.slice()
+    : titleName = genreItem.name.slice();
 
   let [name, setName] = useState(genreItem.name);
   let [enName, setEnName] = useState(genreItem.enName);
   let [isValidName, setIsValidName] = useState(true);
+
+  useEffect(()=> {
+    if (name !== '') {
+      setIsValidName(true);
+    } else {
+      setIsValidName(false);
+    }
+  }, [name]);
 
   let resetHandler = (e: any) => {
     e.preventDefault();
@@ -50,8 +65,8 @@ const EditGenre: FC = () => {
   let submitHandler = async (e: any) => {
     e.preventDefault();
 
-    if (name === '') {
-      setIsValidName(false);
+    if (!isValidName) {
+
       setModalActive(true);
     } else {
       let genreValues: IGenreItem = {
@@ -64,7 +79,7 @@ const EditGenre: FC = () => {
 
       const headers = {
         'Content-type': 'application/json',
-        'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJKb2huIERvZSIsImlhdCI6MjUxNjIzOTAyMiwiaXNBZG1pbiI6dHJ1ZX0.f1EOoLCXMQPDGD0s9QaO5tkWTsH77lDXpNdAgp_Q-1s'
+        'Authorization': TOKEN
       }
 
       try {
@@ -73,52 +88,49 @@ const EditGenre: FC = () => {
       });
         console.log('Returned data:', response);
         setModalMessage(`Жанр "${genreItem.name}" обновлён.`);
+        setModalActive(true);
       } catch (e: any) {
         console.log(`Axios request failed: ${e}`);
         setModalMessage(e.message.toString());
+        setModalActive(true);
       }
-      setModalActive(true);
     }
   }
 
-  let foreignNameHandler = (e: any) => {
-    let reg = /[а-яА-ЯёЁ]/g;
-    if (e.target.value.search(reg) !=  -1) {
-        e.target.value  =  e.target.value.replace(reg, '');
-    }
-    setEnName(e.target.value)
-    }
-  
   return(
       <div className="container">
         <section className={style.header}>
-          <BreadCrumbs 
-            pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
-            slug={'Жанр'} /> 
+          {locale === 'ru'
+          ? <BreadCrumbs 
+          pathList={[{pathLink: '/admin', pathName: 'Администратор'}]} 
+          slug={'Жанр'} /> 
+          : <BreadCrumbs 
+          pathList={[{pathLink: '/admin', pathName: 'Administrator'}]} 
+          slug={'Genre'} /> 
+          }
         </section>
-        <section className={style.main}>
-          <h2 className={style.title}>{titleName}</h2>
-          <div className={style.form}>
-          <label className={style.label} data-id='name'>
-            Название:
-            <input placeholder="Введите название" className={style.inputs} type='text' value={name} onChange={(e) => {setName(e.target.value)}}/>
-          </label>
-          <label className={style.label} data-id='enName'>
-            Название на английском:
-            <input placeholder="Введите название" className={style.inputs} type='text' value={enName} onChange={(e) => {foreignNameHandler(e)}}/>
-          </label>
+        <EditBlock 
+          titleName={titleName} 
+          name={name} 
+          enName={enName} 
+          getName={setName} 
+          getEnName={setEnName} >
+            {locale === 'ru'
+          ? 
+          <div className={style.btnBlock}>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Назад</button>
           </div>
-          <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Сбросить</button>
-          <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Сохранить</button>
-          <Link href={'/admin'} onClick={() => {
-            }}>
-          <button className={style.actionBtn}>
-            Назад
-          </button>
-        </Link>
-        </section>
-        {isValidName && <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage}/>}
-        {!isValidName && <MessageModal active={modalActive} setActive={setModalActive} message={'Не запонено название !'} setValidateName={setIsValidName}/>}
+          :
+          <div className={style.btnBlock}>
+            <button className={style.actionBtn} onClick={(e) => {resetHandler(e)}}>Reset</button>
+            <button className={style.actionBtn} onClick={(e) => {submitHandler(e)}}>Save</button>
+            <button className={style.actionBtn} onClick={() => router.push('/admin')}>Back</button>
+          </div>
+          }
+          <MessageModal active={modalActive} setActive={setModalActive} link={'/admin'} message={modalMessage} isValidName={isValidName}/>
+        </EditBlock>
       </div>
   )
 }

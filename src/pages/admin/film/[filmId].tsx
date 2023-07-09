@@ -4,7 +4,6 @@ import EditMovie from '@/components/screens/admin/editMovie/EditMovie';
 import Layout from '@/components/layout/Layout';
 import { useAppDispatch } from '@/store/hooks';
 import { addFilmId } from '@/store/slices/adminSlice';
-// import { addId } from '../../store/slices/adminSlice';
 
 
 const FilmEditPage: NextPage = () => {

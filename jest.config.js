@@ -11,20 +11,29 @@ module.exports = {
     '!<rootDir>/*.config.js',
     '!<rootDir>/coverage/**',
   ],
+  moduleDirectories: ['node_modules', 'src'],
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules
     '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
- 
+
     // Handle CSS imports (without CSS modules)
     '^.+\\.(css|sass|scss)$': '<rootDir>/__mocks__/styleMock.js',
- 
+
     // Handle image imports
     // https://jestjs.io/docs/webpack#handling-static-assets
-    '^.+\\.(png|jpg|jpeg|gif|webp|avif|ico|bmp|svg)$/i': `<rootDir>/__mocks__/fileMock.js`,
- 
+    '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$':
+      '<rootDir>/__mocks__/fileMock.js',
+
     // Handle module aliases
+    '@/store/hooks': '<rootDir>/src/store/hooks.ts',
+    '^@/store/(.*)$': '<rootDir>/src/store/$1',
+    '~src/(.*)': '<rootDir>/src/$1',
+    '^@/components/(.*)$': '<rootDir>/components/$1',
     '^@/components/(.*)$': '<rootDir>/src/components/$1',
+    // 'src/(.*)': '<rootDir>/$1',
+    '#(.*)': '<rootDir>/node_modules/$1',
+    '^.+\\.svg$': 'jest-svg-transformer',
   },
   // Add more setup options before each test is run
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
@@ -39,4 +48,8 @@ module.exports = {
     '/node_modules/',
     '^.+\\.module\\.(css|sass|scss)$',
   ],
+  roots: ['<rootDir>/src'],
+  rootDir: './',
+  modulePaths: ['<rootDir>'],
+  setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 };
